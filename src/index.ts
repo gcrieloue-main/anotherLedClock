@@ -1,33 +1,11 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import {
-  LedMatrix,
-  GpioMapping,
-  LedMatrixUtils,
-  PixelMapperType,
-} from "rpi-led-matrix";
 
 import { PulserFace } from "./PulserFace";
 import { ClockFace } from "./ClockFace";
 import { TextFace } from "./TextFace";
 
-const matrix = new LedMatrix(
-  {
-    ...LedMatrix.defaultMatrixOptions(),
-    rows: 16,
-    cols: 32,
-    chainLength: 1,
-    hardwareMapping: GpioMapping.Regular,
-    pixelMapperConfig: LedMatrixUtils.encodeMappers({
-      type: PixelMapperType.U,
-    }),
-    pwmLsbNanoseconds: 200,
-  },
-  {
-    ...LedMatrix.defaultRuntimeOptions(),
-    gpioSlowdown: 0,
-  }
-);
+import { matrix } from "./Matrix";
 
 const pulserFace = new PulserFace(matrix);
 const clockFace = new ClockFace(matrix);
