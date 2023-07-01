@@ -116,6 +116,7 @@ export class TextFace {
       .sync();
 
     while (!animationIsOver) {
+      await wait(100);
       console.log("waiting");
     }
   }
