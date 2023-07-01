@@ -1,3 +1,4 @@
+import { off } from "process";
 import { LedMatrixInstance, Font } from "rpi-led-matrix";
 
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
@@ -93,6 +94,27 @@ export class TextFace {
   }
 
   public scrollingDisplay(text: string) {
-    this.simpleDisplay(text);
+    const w = this.matrix.width();
+    var offset = w;
+
+    this.matrix
+      .afterSync(() => {
+        offset--;
+        this.scrollingDisplayText(text, offset);
+      })
+      .sync();
+  }
+
+  public scrollingDisplayText(text: string, offset: number) {
+    const w = this.matrix.width();
+    const h = this.matrix.height();
+    const fontHeight = font4x6.baseline();
+
+    var offset = w;
+
+    this.matrix
+      .clear()
+      .font(font4x6)
+      .drawText(text, offset, h / 2 - fontHeight / 2);
   }
 }
