@@ -62,7 +62,10 @@ app.get("/pulse", (req: Request, res: Response) => {
 app.get("/stop", (req: Request, res: Response) => {
   const msg = "Stop";
   console.log(msg);
-  matrix.clear().sync();
+  matrix
+    .clear()
+    .afterSync(() => {})
+    .sync();
   res.send(msg);
 });
 
