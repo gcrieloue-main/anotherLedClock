@@ -103,10 +103,12 @@ export class TextFace {
       .afterSync((mat: LedMatrixInstance, dt: number) => {
         console.log(this.offset, dt);
 
-        this.offset--;
-        this.scrollingDisplayText(text);
-
-        setTimeout(() => this.matrix.sync(), 1000);
+        const stringWidth = font4x6.stringWidth(text);
+        if (this.offset > -stringWidth) {
+          this.offset--;
+          this.scrollingDisplayText(text);
+          setTimeout(() => this.matrix.sync(), 200);
+        }
       })
       .sync();
   }
