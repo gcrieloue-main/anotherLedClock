@@ -100,6 +100,7 @@ export class TextFace {
       .afterSync(() => {
         offset--;
         this.scrollingDisplayText(text, offset);
+        setTimeout(() => this.matrix.sync(), 0);
       })
       .sync();
   }
@@ -114,7 +115,6 @@ export class TextFace {
     this.matrix
       .clear()
       .font(font4x6)
-      .drawText(text, offset, h / 2 - fontHeight / 2)
-      .sync();
+      .drawText(text, offset, h / 2 - fontHeight / 2);
   }
 }
