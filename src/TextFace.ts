@@ -36,7 +36,7 @@ export class TextFace {
         this.twoLineDisplay(firstLine, secondLine);
         await wait(10000);
       } else {
-        if (!this.animationIsOver) {
+        if (this.animationIsOver) {
           await this.scrollingDisplay(text);
         }
       }
