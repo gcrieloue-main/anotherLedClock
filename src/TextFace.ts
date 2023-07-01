@@ -122,13 +122,10 @@ export class TextFace {
 
   public scrollingDisplayText(text: string) {
     if (this.offset != undefined) {
-      console.log("Text already scrolling");
-      return;
+      const h = this.matrix.height();
+      const fontHeight = font4x6.baseline();
+
+      this.matrix.clear().drawText(text, this.offset, h / 2 - fontHeight / 2);
     }
-
-    const h = this.matrix.height();
-    const fontHeight = font4x6.baseline();
-
-    this.matrix.clear().drawText(text, this.offset, h / 2 - fontHeight / 2);
   }
 }
