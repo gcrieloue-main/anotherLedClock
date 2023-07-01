@@ -30,14 +30,10 @@ const matrix = new LedMatrix(
   }
 );
 
-const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
-
 const pulserFace = new PulserFace(matrix);
 const clockFace = new ClockFace(matrix);
 const textFace = new TextFace(matrix);
 
-//const font = new Font("5x8", "fonts/5x8.bdf");
-const font4x6 = new Font("4x6", "fonts/4x6.bdf");
 // let mode: "CLOCK" | "TEXT" = "CLOCK";
 
 (async () => {
