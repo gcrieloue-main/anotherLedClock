@@ -53,7 +53,7 @@ export class TextFace {
     var firstLine = "";
     var secondLine = "";
 
-    words.every((word) => {
+    words.forEach((word) => {
       var toAdd = "";
       if (firstLine.length == 0) {
         toAdd += word;
