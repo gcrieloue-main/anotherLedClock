@@ -95,19 +95,17 @@ export class TextFace {
 
   public scrollingDisplay(text: string) {
     const w = this.matrix.width();
-    this.offset = w;
+    this.offset = w - 1;
 
     this.scrollingDisplayText(text);
 
     this.matrix
-      .afterSync((mat: LedMatrixInstance, dt: number) => {
-        console.log(this.offset, dt);
-
+      .afterSync(() => {
         const stringWidth = font4x6.stringWidth(text);
-        if (this.offset !== undefined && this.offset > -stringWidth) {
+        if (this.offset > -stringWidth) {
           this.offset--;
           this.scrollingDisplayText(text);
-          setTimeout(() => this.matrix.sync(), 200);
+          setTimeout(() => this.matrix.sync(), 150);
         }
       })
       .sync();
@@ -117,6 +115,6 @@ export class TextFace {
     const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
 
-    this.matrix.clear().drawText(text, this.offset, h / 2 - fontHeight / 2);
+    this.matrix.clear().drawText(text, this.offset, (h - fontHeight) / 2);
   }
 }
