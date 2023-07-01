@@ -84,7 +84,7 @@ async function displayText(text: string) {
 (async () => {
   displayDate();
 
-  matrix.afterSync((mat, dt, t) => {
+  matrix.afterSync((mat:number, dt:number, t:number) => {
     if (mode === "CLOCK") {
       displayDate();
     }
