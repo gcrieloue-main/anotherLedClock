@@ -33,6 +33,8 @@ const pulserFace = new PulserFace(matrix);
 const clockFace = new ClockFace(matrix);
 const textFace = new TextFace(matrix);
 
+const allFaces = [pulserFace, clockFace, textFace];
+
 // let mode: "CLOCK" | "TEXT" = "CLOCK";
 
 (async () => {
@@ -47,6 +49,8 @@ const port = process.env.PORT || 3005;
 app.get("/text/:text", (req: Request, res: Response) => {
   const msg = "Text received : " + req.params.text;
   console.log(msg);
+  allFaces.every((face) => (face.enabled = false));
+  textFace.enabled = true;
   textFace.display(req.params.text);
   matrix.sync();
   res.send(msg);
@@ -55,6 +59,8 @@ app.get("/text/:text", (req: Request, res: Response) => {
 app.get("/pulse", (req: Request, res: Response) => {
   const msg = "Pulse";
   console.log(msg);
+  allFaces.every((face) => (face.enabled = false));
+  pulserFace.enabled = true;
   pulserFace.display();
   res.send(msg);
 });
@@ -72,6 +78,8 @@ app.get("/stop", (req: Request, res: Response) => {
 app.get("/clock", (req: Request, res: Response) => {
   const msg = "Clock";
   console.log(msg);
+  allFaces.every((face) => (face.enabled = false));
+  clockFace.enabled = true;
   clockFace.display();
   res.send(msg);
 });

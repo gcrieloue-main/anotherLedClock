@@ -22,6 +22,7 @@ function formatAMPM(date: Date) {
 
 export class ClockFace {
   matrix: LedMatrixInstance;
+  public enabled = true;
 
   constructor(ledMatrix: LedMatrixInstance) {
     this.matrix = ledMatrix;
@@ -32,8 +33,10 @@ export class ClockFace {
 
     this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
       setTimeout(() => {
-        this.displayClock();
-        this.matrix.sync();
+        if (this.enabled) {
+          this.displayClock();
+          this.matrix.sync();
+        }
       }, 10000);
     });
 

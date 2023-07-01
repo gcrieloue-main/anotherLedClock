@@ -14,6 +14,7 @@ class Pulser {
 const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class PulserFace {
+  public enabled = true;
   matrix: LedMatrixInstance;
 
   constructor(ledMatrix: LedMatrixInstance) {
