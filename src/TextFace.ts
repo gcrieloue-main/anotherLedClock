@@ -96,11 +96,13 @@ export class TextFace {
     const w = this.matrix.width();
     var offset = w;
 
+    this.scrollingDisplayText(text, offset);
+
     this.matrix
       .afterSync(() => {
         offset--;
         this.scrollingDisplayText(text, offset);
-        setTimeout(() => this.matrix.sync(), 0);
+        setTimeout(() => this.matrix.sync(), 100);
       })
       .sync();
   }
