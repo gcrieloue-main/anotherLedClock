@@ -52,7 +52,8 @@ export class TextFace {
 
     this.matrix
       .clear()
-      .drawText(text, w / 2 - stringWidth / 2, h / 2 - fontHeight / 2);
+      .drawText(text, w / 2 - stringWidth / 2, h / 2 - fontHeight / 2)
+      .sync();
   }
 
   public computeTwoLines(text: string): {
@@ -94,7 +95,8 @@ export class TextFace {
     this.matrix
       .clear()
       .drawText(firstLine, 0, (h - textZoneHeight) / 2)
-      .drawText(secondLine, 0, (h - textZoneHeight) / 2 + textZoneHeight / 2);
+      .drawText(secondLine, 0, (h - textZoneHeight) / 2 + textZoneHeight / 2)
+      .sync();
   }
 
   public async scrollingDisplay(text: string) {
