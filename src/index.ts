@@ -23,8 +23,6 @@ function defaultFace() {
   showClock();
 }
 
-// let mode: "CLOCK" | "TEXT" = "CLOCK";
-
 (async () => {
   clockFace.display();
 })();
@@ -49,8 +47,10 @@ app.get("/pulse", async (req: Request, res: Response) => {
   const msg = "Pulse";
   console.log(msg);
   res.send(msg);
+
   allFaces.forEach((face) => (face.enabled = false));
   pulserFace.enabled = true;
+
   await pulserFace.display();
   defaultFace();
 });
@@ -59,6 +59,7 @@ app.get("/stop", async (req: Request, res: Response) => {
   const msg = "Stop";
   console.log(msg);
   res.send(msg);
+
   matrix
     .clear()
     .afterSync(() => {})
@@ -68,6 +69,7 @@ app.get("/stop", async (req: Request, res: Response) => {
 app.get("/clock", async (req: Request, res: Response) => {
   const msg = "Clock";
   console.log(msg);
+
   showClock();
   res.send(msg);
 });

@@ -21,8 +21,6 @@ export class TextFace {
 
     if (!this.animationIsOver) {
       await this.waitForAnimation();
-    } else {
-      console.log("Scrolling animation not over");
     }
 
     this.matrix
@@ -129,6 +127,7 @@ export class TextFace {
 
   async waitForAnimation() {
     while (!this.animationIsOver) {
+      console.log("Scrolling animation not over");
       await wait(100);
     }
   }
