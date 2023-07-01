@@ -129,7 +129,6 @@ export class TextFace {
 
   async waitForAnimation() {
     while (!this.animationIsOver) {
-      console.log("Scrolling animation not over");
       await wait(100);
     }
   }
