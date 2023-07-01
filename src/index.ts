@@ -45,7 +45,7 @@ const app: Express = express();
 const port = process.env.PORT || 3005;
 
 app.get("/text/:text", (req: Request, res: Response) => {
-  const msg = "Text received" + req.params.text;
+  const msg = "Text received : " + req.params.text;
   console.log(msg);
   textFace.display(req.params.text);
   matrix.sync();
