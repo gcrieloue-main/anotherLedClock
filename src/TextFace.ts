@@ -14,7 +14,6 @@ export class TextFace {
   public async display(text: string) {
     const w = this.matrix.width();
     const stringWidth = font4x6.stringWidth(text);
-    const words = text.split(" ");
 
     this.matrix.afterSync(() => {}).sync();
 
