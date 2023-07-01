@@ -8,6 +8,8 @@ import {
   PixelMapperType,
 } from "rpi-led-matrix";
 
+import {PulserFace} from './PulserFace'
+
 const matrix = new LedMatrix(
   {
     ...LedMatrix.defaultMatrixOptions(),
@@ -27,6 +29,8 @@ const matrix = new LedMatrix(
 );
 
 const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
+
+const pulserFace = new PulserFace(matrix);
 
 function formatTime(date: Date) {
   var hours = date.getHours() + 1;
@@ -97,36 +101,6 @@ async function displayText(text: string) {
 
 /********/
 
-class Pulser {
-  constructor(readonly x: number, readonly y: number, readonly f: number) {}
-
-  nextColor(t: number): number {
-    /** You could easily work position-dependent logic into this expression */
-    const brightness = 0xff & Math.max(0, 255 * Math.sin((this.f * t) / 1000));
-
-    return (brightness << 16) | (brightness << 8) | brightness;
-  }
-}
-
-async function pulse() {
-  const pulsers: Pulser[] = [];
-
-  for (let x = 0; x < matrix.width(); x++) {
-    for (let y = 0; y < matrix.height(); y++) {
-      pulsers.push(new Pulser(x, y, 5 * Math.random()));
-    }
-  }
-
-  matrix.afterSync((mat, dt, t) => {
-    pulsers.forEach((pulser) => {
-      matrix.fgColor(pulser.nextColor(t)).setPixel(pulser.x, pulser.y);
-    });
-
-    setTimeout(() => matrix.sync(), 0);
-  });
-
-  await wait(30000);
-}
 
 /*******/
 
@@ -146,8 +120,7 @@ app.get("/text/:text", (req: Request, res: Response) => {
 app.get("/pulse", (req: Request, res: Response) => {
   const msg = "Pulse";
   console.log(msg);
-  pulse();
-  matrix.sync();
+  pulserFace.display()
   res.send(msg);
 });
 
