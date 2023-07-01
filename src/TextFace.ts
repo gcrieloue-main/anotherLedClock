@@ -38,6 +38,8 @@ export class TextFace {
       } else {
         if (this.animationIsOver) {
           await this.scrollingDisplay(text);
+        } else {
+          console.log("Scrolling animation not over");
         }
       }
     }
