@@ -6,6 +6,7 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class TextFace {
   public enabled = true;
+  animationIsOver = true;
   matrix: LedMatrixInstance;
   offset: number = 0;
 
@@ -35,7 +36,9 @@ export class TextFace {
         this.twoLineDisplay(firstLine, secondLine);
         await wait(10000);
       } else {
-        await this.scrollingDisplay(text);
+        if (!this.animationIsOver) {
+          await this.scrollingDisplay(text);
+        }
       }
     }
   }
@@ -98,7 +101,7 @@ export class TextFace {
     const w = this.matrix.width();
     this.offset = w - 1;
 
-    var animationIsOver = false;
+    this.animationIsOver = false;
 
     this.scrollingDisplayText(text);
 
@@ -110,14 +113,13 @@ export class TextFace {
           this.scrollingDisplayText(text);
           setTimeout(() => this.matrix.sync(), 150);
         } else {
-          animationIsOver = true;
+          this.animationIsOver = true;
         }
       })
       .sync();
 
-    while (!animationIsOver) {
+    while (!this.animationIsOver) {
       await wait(100);
-      console.log("waiting");
     }
   }
 
