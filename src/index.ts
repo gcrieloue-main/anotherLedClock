@@ -56,37 +56,37 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 3005;
 
-app.get("/text/:text", (req: Request, res: Response) => {
+app.get("/text/:text", async (req: Request, res: Response) => {
   const msg = "Text received : " + req.params.text;
   console.log(msg);
+  res.send(msg);
   allFaces.every((face) => (face.enabled = false));
   textFace.enabled = true;
-  textFace.display(req.params.text);
+  await textFace.display(req.params.text);
   defaultFace();
-  res.send(msg);
 });
 
-app.get("/pulse", (req: Request, res: Response) => {
+app.get("/pulse", async (req: Request, res: Response) => {
   const msg = "Pulse";
   console.log(msg);
+  res.send(msg);
   allFaces.every((face) => (face.enabled = false));
   pulserFace.enabled = true;
-  pulserFace.display();
+  await pulserFace.display();
   defaultFace();
-  res.send(msg);
 });
 
-app.get("/stop", (req: Request, res: Response) => {
+app.get("/stop", async (req: Request, res: Response) => {
   const msg = "Stop";
   console.log(msg);
+  res.send(msg);
   matrix
     .clear()
     .afterSync(() => {})
     .sync();
-  res.send(msg);
 });
 
-app.get("/clock", (req: Request, res: Response) => {
+app.get("/clock", async (req: Request, res: Response) => {
   const msg = "Clock";
   console.log(msg);
   showClock();
