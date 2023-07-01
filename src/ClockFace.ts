@@ -1,4 +1,4 @@
-import { LedMatrixInstance } from "rpi-led-matrix";
+import { LedMatrixInstance, Font } from "rpi-led-matrix";
 
 const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
