@@ -46,6 +46,7 @@ export class TextFace {
   }
 
   simpleDisplay(text: string) {
+    console.log("simple display");
     const w = this.matrix.width();
     const h = this.matrix.height();
 
@@ -90,6 +91,7 @@ export class TextFace {
   }
 
   twoLineDisplay(firstLine: string, secondLine: string) {
+    console.log("two lines display");
     const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
 
@@ -102,9 +104,9 @@ export class TextFace {
   }
 
   public async scrollingDisplay(text: string) {
+    console.log("scrolling display");
     const w = this.matrix.width();
     this.offset = w - 1;
-
     this.animationIsOver = false;
 
     this.scrollingDisplayText(text);
