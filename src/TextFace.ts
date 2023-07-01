@@ -16,18 +16,21 @@ export class TextFace {
     const stringWidth = font4x6.stringWidth(text);
     const words = text.split(" ");
 
+    this.matrix.afterSync(() => {}).sync();
+
     if (stringWidth < w) {
       this.simpleDisplay(text);
-    } else if (
-      stringWidth < w * 2 &&
-      words.every((word) => font4x6.stringWidth(word) < w)
-    ) {
-      this.twoLineDisplay(text);
     } else {
-      this.scrollingDisplay(text);
+      const { firstLine, secondLine } = this.computeTwoLines(text);
+      if (
+        font4x6.stringWidth(firstLine) < w &&
+        font4x6.stringWidth(secondLine)
+      ) {
+        this.twoLineDisplay(firstLine, secondLine);
+      } else {
+        this.scrollingDisplay(text);
+      }
     }
-
-    this.matrix.afterSync(() => {}).sync();
 
     await wait(10000);
   }
@@ -45,13 +48,14 @@ export class TextFace {
       .drawText(text, w / 2 - stringWidth / 2, h / 2 - fontHeight / 2);
   }
 
-  public twoLineDisplay(text: string) {
+  public computeTwoLines(text: string): {
+    firstLine: string;
+    secondLine: string;
+  } {
     const w = this.matrix.width();
-    const h = this.matrix.height();
-    const fontHeight = font4x6.baseline();
     const words = text.split(" ");
-    var firstLine = "";
-    var secondLine = "";
+    var firstLine: string = "";
+    var secondLine: string = "";
 
     words.forEach((word) => {
       var toAdd = "";
@@ -68,7 +72,14 @@ export class TextFace {
       }
     });
 
-    console.log({ words: words.length, firstLine, secondLine });
+    secondLine = secondLine.substring(1);
+
+    return { firstLine, secondLine };
+  }
+
+  public twoLineDisplay(firstLine: string, secondLine: string) {
+    const h = this.matrix.height();
+    const fontHeight = font4x6.baseline();
 
     const textZoneHeight = 2 * fontHeight + 1;
     this.matrix
