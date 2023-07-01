@@ -37,6 +37,7 @@ export class TextFace {
     }
 
     await wait(10000);
+    this.offset = undefined;
   }
 
   public simpleDisplay(text: string) {
