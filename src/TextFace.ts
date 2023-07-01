@@ -19,6 +19,10 @@ export class TextFace {
     const w = this.matrix.width();
     const stringWidth = font4x6.stringWidth(text);
 
+    if (!this.animationIsOver) {
+      await this.waitForAnimation();
+    }
+
     this.matrix
       .font(font4x6)
       .afterSync(() => {})
