@@ -1,5 +1,5 @@
 import {
-    LedMatrix,
+    LedMatrixInstance,
   } from "rpi-led-matrix";
 
 class Pulser {
@@ -18,9 +18,9 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class PulserFace {
 
-    matrix: typeof LedMatrix;
+    matrix: LedMatrixInstance;
   
-    constructor(ledMatrix: typeof LedMatrix){
+    constructor(ledMatrix: LedMatrixInstance){
         this.matrix = ledMatrix;
     }
 
