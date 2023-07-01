@@ -100,6 +100,7 @@ export class TextFace {
 
     this.matrix
       .afterSync((mat: LedMatrixInstance, dt: number) => {
+        console.log(offset, dt);
         if (dt > 200) {
           offset--;
           this.scrollingDisplayText(text, offset);
