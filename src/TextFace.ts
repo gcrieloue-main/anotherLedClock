@@ -108,11 +108,8 @@ export class TextFace {
   }
 
   public scrollingDisplayText(text: string, offset: number) {
-    const w = this.matrix.width();
     const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
-
-    var offset = w;
 
     this.matrix
       .clear()
