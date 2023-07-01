@@ -6,9 +6,10 @@ import {
   GpioMapping,
   LedMatrixUtils,
   PixelMapperType,
+  LedMatrixInstance
 } from "rpi-led-matrix";
 
-import { PulserFace } from "./PulserFace";
+import {PulserFace} from './PulserFace'
 
 const matrix = new LedMatrix(
   {
@@ -84,7 +85,7 @@ async function displayText(text: string) {
 (async () => {
   displayDate();
 
-  matrix.afterSync((mat: number, dt: number, t: number) => {
+  matrix.afterSync((mat:LedMatrixInstance, dt:number, t:number) => {
     if (mode === "CLOCK") {
       displayDate();
     }
@@ -98,10 +99,6 @@ async function displayText(text: string) {
   displayText("TEST");
   matrix.sync();
 })();
-
-/********/
-
-/*******/
 
 dotenv.config();
 
@@ -119,7 +116,7 @@ app.get("/text/:text", (req: Request, res: Response) => {
 app.get("/pulse", (req: Request, res: Response) => {
   const msg = "Pulse";
   console.log(msg);
-  pulserFace.display();
+  pulserFace.display()
   res.send(msg);
 });
 
