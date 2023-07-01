@@ -6,7 +6,7 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class TextFace {
   matrix: LedMatrixInstance;
-  offset?: number = undefined;
+  offset: number = 0;
 
   constructor(ledMatrix: LedMatrixInstance) {
     this.matrix = ledMatrix;
@@ -37,7 +37,6 @@ export class TextFace {
     }
 
     await wait(10000);
-    this.offset = undefined;
   }
 
   public simpleDisplay(text: string) {
@@ -113,8 +112,6 @@ export class TextFace {
             this.offset--;
             this.scrollingDisplayText(text);
             setTimeout(() => this.matrix.sync(), 200);
-          } else {
-            this.offset = undefined;
           }
         })
         .sync();
@@ -122,11 +119,9 @@ export class TextFace {
   }
 
   public scrollingDisplayText(text: string) {
-    if (this.offset != undefined) {
-      const h = this.matrix.height();
-      const fontHeight = font4x6.baseline();
+    const h = this.matrix.height();
+    const fontHeight = font4x6.baseline();
 
-      this.matrix.clear().drawText(text, this.offset, h / 2 - fontHeight / 2);
-    }
+    this.matrix.clear().drawText(text, this.offset, h / 2 - fontHeight / 2);
   }
 }
