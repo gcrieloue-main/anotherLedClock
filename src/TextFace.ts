@@ -11,12 +11,63 @@ export class TextFace {
 
   public async display(text: string) {
     const w = this.matrix.width();
+    const stringWidth = font4x6.stringWidth(text);
+    const words = text.split(" ");
+
+    if (stringWidth < w) {
+      this.simpleDisplay(text);
+    } else if (
+      stringWidth < w * 2 &&
+      words.every((word) => font4x6.stringWidth(word) < w)
+    ) {
+      this.twoLineDisplay(text);
+    } else {
+      this.scrollingDisplay(text);
+    }
+  }
+
+  public simpleDisplay(text: string) {
+    const w = this.matrix.width();
     const h = this.matrix.height();
-    const fontWidth = font4x6.stringWidth(text);
+
+    const stringWidth = font4x6.stringWidth(text);
     const fontHeight = font4x6.baseline();
+
     this.matrix
       .clear()
       .font(font4x6)
-      .drawText(text, w / 2 - fontWidth / 2, h / 2 - fontHeight / 2);
+      .drawText(text, w / 2 - stringWidth / 2, h / 2 - fontHeight / 2);
+  }
+
+  public twoLineDisplay(text: string) {
+    const w = this.matrix.width();
+    const fontHeight = font4x6.baseline();
+    const words = text.split(" ");
+    var firstLine = "";
+    var secondLine = "";
+    words.every((word) => {
+      var toAdd = "";
+      if (firstLine.length == 0) {
+        toAdd = firstLine += word;
+      } else {
+        toAdd += " " + word;
+      }
+
+      if (font4x6.stringWidth(firstLine + toAdd) < w) {
+        firstLine += toAdd;
+      } else {
+        secondLine += toAdd;
+      }
+    });
+
+    this.matrix
+      .clear()
+      .font(font4x6)
+      .drawText(firstLine, 0, 0)
+      .drawText(secondLine, 0, fontHeight + 1);
+  }
+
+  public scrollingDisplay(text: string) {
+    this.simpleDisplay(text);
   }
 }
