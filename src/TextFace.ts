@@ -6,6 +6,7 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class TextFace {
   matrix: LedMatrixInstance;
+  offset: number = 0;
 
   constructor(ledMatrix: LedMatrixInstance) {
     this.matrix = ledMatrix;
@@ -94,30 +95,29 @@ export class TextFace {
 
   public scrollingDisplay(text: string) {
     const w = this.matrix.width();
-    var offset = w;
+    this.offset = w;
 
-    this.scrollingDisplayText(text, offset);
+    this.scrollingDisplayText(text);
 
     this.matrix
       .afterSync((mat: LedMatrixInstance, dt: number) => {
-        console.log(offset, dt);
-        if (dt > 200) {
-          offset--;
-          this.scrollingDisplayText(text, offset);
-        }
+        console.log(this.offset, dt);
 
-        setTimeout(() => this.matrix.sync(), 0);
+        this.offset--;
+        this.scrollingDisplayText(text);
+
+        setTimeout(() => this.matrix.sync(), 1000);
       })
       .sync();
   }
 
-  public scrollingDisplayText(text: string, offset: number) {
+  public scrollingDisplayText(text: string) {
     const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
 
     this.matrix
       .clear()
       .font(font4x6)
-      .drawText(text, offset, h / 2 - fontHeight / 2);
+      .drawText(text, this.offset, h / 2 - fontHeight / 2);
   }
 }
