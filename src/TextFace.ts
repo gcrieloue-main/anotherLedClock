@@ -99,10 +99,13 @@ export class TextFace {
     this.scrollingDisplayText(text, offset);
 
     this.matrix
-      .afterSync(() => {
-        offset--;
-        this.scrollingDisplayText(text, offset);
-        setTimeout(() => this.matrix.sync(), 500);
+      .afterSync((mat: LedMatrixInstance, dt: number) => {
+        if (dt > 200) {
+          offset--;
+          this.scrollingDisplayText(text, offset);
+        }
+
+        setTimeout(() => this.matrix.sync(), 0);
       })
       .sync();
   }
