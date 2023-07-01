@@ -18,7 +18,7 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class PulserFace {
 
-    matrix: LedMatrix
+    matrix: LedMatrix;
   
     constructor(ledMatrix:LedMatrix){
         this.matrix = ledMatrix;
@@ -33,7 +33,7 @@ export class PulserFace {
           }
         }
       
-        this.matrix.afterSync((mat, dt, t) => {
+        this.matrix.afterSync((mat:number, dt:number, t:number) => {
           pulsers.forEach((pulser) => {
             this.matrix.fgColor(pulser.nextColor(t)).setPixel(pulser.x, pulser.y);
           });
