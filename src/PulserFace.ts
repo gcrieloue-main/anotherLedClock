@@ -33,7 +33,7 @@ export class PulserFace {
           }
         }
       
-        this.matrix.afterSync((mat:number, dt:number, t:number) => {
+        this.matrix.afterSync((mat:LedMatrixInstance, dt:number, t:number) => {
           pulsers.forEach((pulser) => {
             this.matrix.fgColor(pulser.nextColor(t)).setPixel(pulser.x, pulser.y);
           });
