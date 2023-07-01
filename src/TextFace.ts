@@ -75,7 +75,7 @@ export class TextFace {
       }
     });
 
-    secondLine = secondLine.substring(1);
+    secondLine = secondLine.trim();
 
     return { firstLine, secondLine };
   }
