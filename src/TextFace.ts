@@ -94,28 +94,23 @@ export class TextFace {
   }
 
   public scrollingDisplay(text: string) {
-    if (this.offset != undefined) {
-      console.log("Text already scrolling");
-      return;
-    } else {
-      const w = this.matrix.width();
-      this.offset = w;
+    const w = this.matrix.width();
+    this.offset = w;
 
-      this.scrollingDisplayText(text);
+    this.scrollingDisplayText(text);
 
-      this.matrix
-        .afterSync((mat: LedMatrixInstance, dt: number) => {
-          console.log(this.offset, dt);
+    this.matrix
+      .afterSync((mat: LedMatrixInstance, dt: number) => {
+        console.log(this.offset, dt);
 
-          const stringWidth = font4x6.stringWidth(text);
-          if (this.offset !== undefined && this.offset > -stringWidth) {
-            this.offset--;
-            this.scrollingDisplayText(text);
-            setTimeout(() => this.matrix.sync(), 200);
-          }
-        })
-        .sync();
-    }
+        const stringWidth = font4x6.stringWidth(text);
+        if (this.offset !== undefined && this.offset > -stringWidth) {
+          this.offset--;
+          this.scrollingDisplayText(text);
+          setTimeout(() => this.matrix.sync(), 200);
+        }
+      })
+      .sync();
   }
 
   public scrollingDisplayText(text: string) {
