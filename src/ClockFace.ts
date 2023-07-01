@@ -45,8 +45,10 @@ export class ClockFace {
       .drawText(ampmStr, 23, 5);
 
     this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
-      this.display();
-      setTimeout(() => this.matrix.sync(), 10000);
+      setTimeout(() => {
+        this.display();
+        this.matrix.sync();
+      }, 10000);
     });
 
     this.matrix.sync();
