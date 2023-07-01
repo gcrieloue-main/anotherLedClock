@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, text } from "express";
 import dotenv from "dotenv";
 import {
   Font,
@@ -10,6 +10,7 @@ import {
 
 import { PulserFace } from "./PulserFace";
 import { ClockFace } from "./ClockFace";
+import { TextFace } from "./TextFace";
 
 const matrix = new LedMatrix(
   {
@@ -33,6 +34,7 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 const pulserFace = new PulserFace(matrix);
 const clockFace = new ClockFace(matrix);
+const textFace = new TextFace(matrix);
 
 //const font = new Font("5x8", "fonts/5x8.bdf");
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
@@ -56,7 +58,7 @@ const port = process.env.PORT || 3005;
 app.get("/text/:text", (req: Request, res: Response) => {
   const msg = "Text received" + req.params.text;
   console.log(msg);
-  displayText(req.params.text);
+  textFace.display(req.params.text);
   matrix.sync();
   res.send(msg);
 });
