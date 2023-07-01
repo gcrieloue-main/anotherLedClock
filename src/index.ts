@@ -40,6 +40,9 @@ app.get("/text/:text", async (req: Request, res: Response) => {
   res.send(msg);
   allFaces.forEach((face) => (face.enabled = false));
   textFace.enabled = true;
+  if (!textFace.animationIsOver) {
+    await textFace.waitForAnimation();
+  }
   await textFace.display(req.params.text);
   defaultFace();
 });

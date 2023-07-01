@@ -6,7 +6,7 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class TextFace {
   public enabled = true;
-  animationIsOver = true;
+  public animationIsOver = true;
   matrix: LedMatrixInstance;
   offset: number = 0;
 
@@ -45,7 +45,7 @@ export class TextFace {
     }
   }
 
-  public simpleDisplay(text: string) {
+  simpleDisplay(text: string) {
     const w = this.matrix.width();
     const h = this.matrix.height();
 
@@ -58,7 +58,7 @@ export class TextFace {
       .sync();
   }
 
-  public computeTwoLines(text: string): {
+  computeTwoLines(text: string): {
     firstLine: string;
     secondLine: string;
   } {
@@ -89,7 +89,7 @@ export class TextFace {
     return { firstLine, secondLine };
   }
 
-  public twoLineDisplay(firstLine: string, secondLine: string) {
+  twoLineDisplay(firstLine: string, secondLine: string) {
     const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
 
@@ -122,12 +122,16 @@ export class TextFace {
       })
       .sync();
 
+    this.waitForAnimation();
+  }
+
+  async waitForAnimation() {
     while (!this.animationIsOver) {
       await wait(100);
     }
   }
 
-  public scrollingDisplayText(text: string) {
+  scrollingDisplayText(text: string) {
     const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
 
