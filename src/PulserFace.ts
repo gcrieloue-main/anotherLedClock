@@ -18,9 +18,9 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class PulserFace {
 
-    matrix: LedMatrix;
+    matrix: typeof LedMatrix;
   
-    constructor(ledMatrix:LedMatrix){
+    constructor(ledMatrix: typeof LedMatrix){
         this.matrix = ledMatrix;
     }
 
