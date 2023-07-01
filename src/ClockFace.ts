@@ -28,6 +28,17 @@ export class ClockFace {
   }
 
   public async display() {
+    this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
+      setTimeout(() => {
+        this.displayClock();
+        this.matrix.sync();
+      }, 10000);
+    });
+
+    this.matrix.sync();
+  }
+
+  public async displayClock() {
     const time = new Date();
     const timeStr = formatTime(time);
     const ampmStr = formatAMPM(time);
@@ -43,14 +54,5 @@ export class ClockFace {
       .fgColor(0x3333ff)
       .font(font4x6)
       .drawText(ampmStr, 23, 5);
-
-    this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
-      setTimeout(() => {
-        this.display();
-        this.matrix.sync();
-      }, 10000);
-    });
-
-    this.matrix.sync();
   }
 }
