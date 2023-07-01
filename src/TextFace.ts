@@ -21,6 +21,8 @@ export class TextFace {
 
     if (!this.animationIsOver) {
       await this.waitForAnimation();
+    } else {
+      console.log("Scrolling animation not over");
     }
 
     this.matrix
@@ -40,11 +42,7 @@ export class TextFace {
         this.twoLineDisplay(firstLine, secondLine);
         await wait(10000);
       } else {
-        if (this.animationIsOver) {
-          await this.scrollingDisplay(text);
-        } else {
-          console.log("Scrolling animation not over");
-        }
+        await this.scrollingDisplay(text);
       }
     }
   }
