@@ -47,10 +47,12 @@ export class TextFace {
 
   public twoLineDisplay(text: string) {
     const w = this.matrix.width();
+    const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
     const words = text.split(" ");
     var firstLine = "";
     var secondLine = "";
+
     words.every((word) => {
       var toAdd = "";
       if (firstLine.length == 0) {
@@ -66,11 +68,14 @@ export class TextFace {
       }
     });
 
+    console.log({ firstLine, secondLine });
+
+    const textZoneHeight = 2 * fontHeight + 1;
     this.matrix
       .clear()
       .font(font4x6)
-      .drawText(firstLine, 0, 0)
-      .drawText(secondLine, 0, fontHeight + 1);
+      .drawText(firstLine, 0, (h - textZoneHeight) / 2)
+      .drawText(secondLine, 0, h / 2 + textZoneHeight / 2 + 1);
   }
 
   public scrollingDisplay(text: string) {
