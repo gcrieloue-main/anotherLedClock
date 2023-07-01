@@ -28,6 +28,8 @@ export class ClockFace {
   }
 
   public async display() {
+    this.displayClock();
+
     this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
       setTimeout(() => {
         this.displayClock();
