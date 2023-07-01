@@ -36,6 +36,8 @@ export class ClockFace {
         if (this.enabled) {
           this.displayClock();
           this.matrix.sync();
+        } else {
+          console.log("skip clock");
         }
       }, 10000);
     });
