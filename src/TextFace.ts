@@ -25,6 +25,7 @@ export class TextFace {
 
     if (stringWidth < w) {
       this.simpleDisplay(text);
+      await wait(10000);
     } else {
       const { firstLine, secondLine } = this.computeTwoLines(text);
       if (
@@ -32,12 +33,11 @@ export class TextFace {
         font4x6.stringWidth(secondLine) < w
       ) {
         this.twoLineDisplay(firstLine, secondLine);
+        await wait(10000);
       } else {
-        this.scrollingDisplay(text);
+        await this.scrollingDisplay(text);
       }
     }
-
-    await wait(10000);
   }
 
   public simpleDisplay(text: string) {
@@ -94,9 +94,11 @@ export class TextFace {
       .drawText(secondLine, 0, (h - textZoneHeight) / 2 + textZoneHeight / 2);
   }
 
-  public scrollingDisplay(text: string) {
+  public async scrollingDisplay(text: string) {
     const w = this.matrix.width();
     this.offset = w - 1;
+
+    var animationIsOver = false;
 
     this.scrollingDisplayText(text);
 
@@ -107,9 +109,15 @@ export class TextFace {
           this.offset--;
           this.scrollingDisplayText(text);
           setTimeout(() => this.matrix.sync(), 150);
+        } else {
+          animationIsOver = true;
         }
       })
       .sync();
+
+    while (!animationIsOver) {
+      console.log("waiting");
+    }
   }
 
   public scrollingDisplayText(text: string) {
