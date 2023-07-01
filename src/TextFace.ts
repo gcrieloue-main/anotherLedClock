@@ -1,4 +1,3 @@
-import { off } from "process";
 import { LedMatrixInstance, Font } from "rpi-led-matrix";
 
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
@@ -115,6 +114,7 @@ export class TextFace {
     this.matrix
       .clear()
       .font(font4x6)
-      .drawText(text, offset, h / 2 - fontHeight / 2);
+      .drawText(text, offset, h / 2 - fontHeight / 2)
+      .sync();
   }
 }
