@@ -56,7 +56,7 @@ export class TextFace {
     words.every((word) => {
       var toAdd = "";
       if (firstLine.length == 0) {
-        toAdd = firstLine += word;
+        toAdd += word;
       } else {
         toAdd += " " + word;
       }
