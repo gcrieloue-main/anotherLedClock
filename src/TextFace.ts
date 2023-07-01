@@ -75,7 +75,7 @@ export class TextFace {
       .clear()
       .font(font4x6)
       .drawText(firstLine, 0, (h - textZoneHeight) / 2)
-      .drawText(secondLine, 0, h / 2 + textZoneHeight / 2 + 1);
+      .drawText(secondLine, 0, (h - textZoneHeight) / 2 + textZoneHeight / 2);
   }
 
   public scrollingDisplay(text: string) {
