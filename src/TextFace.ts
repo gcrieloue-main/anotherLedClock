@@ -18,7 +18,10 @@ export class TextFace {
     const w = this.matrix.width();
     const stringWidth = font4x6.stringWidth(text);
 
-    this.matrix.afterSync(() => {}).sync();
+    this.matrix
+      .font(font4x6)
+      .afterSync(() => {})
+      .sync();
 
     if (stringWidth < w) {
       this.simpleDisplay(text);
@@ -46,7 +49,6 @@ export class TextFace {
 
     this.matrix
       .clear()
-      .font(font4x6)
       .drawText(text, w / 2 - stringWidth / 2, h / 2 - fontHeight / 2);
   }
 
@@ -88,7 +90,6 @@ export class TextFace {
     const textZoneHeight = 2 * fontHeight + 1;
     this.matrix
       .clear()
-      .font(font4x6)
       .drawText(firstLine, 0, (h - textZoneHeight) / 2)
       .drawText(secondLine, 0, (h - textZoneHeight) / 2 + textZoneHeight / 2);
   }
@@ -117,9 +118,6 @@ export class TextFace {
     const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
 
-    this.matrix
-      .clear()
-      .font(font4x6)
-      .drawText(text, this.offset, h / 2 - fontHeight / 2);
+    this.matrix.clear().drawText(text, this.offset, h / 2 - fontHeight / 2);
   }
 }
