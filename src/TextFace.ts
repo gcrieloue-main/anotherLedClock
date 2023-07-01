@@ -10,6 +10,12 @@ export class TextFace {
   }
 
   public async display(text: string) {
-    this.matrix.clear().font(font4x6).drawText(text, 1, 1);
+    const w = this.matrix.width();
+    //const h = this.matrix.height();
+    const fontWidth = font4x6.stringWidth(text);
+    this.matrix
+      .clear()
+      .font(font4x6)
+      .drawText(text, w / 2 - fontWidth / 2, 1);
   }
 }
