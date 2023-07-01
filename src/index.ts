@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, text } from "express";
+import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import {
   Font,
@@ -39,12 +39,6 @@ const textFace = new TextFace(matrix);
 //const font = new Font("5x8", "fonts/5x8.bdf");
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
 // let mode: "CLOCK" | "TEXT" = "CLOCK";
-
-async function displayText(text: string) {
-  matrix.clear().font(font4x6).drawText(text, 1, 1);
-
-  await wait(10000);
-}
 
 (async () => {
   clockFace.display();
