@@ -58,6 +58,7 @@ export class TextFace {
     var firstLine: string = "";
     var secondLine: string = "";
 
+    var firstLineFull = false;
     words.forEach((word) => {
       var toAdd = "";
       if (firstLine.length == 0) {
@@ -66,9 +67,10 @@ export class TextFace {
         toAdd += " " + word;
       }
 
-      if (font4x6.stringWidth(firstLine + toAdd) < w) {
+      if (font4x6.stringWidth(firstLine + toAdd) < w && !firstLineFull) {
         firstLine += toAdd;
       } else {
+        firstLineFull = true;
         secondLine += toAdd;
       }
     });
