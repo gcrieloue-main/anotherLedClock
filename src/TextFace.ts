@@ -6,7 +6,7 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class TextFace {
   matrix: LedMatrixInstance;
-  offset: number = 0;
+  offset?: number = undefined;
 
   constructor(ledMatrix: LedMatrixInstance) {
     this.matrix = ledMatrix;
@@ -14,7 +14,6 @@ export class TextFace {
 
   public async display(textToDisplay: string) {
     const text = textToDisplay.trim();
-
     const w = this.matrix.width();
     const stringWidth = font4x6.stringWidth(text);
 
@@ -95,23 +94,30 @@ export class TextFace {
   }
 
   public scrollingDisplay(text: string) {
-    const w = this.matrix.width();
-    this.offset = w;
+    if (this.offset != undefined) {
+      console.log("Text already scrolling");
+      return;
+    } else {
+      const w = this.matrix.width();
+      this.offset = w;
 
-    this.scrollingDisplayText(text);
+      this.scrollingDisplayText(text);
 
-    this.matrix
-      .afterSync((mat: LedMatrixInstance, dt: number) => {
-        console.log(this.offset, dt);
+      this.matrix
+        .afterSync((mat: LedMatrixInstance, dt: number) => {
+          console.log(this.offset, dt);
 
-        const stringWidth = font4x6.stringWidth(text);
-        if (this.offset > -stringWidth) {
-          this.offset--;
-          this.scrollingDisplayText(text);
-          setTimeout(() => this.matrix.sync(), 200);
-        }
-      })
-      .sync();
+          const stringWidth = font4x6.stringWidth(text);
+          if (this.offset !== undefined && this.offset > -stringWidth) {
+            this.offset--;
+            this.scrollingDisplayText(text);
+            setTimeout(() => this.matrix.sync(), 200);
+          } else {
+            this.offset = undefined;
+          }
+        })
+        .sync();
+    }
   }
 
   public scrollingDisplayText(text: string) {
