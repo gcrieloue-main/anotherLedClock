@@ -5,11 +5,11 @@ import {
   LedMatrix,
   GpioMapping,
   LedMatrixUtils,
-  PixelMapperType
+  PixelMapperType,
 } from "rpi-led-matrix";
 
-import {PulserFace} from './PulserFace'
-import {ClockFace} from './ClockFace'
+import { PulserFace } from "./PulserFace";
+import { ClockFace } from "./ClockFace";
 
 const matrix = new LedMatrix(
   {
@@ -34,15 +34,12 @@ const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 const pulserFace = new PulserFace(matrix);
 const clockFace = new ClockFace(matrix);
 
-
 //const font = new Font("5x8", "fonts/5x8.bdf");
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
 // let mode: "CLOCK" | "TEXT" = "CLOCK";
 
 async function displayText(text: string) {
-  matrix.clear()
-  .font(font4x6)
-  .drawText(text, 1, 1);
+  matrix.clear().font(font4x6).drawText(text, 1, 1);
 
   await wait(10000);
 }
@@ -67,14 +64,21 @@ app.get("/text/:text", (req: Request, res: Response) => {
 app.get("/pulse", (req: Request, res: Response) => {
   const msg = "Pulse";
   console.log(msg);
-  pulserFace.display()
+  pulserFace.display();
+  res.send(msg);
+});
+
+app.get("/stop", (req: Request, res: Response) => {
+  const msg = "Stop";
+  console.log(msg);
+  matrix.clear().sync();
   res.send(msg);
 });
 
 app.get("/clock", (req: Request, res: Response) => {
   const msg = "Clock";
   console.log(msg);
-  clockFace.display()
+  clockFace.display();
   res.send(msg);
 });
 
