@@ -5,8 +5,7 @@ import {
   LedMatrix,
   GpioMapping,
   LedMatrixUtils,
-  PixelMapperType,
-  LedMatrixInstance
+  PixelMapperType
 } from "rpi-led-matrix";
 
 import {PulserFace} from './PulserFace'
@@ -38,16 +37,14 @@ const clockFace = new ClockFace(matrix);
 
 //const font = new Font("5x8", "fonts/5x8.bdf");
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
-let mode: "CLOCK" | "TEXT" = "CLOCK";
+// let mode: "CLOCK" | "TEXT" = "CLOCK";
 
 async function displayText(text: string) {
-  mode = "TEXT";
   matrix.clear()
   .font(font4x6)
   .drawText(text, 1, 1);
 
   await wait(10000);
-  mode = "CLOCK";
 }
 
 (async () => {

@@ -1,7 +1,5 @@
 import { LedMatrixInstance, Font } from "rpi-led-matrix";
 
-const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
-
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
 const fontTom = new Font("tom", "fonts/tom-thumb.bdf");
 
