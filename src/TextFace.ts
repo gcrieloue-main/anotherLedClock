@@ -124,7 +124,7 @@ export class TextFace {
       })
       .sync();
 
-    this.waitForAnimation();
+    await this.waitForAnimation();
   }
 
   async waitForAnimation() {

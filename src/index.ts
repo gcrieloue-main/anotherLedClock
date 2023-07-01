@@ -19,6 +19,13 @@ function showClock() {
   clockFace.display();
 }
 
+function stop() {
+  matrix
+    .clear()
+    .afterSync(() => {})
+    .sync();
+}
+
 function defaultFace() {
   showClock();
 }
@@ -60,10 +67,7 @@ app.get("/stop", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  matrix
-    .clear()
-    .afterSync(() => {})
-    .sync();
+  stop();
 });
 
 app.get("/clock", async (req: Request, res: Response) => {
