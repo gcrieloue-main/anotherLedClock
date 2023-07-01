@@ -68,7 +68,7 @@ export class TextFace {
       }
     });
 
-    console.log({ firstLine, secondLine });
+    console.log({ words: words.length, firstLine, secondLine });
 
     const textZoneHeight = 2 * fontHeight + 1;
     this.matrix
