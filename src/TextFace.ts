@@ -11,7 +11,9 @@ export class TextFace {
     this.matrix = ledMatrix;
   }
 
-  public async display(text: string) {
+  public async display(textToDisplay: string) {
+    const text = textToDisplay.trim();
+
     const w = this.matrix.width();
     const stringWidth = font4x6.stringWidth(text);
 
@@ -23,7 +25,7 @@ export class TextFace {
       const { firstLine, secondLine } = this.computeTwoLines(text);
       if (
         font4x6.stringWidth(firstLine) < w &&
-        font4x6.stringWidth(secondLine)
+        font4x6.stringWidth(secondLine) < w
       ) {
         this.twoLineDisplay(firstLine, secondLine);
       } else {
