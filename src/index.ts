@@ -74,6 +74,13 @@ app.get("/pulse", (req: Request, res: Response) => {
   res.send(msg);
 });
 
+app.get("/clock", (req: Request, res: Response) => {
+  const msg = "Clock";
+  console.log(msg);
+  clockFace.display()
+  res.send(msg);
+});
+
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
