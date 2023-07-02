@@ -1,4 +1,4 @@
-import { LedMatrixInstance, Font } from "rpi-led-matrix";
+import { LedMatrixInstance } from "rpi-led-matrix";
 import { MatrixConfig } from "./MatrixConfig";
 
 export class ColorFace {
@@ -237,7 +237,9 @@ export class ColorFace {
     var i = 0;
     for (var x = 0; x < 32; x++) {
       for (var y = 0; y < 16; y++) {
-        this.matrix.fgColor(this.colors[i]).setPixel(x, y);
+        this.matrix
+          .fgColor(parseInt("0x" + this.colors[i % 512]))
+          .setPixel(x, y);
         i++;
       }
     }
