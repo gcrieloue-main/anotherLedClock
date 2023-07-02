@@ -62,7 +62,13 @@ export class ClockFace {
       .font(fontTom)
       .drawText(timeStr, 3, 5)
       .fgColor(this.config.alternateColor)
-      .drawRect(0, 0, this.matrix.width() - 1, this.matrix.height() - 1)
+      .drawRect(0, 0, this.matrix.width() - 1, 2)
+      .drawRect(
+        0,
+        this.matrix.height() - 1,
+        this.matrix.width() - 1,
+        this.matrix.height() - 3
+      )
       .fgColor(this.config.secondaryColor)
       .font(font4x6)
       .drawText(ampmStr, 23, 5);
