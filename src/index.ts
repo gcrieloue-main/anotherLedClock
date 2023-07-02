@@ -14,7 +14,7 @@ const textFace = new TextFace(matrix);
 const allFaces = [pulserFace, clockFace, textFace];
 
 function showClock() {
-  if (!clockFace.enabled){
+  if (!clockFace.enabled) {
     allFaces.forEach((face) => (face.enabled = false));
     clockFace.enabled = true;
     clockFace.display();
@@ -44,10 +44,10 @@ const port = process.env.PORT || 3005;
 app.get("/text/:text", async (req: Request, res: Response) => {
   var msg = "Text received : " + req.params.text;
 
-  if (!textFace.animationIsOver){
+  if (!textFace.animationIsOver) {
     msg += ", skipped";
-      res.send(msg);
-    return
+    res.send(msg);
+    return;
   }
   res.send(msg);
 
