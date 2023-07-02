@@ -118,6 +118,15 @@ app.get("/config/primary/:primary", async (req: Request, res: Response) => {
   matrixConfig.primaryColor = parseInt(primary);
 });
 
+app.get("/config/secondary/:secondary", async (req: Request, res: Response) => {
+  const secondary = req.params.secondary;
+  const msg = "Secondary : " + secondary;
+  console.log(msg);
+  res.send(msg);
+
+  matrixConfig.secondaryColor = parseInt(secondary);
+});
+
 app.get("/stop", async (req: Request, res: Response) => {
   const msg = "Stop";
   console.log(msg);
