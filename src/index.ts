@@ -14,9 +14,11 @@ const textFace = new TextFace(matrix);
 const allFaces = [pulserFace, clockFace, textFace];
 
 function showClock() {
-  allFaces.forEach((face) => (face.enabled = false));
-  clockFace.enabled = true;
-  clockFace.display();
+  if (!clockFace.enabled){
+    allFaces.forEach((face) => (face.enabled = false));
+    clockFace.enabled = true;
+    clockFace.display();
+  }
 }
 
 function stop() {
