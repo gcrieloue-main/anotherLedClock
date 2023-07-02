@@ -5,8 +5,8 @@ export class MatrixConfig {
 
   public config = () => {
     return {
-      primaryColor: this.primaryColor,
-      secondaryColor: this.secondaryColor,
+      primaryColor: this.primaryColor.toString(16),
+      secondaryColor: this.secondaryColor.toString(16),
       brightness: this.brightness,
     };
   };
