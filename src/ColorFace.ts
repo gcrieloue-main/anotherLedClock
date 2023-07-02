@@ -238,7 +238,7 @@ export class ColorFace {
     for (var x = 0; x < 32; x++) {
       for (var y = 0; y < 16; y++) {
         this.matrix
-          .fgColor(parseInt("0x" + this.colors[i % 512]))
+          .fgColor(parseInt("0x" + this.colors[i % this.colors.length]))
           .setPixel(x, y);
         i++;
       }
