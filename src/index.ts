@@ -9,11 +9,13 @@ import { TextFace } from "./TextFace";
 
 import { matrix } from "./Matrix";
 import { MatrixConfig } from "./MatrixConfig";
+import { ColorFace } from "./ColorFace";
 
 const matrixConfig = new MatrixConfig();
 const pulserFace = new PulserFace(matrix);
 const clockFace = new ClockFace(matrix, matrixConfig);
 const textFace = new TextFace(matrix, matrixConfig);
+const colorFace = new ColorFace(matrix, matrixConfig);
 
 const allFaces = [pulserFace, clockFace, textFace];
 
@@ -50,6 +52,13 @@ async function pulse(duration?: number) {
   pulserFace.enabled = true;
 
   await pulserFace.display(duration);
+}
+
+async function colors(duration?: number) {
+  allFaces.forEach((face) => (face.enabled = false));
+  colorFace.enabled = true;
+
+  await colorFace.display();
 }
 
 // ============= Start =============
@@ -98,6 +107,14 @@ app.get("/pulse", async (req: Request, res: Response) => {
 
   await pulse();
   defaultFace();
+});
+
+app.get("/colors", async (req: Request, res: Response) => {
+  const msg = "Colors";
+  console.log(msg);
+  res.send(msg);
+
+  await colors();
 });
 
 app.get("/config", async (req: Request, res: Response) => {
