@@ -25,6 +25,13 @@ function showClock() {
   }
 }
 
+async function text(txt: string) {
+  allFaces.forEach((face) => (face.enabled = false));
+  textFace.enabled = true;
+
+  await textFace.display(txt);
+}
+
 function stop() {
   matrix
     .clear()
@@ -66,7 +73,8 @@ app.get("/clock", async (req: Request, res: Response) => {
 });
 
 app.get("/text/:text", async (req: Request, res: Response) => {
-  var msg = "Text received : " + req.params.text;
+  const txt = req.params.tex;
+  var msg = "Text received : " + txt;
 
   if (!textFace.animationIsOver) {
     msg += ", skipped";
@@ -76,10 +84,7 @@ app.get("/text/:text", async (req: Request, res: Response) => {
   }
   res.send(msg);
 
-  allFaces.forEach((face) => (face.enabled = false));
-  textFace.enabled = true;
-
-  await textFace.display(req.params.text);
+  await text(txt);
   defaultFace();
 });
 
