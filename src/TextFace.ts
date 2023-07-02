@@ -1,4 +1,5 @@
 import { LedMatrixInstance, Font } from "rpi-led-matrix";
+import { MatrixConfig } from "./MatrixConfig";
 
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
 
@@ -9,9 +10,11 @@ export class TextFace {
   public animationIsOver = true;
   matrix: LedMatrixInstance;
   offset: number = 0;
+  config: MatrixConfig;
 
-  constructor(ledMatrix: LedMatrixInstance) {
+  constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix;
+    this.config = config;
   }
 
   public async display(textToDisplay: string) {
