@@ -43,6 +43,7 @@ function stop() {
 function defaultFace() {
   showClock();
 }
+
 function enableFace(face: Face) {
   allFaces.forEach((face) => (face.enabled = false));
   face.enabled = true;
