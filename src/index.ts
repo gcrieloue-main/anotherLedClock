@@ -8,10 +8,12 @@ import { ClockFace } from "./ClockFace";
 import { TextFace } from "./TextFace";
 
 import { matrix } from "./Matrix";
+import { MatrixConfig } from "./MatrixConfig";
 
+const matrixConfig = new MatrixConfig();
 const pulserFace = new PulserFace(matrix);
-const clockFace = new ClockFace(matrix);
-const textFace = new TextFace(matrix);
+const clockFace = new ClockFace(matrix, matrixConfig);
+const textFace = new TextFace(matrix, matrixConfig);
 
 const allFaces = [pulserFace, clockFace, textFace];
 
@@ -97,6 +99,7 @@ app.get("/pulse", async (req: Request, res: Response) => {
   await pulse();
   defaultFace();
 });
+
 app.get("/brightness/:brightness", async (req: Request, res: Response) => {
   const brightness = req.params.brightness;
   const msg = "Brightness : " + brightness;
@@ -104,6 +107,15 @@ app.get("/brightness/:brightness", async (req: Request, res: Response) => {
   res.send(msg);
 
   matrix.brightness(parseInt(brightness, 10)).sync();
+});
+
+app.get("/config/primary/:primary", async (req: Request, res: Response) => {
+  const primary = req.params.brightness;
+  const msg = "Primary : " + primary;
+  console.log(msg);
+  res.send(msg);
+
+  matrixConfig.primaryColor = parseInt(primary);
 });
 
 app.get("/stop", async (req: Request, res: Response) => {

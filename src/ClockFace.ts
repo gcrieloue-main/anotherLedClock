@@ -58,10 +58,10 @@ export class ClockFace {
       .clear()
       .fgColor(0x000000)
       .fill()
-      .fgColor(0xffffff)
+      .fgColor(this.config.primaryColor)
       .font(fontTom)
       .drawText(timeStr, 3, 5)
-      .fgColor(0x3333ff)
+      .fgColor(this.config.secondaryColor)
       .font(font4x6)
       .drawText(ampmStr, 23, 5);
   }
