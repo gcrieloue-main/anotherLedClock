@@ -42,13 +42,15 @@ const app: Express = express();
 const port = process.env.PORT || 3005;
 
 app.get("/text/:text", async (req: Request, res: Response) => {
-  const msg = "Text received : " + req.params.text;
-  console.log(msg);
+  var msg = "Text received : " + req.params.text;
+
   if (!textFace.animationIsOver){
-    res.send(msg+", skipped");
+    msg += ", skipped";
+      res.send(msg);
     return
   }
   res.send(msg);
+
   allFaces.forEach((face) => (face.enabled = false));
   textFace.enabled = true;
 
