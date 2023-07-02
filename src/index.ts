@@ -74,10 +74,7 @@ app.get("/pulse", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  allFaces.forEach((face) => (face.enabled = false));
-  pulserFace.enabled = true;
-
-  await pulserFace.display();
+  await pulse();
   defaultFace();
 });
 
