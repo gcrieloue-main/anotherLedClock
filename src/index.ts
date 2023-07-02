@@ -1,7 +1,7 @@
 require("console-stamp")(console, "yyyy/mm/dd HH:MM:ss.l");
 
 import express, { Express, Request, Response } from "express";
-import dotenv, { config } from "dotenv";
+import dotenv from "dotenv";
 
 import { PulserFace } from "./PulserFace";
 import { ClockFace } from "./ClockFace";
