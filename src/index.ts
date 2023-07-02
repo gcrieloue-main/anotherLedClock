@@ -34,8 +34,16 @@ function defaultFace() {
   showClock();
 }
 
+async function pulse(duration?: number) {
+  allFaces.forEach((face) => (face.enabled = false));
+  pulserFace.enabled = true;
+
+  await pulserFace.display(duration);
+}
+
 (async () => {
-  clockFace.display();
+  await pulse(2000);
+  defaultFace();
 })();
 
 dotenv.config();
