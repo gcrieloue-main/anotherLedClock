@@ -21,7 +21,7 @@ export class PulserFace {
     this.matrix = ledMatrix;
   }
 
-  public async display() {
+  public async display(duration: number = 10000) {
     const pulsers: Pulser[] = [];
 
     for (let x = 0; x < this.matrix.width(); x++) {
@@ -40,6 +40,6 @@ export class PulserFace {
 
     this.matrix.sync();
 
-    await wait(30000);
+    await wait(duration);
   }
 }
