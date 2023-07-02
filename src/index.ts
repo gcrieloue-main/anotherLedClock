@@ -15,6 +15,8 @@ const textFace = new TextFace(matrix);
 
 const allFaces = [pulserFace, clockFace, textFace];
 
+// ============= Features =============
+
 function showClock() {
   if (!clockFace.enabled) {
     allFaces.forEach((face) => (face.enabled = false));
@@ -41,15 +43,27 @@ async function pulse(duration?: number) {
   await pulserFace.display(duration);
 }
 
+// ============= Start =============
+
 (async () => {
   await pulse(2000);
   defaultFace();
 })();
 
+// ============= API =============
+
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3005;
+
+app.get("/clock", async (req: Request, res: Response) => {
+  const msg = "Clock";
+  console.log(msg);
+
+  showClock();
+  res.send(msg);
+});
 
 app.get("/text/:text", async (req: Request, res: Response) => {
   var msg = "Text received : " + req.params.text;
@@ -84,14 +98,6 @@ app.get("/stop", async (req: Request, res: Response) => {
   res.send(msg);
 
   stop();
-});
-
-app.get("/clock", async (req: Request, res: Response) => {
-  const msg = "Clock";
-  console.log(msg);
-
-  showClock();
-  res.send(msg);
 });
 
 app.listen(port, () => {
