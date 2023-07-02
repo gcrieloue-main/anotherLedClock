@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "sudo node src",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "auto": "git add . && git commit -m 'dev' && git push"
+    "push": "git add . && git commit -m 'dev' && git push",
+    "get": " git pull && npm run build && npm run start"
   },
   "keywords": [],
   "author": "",
