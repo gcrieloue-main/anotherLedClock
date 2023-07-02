@@ -1,3 +1,5 @@
+require("console-stamp")(console, "yyyy/mm/dd HH:MM:ss.l");
+
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 
