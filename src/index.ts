@@ -23,16 +23,13 @@ const allFaces = [pulserFace, clockFace, textFace];
 
 function showClock() {
   if (!clockFace.enabled) {
-    allFaces.forEach((face) => (face.enabled = false));
-    clockFace.enabled = true;
+    enableFace(clockFace);
     clockFace.display();
   }
 }
 
 async function text(txt: string) {
-  allFaces.forEach((face) => (face.enabled = false));
-  textFace.enabled = true;
-
+  enableFace(textFace);
   await textFace.display(txt);
 }
 
@@ -46,17 +43,19 @@ function stop() {
 function defaultFace() {
   showClock();
 }
+function enableFace(face: Face) {
+  allFaces.forEach((face) => (face.enabled = false));
+  face.enabled = true;
+}
 
 async function pulse(duration?: number) {
-  allFaces.forEach((face) => (face.enabled = false));
-  pulserFace.enabled = true;
+  enableFace(pulserFace);
 
   await pulserFace.display(duration);
 }
 
 async function colors(duration?: number) {
-  allFaces.forEach((face) => (face.enabled = false));
-  colorFace.enabled = true;
+  enableFace(colorFace);
 
   await colorFace.display();
 }
