@@ -53,7 +53,6 @@ export class ClockFace {
     //console.log("display", timeStr);
     this.matrix
       .clear()
-      .brightness(20)
       .fgColor(0x000000)
       .fill()
       .fgColor(0xffffff)

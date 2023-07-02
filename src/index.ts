@@ -53,6 +53,7 @@ async function pulse(duration?: number) {
 // ============= Start =============
 
 (async () => {
+  matrix.brightness(40);
   await pulse(5000);
   defaultFace();
 })();
