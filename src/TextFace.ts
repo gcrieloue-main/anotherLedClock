@@ -20,6 +20,7 @@ export class TextFace {
     const stringWidth = font4x6.stringWidth(text);
 
     if (!this.animationIsOver) {
+      console.log("animation not over !")
       await this.waitForAnimation();
     }
 
@@ -120,6 +121,7 @@ export class TextFace {
           setTimeout(() => this.matrix.sync(), 150);
         } else {
           this.animationIsOver = true;
+          console.log("animation is over")
         }
       })
       .sync();
