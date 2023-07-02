@@ -20,6 +20,6 @@ export const matrix = new LedMatrix(
   },
   {
     ...LedMatrix.defaultRuntimeOptions(),
-    gpioSlowdown: 0,
+    gpioSlowdown: 1,
   }
 );
