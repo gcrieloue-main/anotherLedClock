@@ -97,6 +97,14 @@ app.get("/pulse", async (req: Request, res: Response) => {
   await pulse();
   defaultFace();
 });
+app.get("/brightness/:brightness", async (req: Request, res: Response) => {
+  const brightness = req.params.brightness;
+  const msg = "Brightness : " + brightness;
+  console.log(msg);
+  res.send(msg);
+
+  matrix.brightness(brightness);
+});
 
 app.get("/stop", async (req: Request, res: Response) => {
   const msg = "Stop";
