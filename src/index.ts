@@ -110,7 +110,7 @@ app.get("/brightness/:brightness", async (req: Request, res: Response) => {
 });
 
 app.get("/config/primary/:primary", async (req: Request, res: Response) => {
-  const primary = req.params.brightness;
+  const primary = req.params.primary;
   const msg = "Primary : " + primary;
   console.log(msg);
   res.send(msg);
