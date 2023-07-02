@@ -53,7 +53,7 @@ async function pulse(duration?: number) {
 // ============= Start =============
 
 (async () => {
-  await pulse(2000);
+  await pulse(5000);
   defaultFace();
 })();
 
@@ -73,7 +73,7 @@ app.get("/clock", async (req: Request, res: Response) => {
 });
 
 app.get("/text/:text", async (req: Request, res: Response) => {
-  const txt = req.params.tex;
+  const txt = req.params.text;
   var msg = "Text received : " + txt;
 
   if (!textFace.animationIsOver) {
