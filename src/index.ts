@@ -103,7 +103,7 @@ app.get("/brightness/:brightness", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  matrix.brightness(brightness);
+  matrix.brightness(parseInt(brightness, 10));
 });
 
 app.get("/stop", async (req: Request, res: Response) => {
