@@ -101,7 +101,6 @@ app.get("/pulse", async (req: Request, res: Response) => {
 });
 
 app.get("/config", async (req: Request, res: Response) => {
-  const brightness = req.params.brightness;
   console.log(matrixConfig.config());
   res.send(matrixConfig.config());
 });
