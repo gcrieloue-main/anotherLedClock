@@ -1,7 +1,7 @@
 require("console-stamp")(console, "yyyy/mm/dd HH:MM:ss.l");
 
 import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import dotenv, { config } from "dotenv";
 
 import { PulserFace } from "./PulserFace";
 import { ClockFace } from "./ClockFace";
@@ -55,7 +55,7 @@ async function pulse(duration?: number) {
 // ============= Start =============
 
 (async () => {
-  matrix.brightness(30);
+  matrix.brightness(matrixConfig.brightness);
   await pulse(5000);
   defaultFace();
 })();
@@ -100,14 +100,25 @@ app.get("/pulse", async (req: Request, res: Response) => {
   defaultFace();
 });
 
-app.get("/brightness/:brightness", async (req: Request, res: Response) => {
+app.get("/config", async (req: Request, res: Response) => {
   const brightness = req.params.brightness;
-  const msg = "Brightness : " + brightness;
-  console.log(msg);
-  res.send(msg);
-
-  matrix.brightness(parseInt(brightness, 10)).sync();
+  console.log(matrixConfig.config());
+  res.send(matrixConfig.config());
 });
+
+app.get(
+  "/config/brightness/:brightness",
+  async (req: Request, res: Response) => {
+    const brightness = req.params.brightness;
+    const msg = "Brightness : " + brightness;
+    console.log(msg);
+    res.send(msg);
+
+    const brightnessNumber = parseInt(brightness, 10);
+    matrixConfig.brightness = brightnessNumber;
+    matrix.brightness(brightnessNumber).sync();
+  }
+);
 
 app.get("/config/primary/:primary", async (req: Request, res: Response) => {
   const primary = req.params.primary;
