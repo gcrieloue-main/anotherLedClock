@@ -120,8 +120,8 @@ export class TextFace {
           this.scrollingDisplayText(text);
           setTimeout(() => this.matrix.sync(), 150);
         } else {
-          this.animationIsOver = true;
           console.log("animation is over");
+          this.animationIsOver = true;
         }
       })
       .sync();
