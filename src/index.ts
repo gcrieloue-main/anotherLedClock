@@ -48,6 +48,7 @@ app.get("/text/:text", async (req: Request, res: Response) => {
 
   if (!textFace.animationIsOver) {
     msg += ", skipped";
+    console.log(msg);
     res.send(msg);
     return;
   }
