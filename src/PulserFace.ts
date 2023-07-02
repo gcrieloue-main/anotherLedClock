@@ -13,7 +13,7 @@ class Pulser {
 
 const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
-export class PulserFace {
+export class PulserFace implements Face {
   public enabled = true;
   matrix: LedMatrixInstance;
 
@@ -31,11 +31,13 @@ export class PulserFace {
     }
 
     this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
-      pulsers.forEach((pulser) => {
-        this.matrix.fgColor(pulser.nextColor(t)).setPixel(pulser.x, pulser.y);
-      });
+      if (this.enabled) {
+        pulsers.forEach((pulser) => {
+          this.matrix.fgColor(pulser.nextColor(t)).setPixel(pulser.x, pulser.y);
+        });
 
-      setTimeout(() => this.matrix.sync(), 0);
+        setTimeout(() => this.matrix.sync(), 0);
+      }
     });
 
     this.matrix.sync();

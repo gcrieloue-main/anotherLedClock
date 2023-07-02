@@ -21,7 +21,7 @@ function formatAMPM(date: Date) {
   return ampm;
 }
 
-export class ClockFace {
+export class ClockFace implements Face {
   matrix: LedMatrixInstance;
   public enabled = true;
   config: MatrixConfig;

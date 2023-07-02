@@ -1,0 +1,3 @@
+interface Face {
+  enabled: boolean;
+}

@@ -1,14 +1,13 @@
 import { LedMatrixInstance } from "rpi-led-matrix";
 import { MatrixConfig } from "./MatrixConfig";
 
-export class ColorFace {
+export class ColorFace implements Face {
   public enabled = true;
   matrix: LedMatrixInstance;
   offset: number = 0;
   config: MatrixConfig;
 
   colors = [
-    "000000",
     "000033",
     "000066",
     "000099",
