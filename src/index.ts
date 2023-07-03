@@ -103,6 +103,8 @@ app.get("/text/:text", async (req: Request, res: Response) => {
     res.send(msg);
     return;
   }
+
+  console.log(msg);
   res.send(msg);
 
   await text(txt);
@@ -136,6 +138,7 @@ app.get("/animation/circle", async (req: Request, res: Response) => {
 
   if (!circleFace.enabled) {
     await circle();
+    defaultFace();
   }
 });
 
