@@ -258,7 +258,7 @@ export class CircleFace implements Face {
             circle.r
           );
       }
-      setTimeout(() => this.matrix.sync(), 10);
+      setTimeout(() => this.matrix.sync(), 50);
     });
 
     this.matrix.sync();
