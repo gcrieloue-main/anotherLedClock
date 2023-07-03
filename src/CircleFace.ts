@@ -247,7 +247,6 @@ export class CircleFace implements Face {
       };
       i++;
       circles.push(newCircle);
-      console.log(i, circles.length, newCircle.color.toString(16));
 
       for (var circle of circles) {
         circle.r++;
