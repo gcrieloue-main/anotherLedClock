@@ -1,7 +1,7 @@
 import { LedMatrixInstance } from "rpi-led-matrix";
 import { MatrixConfig } from "./MatrixConfig";
 
-const wait = (t) => new Promise((ok) => setTimeout(ok, t));
+const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class CircleFace implements Face {
   public enabled = true;
