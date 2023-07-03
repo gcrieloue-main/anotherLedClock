@@ -242,7 +242,7 @@ export class CircleFace implements Face {
         circles.shift();
       }
       const newCircle = {
-        color: parseInt("0x" + this.colors[(i % this.colors.length, 0)]),
+        color: parseInt("0x" + this.colors[i % this.colors.length]),
         r: 0,
       };
       i++;
