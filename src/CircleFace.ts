@@ -238,6 +238,7 @@ export class CircleFace implements Face {
 
     var i = 0;
     this.matrix.afterSync(() => {
+      i++;
       if (circles.length > 16) {
         circles.shift();
       }
@@ -254,7 +255,6 @@ export class CircleFace implements Face {
             this.matrix.height() / 2,
             circle.r
           );
-        i++;
       }
       this.matrix.sync();
     });
