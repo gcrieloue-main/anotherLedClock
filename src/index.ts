@@ -52,7 +52,7 @@ function enableFace(face: Face) {
   face.enabled = true;
 }
 
-async function cicle(duration?: number) {
+async function circle(duration?: number) {
   enableFace(circleFace);
 
   await circleFace.display();
@@ -127,11 +127,11 @@ app.get("/animation/colors", async (req: Request, res: Response) => {
 });
 
 app.get("/animation/circle", async (req: Request, res: Response) => {
-  const msg = "Colors";
+  const msg = "Circle";
   console.log(msg);
   res.send(msg);
 
-  await colors();
+  await circle();
 });
 
 app.get("/config", async (req: Request, res: Response) => {
