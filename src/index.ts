@@ -101,7 +101,7 @@ app.get("/text/:text", async (req: Request, res: Response) => {
   defaultFace();
 });
 
-app.get("/pulse", async (req: Request, res: Response) => {
+app.get("/animation/pulse", async (req: Request, res: Response) => {
   const msg = "Pulse";
   console.log(msg);
   res.send(msg);
@@ -110,7 +110,7 @@ app.get("/pulse", async (req: Request, res: Response) => {
   defaultFace();
 });
 
-app.get("/colors", async (req: Request, res: Response) => {
+app.get("/animation/colors", async (req: Request, res: Response) => {
   const msg = "Colors";
   console.log(msg);
   res.send(msg);
