@@ -114,16 +114,19 @@ app.get("/animation/pulse", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  await pulse();
-  defaultFace();
+  if (!pulserFace.enabled) {
+    await pulse();
+    defaultFace();
+  }
 });
 
 app.get("/animation/colors", async (req: Request, res: Response) => {
   const msg = "Colors";
   console.log(msg);
   res.send(msg);
-
-  await colors();
+  if (!colorFace.enabled) {
+    await colors();
+  }
 });
 
 app.get("/animation/circle", async (req: Request, res: Response) => {
@@ -131,7 +134,9 @@ app.get("/animation/circle", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  await circle();
+  if (!circleFace.enabled) {
+    await circle();
+  }
 });
 
 app.get("/config", async (req: Request, res: Response) => {

@@ -14,7 +14,7 @@ export class CircleFace implements Face {
     this.config = config;
   }
 
-  public async display() {
+  public async display(duration = 1000) {
     this.matrix.clear();
 
     const circles: { color: number; r: number }[] = [];
@@ -46,6 +46,6 @@ export class CircleFace implements Face {
 
     this.matrix.sync();
 
-    await wait(10000);
+    await wait(duration);
   }
 }
