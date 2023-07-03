@@ -11,14 +11,16 @@ import { TextFace } from "./TextFace";
 import { matrix } from "./Matrix";
 import { MatrixConfig } from "./MatrixConfig";
 import { ColorFace } from "./ColorFace";
+import { CircleFace } from "./CircleFace";
 
 const matrixConfig = new MatrixConfig();
 const pulserFace = new PulserFace(matrix);
 const clockFace = new ClockFace(matrix, matrixConfig);
 const textFace = new TextFace(matrix, matrixConfig);
 const colorFace = new ColorFace(matrix, matrixConfig);
+const circleFace = new CircleFace(matrix, matrixConfig);
 
-const allFaces = [pulserFace, clockFace, textFace];
+const allFaces = [pulserFace, clockFace, textFace, circleFace, colorFace];
 
 // ============= Features =============
 
@@ -48,6 +50,12 @@ function defaultFace() {
 function enableFace(face: Face) {
   allFaces.forEach((face) => (face.enabled = false));
   face.enabled = true;
+}
+
+async function cicle(duration?: number) {
+  enableFace(circleFace);
+
+  await circleFace.display();
 }
 
 async function pulse(duration?: number) {
@@ -111,6 +119,14 @@ app.get("/animation/pulse", async (req: Request, res: Response) => {
 });
 
 app.get("/animation/colors", async (req: Request, res: Response) => {
+  const msg = "Colors";
+  console.log(msg);
+  res.send(msg);
+
+  await colors();
+});
+
+app.get("/animation/circle", async (req: Request, res: Response) => {
   const msg = "Colors";
   console.log(msg);
   res.send(msg);
