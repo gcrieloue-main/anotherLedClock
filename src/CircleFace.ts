@@ -238,16 +238,17 @@ export class CircleFace implements Face {
 
     var i = 0;
     this.matrix.afterSync(() => {
-      i++;
-      if (circles.length > 16) {
+      if (circles.length > 15) {
         circles.shift();
       }
       const newCircle = {
         color: parseInt("0x" + this.colors[(i % this.colors.length, 0)]),
         r: 0,
       };
+      i++;
       circles.push(newCircle);
-      console.log(circles.length, JSON.stringify(newCircle));
+      console.log(circles.length, newCircle.color.toString(16));
+
       for (var circle of circles) {
         circle.r++;
         this.matrix
