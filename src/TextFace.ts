@@ -45,7 +45,6 @@ export class TextFace implements Face {
         this.twoLineDisplay(firstLine, secondLine);
         await wait(10000);
       } else {
-        this.matrix.font(font6x9);
         await this.scrollingDisplay(text);
       }
     }
@@ -116,13 +115,13 @@ export class TextFace implements Face {
     this.animationIsOver = false;
 
     this.scrollingDisplayText(text);
-
+    this.matrix.font(font6x9);
     this.matrix
       .afterSync(() => {
         const stringWidth = font4x6.stringWidth(text);
         if (this.offset > -stringWidth) {
           setTimeout(() => {
-            this.offset--;
+            // this.offset--;
             this.scrollingDisplayText(text);
             this.matrix.sync();
           }, 150);
