@@ -17,7 +17,10 @@ export class PictureFace implements Face {
   public async display(icon: string) {
     this.matrix.clear();
 
+    console.log("loading pic...");
     const pxs = this.loadPic(icon);
+    console.log("pic loaded");
+    console.log(pxs);
 
     pxs.forEach((px) => this.matrix.fgColor(px.color).setPixel(px.x, px.y));
 
