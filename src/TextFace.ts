@@ -108,7 +108,7 @@ export class TextFace implements Face {
       .sync();
   }
 
-  public async scrollingDisplay(text: string) {
+  public async scrollingDisplay(text: string, rate = 100) {
     console.log("scrolling display");
     const w = this.matrix.width();
     this.offset = w - 1;
@@ -124,7 +124,7 @@ export class TextFace implements Face {
             this.offset--;
             this.scrollingDisplayText(text);
             this.matrix.sync();
-          }, 150);
+          }, rate);
         } else {
           console.log("animation is over");
           this.animationIsOver = true;
