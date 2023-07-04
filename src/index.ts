@@ -92,7 +92,7 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 3005;
 
-app.get("/picture", async (req: Request, res: Response) => {
+app.get("/picture/:picture", async (req: Request, res: Response) => {
   const msg = "Picture";
   console.log(msg);
   const picture = req.params.picture;
