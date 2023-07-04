@@ -17,13 +17,16 @@ export class ImageFace implements Face {
   public async display() {
     this.matrix.clear();
 
-    getPixels("icon.png", function (err, pixels) {
-      if (err) {
-        console.log("Bad image path");
-        return;
+    getPixels(
+      "icon.png",
+      function (err: any, pixels: { shape: string | any[] }) {
+        if (err) {
+          console.log("Bad image path");
+          return;
+        }
+        console.log("got pixels", pixels.shape.slice());
       }
-      console.log("got pixels", pixels.shape.slice());
-    });
+    );
 
     this.matrix.fgColor(parseInt("0xff0000")).setPixel(0, 0);
 
