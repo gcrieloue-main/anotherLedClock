@@ -92,14 +92,6 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 3005;
 
-app.get("/picture/:picture", async (req: Request, res: Response) => {
-  const picture = req.params.picture;
-  const msg = "Picture " + picture;
-  console.log(msg);
-  showPicture(picture);
-  res.send(msg);
-});
-
 app.get("/clock", async (req: Request, res: Response) => {
   const msg = "Clock";
   console.log(msg);
@@ -155,6 +147,16 @@ app.get("/animation/circle", async (req: Request, res: Response) => {
     await circle();
     defaultFace();
   }
+});
+
+app.get("/picture/:picture", async (req: Request, res: Response) => {
+  const picture = req.params.picture;
+  const msg = "Picture " + picture;
+  console.log(msg);
+  res.send(msg);
+
+  await showPicture(picture);
+  defaultFace();
 });
 
 app.get("/config", async (req: Request, res: Response) => {
