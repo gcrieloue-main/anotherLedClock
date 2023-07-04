@@ -3,7 +3,7 @@ import { MatrixConfig } from "./MatrixConfig";
 import { wait } from "./Utils";
 var getPixels = require("get-pixels");
 
-export class ImageFace implements Face {
+export class PictureFace implements Face {
   public enabled = true;
   matrix: LedMatrixInstance;
   offset: number = 0;

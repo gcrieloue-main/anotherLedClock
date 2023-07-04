@@ -12,6 +12,7 @@ import { matrix } from "./Matrix";
 import { MatrixConfig } from "./MatrixConfig";
 import { ColorFace } from "./ColorFace";
 import { CircleFace } from "./CircleFace";
+import { PictureFace } from "./PictureFace";
 
 const matrixConfig = new MatrixConfig();
 const pulserFace = new PulserFace(matrix);
@@ -19,6 +20,7 @@ const clockFace = new ClockFace(matrix, matrixConfig);
 const textFace = new TextFace(matrix, matrixConfig);
 const colorFace = new ColorFace(matrix, matrixConfig);
 const circleFace = new CircleFace(matrix, matrixConfig);
+const pictureFace = new PictureFace(matrix, matrixConfig);
 
 const allFaces = [pulserFace, clockFace, textFace, circleFace, colorFace];
 
@@ -74,6 +76,7 @@ async function colors(duration?: number) {
 
 (async () => {
   matrix.brightness(matrixConfig.brightness);
+  await pictureFace.display();
   await pulse(5000);
   defaultFace();
 })();
