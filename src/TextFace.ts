@@ -2,6 +2,7 @@ import { LedMatrixInstance, Font } from "rpi-led-matrix";
 import { MatrixConfig } from "./MatrixConfig";
 
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
+const font6x9 = new Font("4x6", "fonts/4x6.bdf");
 
 const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
@@ -44,6 +45,7 @@ export class TextFace implements Face {
         this.twoLineDisplay(firstLine, secondLine);
         await wait(10000);
       } else {
+        this.matrix.font(font6x9);
         await this.scrollingDisplay(text);
       }
     }
