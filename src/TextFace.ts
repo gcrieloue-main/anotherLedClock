@@ -110,7 +110,7 @@ export class TextFace implements Face {
 
   public async scrollingDisplay(text: string) {
     console.log("scrolling display");
-    const w = this.matrix.width();
+    //const w = this.matrix.width();
     //this.offset = w - 1;
     this.animationIsOver = false;
 
