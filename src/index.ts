@@ -33,6 +33,11 @@ function showClock() {
   }
 }
 
+async function showPicture() {
+  enableFace(pictureFace);
+  await pictureFace.display();
+}
+
 async function text(txt: string) {
   enableFace(textFace);
   await textFace.display(txt);
@@ -76,7 +81,6 @@ async function colors(duration?: number) {
 
 (async () => {
   matrix.brightness(matrixConfig.brightness);
-  await pictureFace.display();
   await pulse(5000);
   defaultFace();
 })();
@@ -87,6 +91,14 @@ dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3005;
+
+app.get("/picture", async (req: Request, res: Response) => {
+  const msg = "Picture";
+  console.log(msg);
+
+  showPicture();
+  res.send(msg);
+});
 
 app.get("/clock", async (req: Request, res: Response) => {
   const msg = "Clock";
