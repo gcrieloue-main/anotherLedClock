@@ -30,7 +30,7 @@ export class TextFace implements Face {
 
     this.matrix
       .font(font4x6)
-      .afterSync(() => {})
+      .afterSync(() => undefined)
       .sync();
 
     if (stringWidth < w) {
@@ -111,25 +111,24 @@ export class TextFace implements Face {
   public async scrollingDisplay(text: string) {
     console.log("scrolling display");
     const w = this.matrix.width();
-    //this.offset = w - 1;
-    this.offset = w / 2;
+    this.offset = w - 1;
     this.animationIsOver = false;
 
     this.scrollingDisplayText(text);
     this.matrix.font(font6x9);
     this.matrix
       .afterSync(() => {
-        //const stringWidth = font4x6.stringWidth(text);
-        // if (this.offset > -stringWidth) {
-        setTimeout(() => {
-          // this.offset--;
-          this.scrollingDisplayText(text);
-          this.matrix.sync();
-        }, 150);
-        //} else {
-        //  console.log("animation is over");
-        this.animationIsOver = true;
-        //  }
+        const stringWidth = font4x6.stringWidth(text);
+        if (this.offset > -stringWidth) {
+          setTimeout(() => {
+            this.offset--;
+            this.scrollingDisplayText(text);
+            this.matrix.sync();
+          }, 150);
+        } else {
+          console.log("animation is over");
+          this.animationIsOver = true;
+        }
       })
       .sync();
 
@@ -137,16 +136,24 @@ export class TextFace implements Face {
   }
 
   async waitForAnimation() {
-    // while (!this.animationIsOver) {
-    //   await wait(100);
-    // }
-    await wait(2000);
+    while (!this.animationIsOver) {
+      await wait(100);
+    }
   }
 
   scrollingDisplayText(text: string) {
     const h = this.matrix.height();
     const fontHeight = font4x6.baseline();
-
-    this.matrix.clear().drawText(text, this.offset, (h - fontHeight) / 2);
+    this.matrix.clear();
+    var i = 0;
+    var charWidth = font4x6.stringWidth(text[0]);
+    for (const c of text) {
+      this.matrix.drawText(
+        c,
+        this.offset + i * charWidth,
+        (h - fontHeight) / 2
+      );
+      i++;
+    }
   }
 }
