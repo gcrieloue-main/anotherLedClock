@@ -18,7 +18,7 @@ export class PictureFace implements Face {
     this.matrix.clear();
 
     getPixels(
-      "icon.png",
+      "./src/icon.png",
       function (err: any, pixels: { shape: string | any[] }) {
         if (err) {
           console.log("Bad image path");
