@@ -50,12 +50,14 @@ export class PictureFace implements Face {
             const r = pixels.get(x, y, 0);
             const g = pixels.get(x, y, 1);
             const b = pixels.get(x, y, 2);
+            const color = parseInt(
+              `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+            );
+            console.log(color.toString(16));
             pxs.push({
               x,
               y,
-              color: parseInt(
-                `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
-              ),
+              color,
             });
           }
         }
