@@ -112,6 +112,7 @@ export class TextFace implements Face {
     console.log("scrolling display");
     //const w = this.matrix.width();
     //this.offset = w - 1;
+    this.offset = 2 / 2;
     this.animationIsOver = false;
 
     this.scrollingDisplayText(text);
