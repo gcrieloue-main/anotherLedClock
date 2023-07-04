@@ -26,7 +26,6 @@
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    
     "globby": "^11.0.1",
     "nodemon": "^2.0.4",
     "ora": "^5.0.0",
@@ -38,10 +37,10 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "get-pixels": "^3.3.3",
     "console-stamp": "^3.1.1",
     "express": "^4.18.2",
     "express-list-endpoints": "^6.0.0",
-       "rpi-led-matrix": "^1.14.0"
+    "get-pixels": "^3.3.3",
+    "rpi-led-matrix": "^1.14.0"
   }
 }
