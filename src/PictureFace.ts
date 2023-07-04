@@ -54,11 +54,7 @@ export class PictureFace implements Face {
               `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
             );
             console.log(color.toString(16));
-            pxs.push({
-              x,
-              y,
-              color,
-            });
+            pxs.push({ x, y, color });
           }
         }
       }
