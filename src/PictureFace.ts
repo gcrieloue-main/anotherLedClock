@@ -14,11 +14,11 @@ export class PictureFace implements Face {
     this.config = config;
   }
 
-  public async display() {
+  public async display(icon: string) {
     this.matrix.clear();
 
     getPixels(
-      "./src/icon.png",
+      "./src/" + icon + ".png",
       (
         err: any,
         pixels: {
@@ -31,15 +31,13 @@ export class PictureFace implements Face {
           return;
         }
 
-        console.log(pixels.shape[1].length, pixels.shape[0].length);
-
         for (let y = 0; y < 16; y++) {
           for (let x = 0; x < 16; x++) {
             const r = pixels.get(x, y, 0);
             const g = pixels.get(x, y, 1);
             const b = pixels.get(x, y, 2);
             const rgba = `${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
-            // console.log(rgba);
+            console.log(rgba);
             this.matrix.fgColor(parseInt("0x" + rgba)).setPixel(x, y);
           }
         }

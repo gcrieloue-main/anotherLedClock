@@ -33,9 +33,9 @@ function showClock() {
   }
 }
 
-async function showPicture() {
+async function showPicture(picture: string) {
   enableFace(pictureFace);
-  await pictureFace.display();
+  await pictureFace.display(picture);
 }
 
 async function text(txt: string) {
@@ -95,8 +95,8 @@ const port = process.env.PORT || 3005;
 app.get("/picture", async (req: Request, res: Response) => {
   const msg = "Picture";
   console.log(msg);
-
-  showPicture();
+  const picture = req.params.picture;
+  showPicture(picture);
   res.send(msg);
 });
 
