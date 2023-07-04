@@ -19,35 +19,32 @@ export class PictureFace implements Face {
 
     getPixels(
       "./src/icon.png",
-      function (
+      (
         err: any,
         pixels: {
           shape: string | any[];
           get: (arg0: number, arg1: number, arg2: number) => number;
         }
-      ) {
+      ) => {
         if (err) {
           console.log("Bad image path");
           return;
         }
 
-        for (let y = 0; y < pixels.shape[1]; y++) {
-          for (let x = 0; x < pixels.shape[0]; x++) {
+        console.log(pixels.shape[1].length, pixels.shape[0].length);
+
+        for (let y = 0; y < 16; y++) {
+          for (let x = 0; x < 16; x++) {
             const r = pixels.get(x, y, 0);
             const g = pixels.get(x, y, 1);
             const b = pixels.get(x, y, 2);
-            const rgba = `color: ${r.toString(16)}${g.toString(16)}${b.toString(
-              16
-            )});`;
-            console.log(rgba);
+            const rgba = `${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+            // console.log(rgba);
+            this.matrix.fgColor(parseInt("0x" + rgba)).setPixel(x, y);
           }
         }
-
-        console.log("got pixels", pixels.shape.slice());
       }
     );
-
-    this.matrix.fgColor(parseInt("0xff0000")).setPixel(0, 0);
 
     await wait(10000);
 
