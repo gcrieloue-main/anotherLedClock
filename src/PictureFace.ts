@@ -23,7 +23,7 @@ export class PictureFace implements Face {
         err: any,
         pixels: {
           shape: string | any[];
-          get: (arg0: number, arg1: number, arg2: number) => string;
+          get: (arg0: number, arg1: number, arg2: number) => number;
         }
       ) {
         if (err) {
@@ -36,7 +36,9 @@ export class PictureFace implements Face {
             const r = pixels.get(x, y, 0);
             const g = pixels.get(x, y, 1);
             const b = pixels.get(x, y, 2);
-            const rgba = `color: rgba(${r}, ${g}, ${b});`;
+            const rgba = `color: ${r.toString(16)}${g.toString(16)}${b.toString(
+              16
+            )});`;
             console.log(rgba);
           }
         }
