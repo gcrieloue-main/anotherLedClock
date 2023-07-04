@@ -110,26 +110,26 @@ export class TextFace implements Face {
 
   public async scrollingDisplay(text: string) {
     console.log("scrolling display");
-    //const w = this.matrix.width();
+    const w = this.matrix.width();
     //this.offset = w - 1;
-    this.offset = 2 / 2;
+    this.offset = w / 2;
     this.animationIsOver = false;
 
     this.scrollingDisplayText(text);
     this.matrix.font(font6x9);
     this.matrix
       .afterSync(() => {
-        const stringWidth = font4x6.stringWidth(text);
-        if (this.offset > -stringWidth) {
-          setTimeout(() => {
-            // this.offset--;
-            this.scrollingDisplayText(text);
-            this.matrix.sync();
-          }, 150);
-        } else {
-          console.log("animation is over");
-          this.animationIsOver = true;
-        }
+        //const stringWidth = font4x6.stringWidth(text);
+        // if (this.offset > -stringWidth) {
+        setTimeout(() => {
+          // this.offset--;
+          this.scrollingDisplayText(text);
+          this.matrix.sync();
+        }, 150);
+        //} else {
+        //  console.log("animation is over");
+        this.animationIsOver = true;
+        //  }
       })
       .sync();
 
@@ -137,9 +137,10 @@ export class TextFace implements Face {
   }
 
   async waitForAnimation() {
-    while (!this.animationIsOver) {
-      await wait(100);
-    }
+    // while (!this.animationIsOver) {
+    //   await wait(100);
+    // }
+    await wait(2000);
   }
 
   scrollingDisplayText(text: string) {
