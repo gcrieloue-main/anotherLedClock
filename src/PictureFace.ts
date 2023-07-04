@@ -17,6 +17,17 @@ export class PictureFace implements Face {
   public async display(icon: string) {
     this.matrix.clear();
 
+    const pxs = this.loadPic(icon);
+
+    pxs.forEach((px) => this.matrix.fgColor(px.color).setPixel(px.x, px.y));
+
+    this.matrix.sync();
+    await wait(10000);
+  }
+
+  public loadPic(icon: string) {
+    let pxs: { x: number; y: number; color: number }[] = [];
+
     getPixels(
       "./src/" + icon + ".png",
       (
@@ -36,15 +47,18 @@ export class PictureFace implements Face {
             const r = pixels.get(x, y, 0);
             const g = pixels.get(x, y, 1);
             const b = pixels.get(x, y, 2);
-            const rgba = `${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
-            console.log(rgba);
-            this.matrix.fgColor(parseInt("0x" + rgba)).setPixel(x, y);
+            pxs.push({
+              x,
+              y,
+              color: parseInt(
+                `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+              ),
+            });
           }
         }
       }
     );
 
-    this.matrix.sync();
-    await wait(10000);
+    return pxs;
   }
 }
