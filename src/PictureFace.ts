@@ -50,8 +50,9 @@ export class PictureFace implements Face {
           }
         ) => {
           if (err) {
-            console.log("Bad image path");
-            return;
+            const reason = "Bad image path";
+            console.log(reason);
+            reject(reason);
           }
 
           for (let y = 0; y < 16; y++) {
@@ -62,7 +63,6 @@ export class PictureFace implements Face {
               const color = parseInt(
                 `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
               );
-              console.log(color.toString(16));
               pxs.push({ x, y, color });
             }
           }

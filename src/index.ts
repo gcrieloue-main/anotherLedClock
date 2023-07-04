@@ -93,9 +93,9 @@ const app: Express = express();
 const port = process.env.PORT || 3005;
 
 app.get("/picture/:picture", async (req: Request, res: Response) => {
-  const msg = "Picture";
-  console.log(msg);
   const picture = req.params.picture;
+  const msg = "Picture " + picture;
+  console.log(msg);
   showPicture(picture);
   res.send(msg);
 });
