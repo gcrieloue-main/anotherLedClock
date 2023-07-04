@@ -44,8 +44,7 @@ export class PictureFace implements Face {
       }
     );
 
-    await wait(10000);
-
     this.matrix.sync();
+    await wait(10000);
   }
 }
