@@ -3,6 +3,12 @@ import { MatrixConfig } from "./MatrixConfig";
 import { wait } from "./Utils";
 var getPixels = require("get-pixels");
 
+interface Pixel {
+  x: number;
+  y: number;
+  color: number;
+}
+
 export class PictureFace implements Face {
   public enabled = true;
   matrix: LedMatrixInstance;
@@ -18,48 +24,52 @@ export class PictureFace implements Face {
     this.matrix.clear();
 
     console.log(`loading pic ${icon}...`);
-    const pxs = this.loadPic(icon);
+    const pxs = await this.loadPic(icon);
     console.log("pic loaded");
     console.log(pxs);
 
-    pxs.forEach((px) => this.matrix.fgColor(px.color).setPixel(px.x, px.y));
+    pxs.forEach((px: Pixel) =>
+      this.matrix.fgColor(px.color).setPixel(px.x, px.y)
+    );
 
     this.matrix.sync();
     await wait(10000);
   }
 
-  public loadPic(icon: string) {
-    let pxs: { x: number; y: number; color: number }[] = [];
+  public async loadPic(icon: string): Promise<Pixel[]> {
+    return new Promise((resolve, reject) => {
+      let pxs: Pixel[] = [];
 
-    getPixels(
-      "./src/" + icon + ".png",
-      (
-        err: any,
-        pixels: {
-          shape: string | any[];
-          get: (arg0: number, arg1: number, arg2: number) => number;
-        }
-      ) => {
-        if (err) {
-          console.log("Bad image path");
-          return;
-        }
-
-        for (let y = 0; y < 16; y++) {
-          for (let x = 0; x < 16; x++) {
-            const r = pixels.get(x, y, 0);
-            const g = pixels.get(x, y, 1);
-            const b = pixels.get(x, y, 2);
-            const color = parseInt(
-              `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
-            );
-            console.log(color.toString(16));
-            pxs.push({ x, y, color });
+      getPixels(
+        "./src/" + icon + ".png",
+        (
+          err: any,
+          pixels: {
+            shape: string | any[];
+            get: (arg0: number, arg1: number, arg2: number) => number;
           }
-        }
-      }
-    );
+        ) => {
+          if (err) {
+            console.log("Bad image path");
+            return;
+          }
 
-    return pxs;
+          for (let y = 0; y < 16; y++) {
+            for (let x = 0; x < 16; x++) {
+              const r = pixels.get(x, y, 0);
+              const g = pixels.get(x, y, 1);
+              const b = pixels.get(x, y, 2);
+              const color = parseInt(
+                `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+              );
+              console.log(color.toString(16));
+              pxs.push({ x, y, color });
+            }
+          }
+
+          resolve(pxs);
+        }
+      );
+    });
   }
 }
