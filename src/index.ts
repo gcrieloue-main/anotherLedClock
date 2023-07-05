@@ -47,12 +47,11 @@ function enableFace(face: Face) {
   face.enabled = true;
 }
 
-async function runFace(
-  face: Face,
-  fn: (...args: any[]) => Promise<any | void>
-) {
+async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
+  if (face.enabled) return;
+
   enableFace(face);
-  face.enabled = true;
+
   await fn();
   defaultFace();
 }
@@ -116,19 +115,15 @@ app.get("/animation/pulse", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  if (!pulserFace.enabled) {
-    await pulse();
-    defaultFace();
-  }
+  await pulse();
 });
 
 app.get("/animation/colors", async (req: Request, res: Response) => {
   const msg = "Colors";
   console.log(msg);
   res.send(msg);
-  if (!colorFace.enabled) {
-    await colors();
-  }
+
+  await colors();
 });
 
 app.get("/animation/circle", async (req: Request, res: Response) => {
@@ -136,9 +131,7 @@ app.get("/animation/circle", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  if (!circleFace.enabled) {
-    await circle();
-  }
+  await circle();
 });
 
 app.get("/picture/:picture", async (req: Request, res: Response) => {

@@ -22,7 +22,7 @@ export class PictureFace implements Face {
     this.config = config;
   }
 
-  public async display(icon: string) {
+  public async display(icon: string, duration = 10000) {
     this.matrix.clear();
 
     console.log(`loading pic ${icon}...`);
@@ -34,7 +34,7 @@ export class PictureFace implements Face {
     );
 
     this.matrix.sync();
-    await wait(10000);
+    await wait(duration);
   }
 
   public async loadPic(icon: string): Promise<Pixel[]> {
