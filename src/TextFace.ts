@@ -118,16 +118,18 @@ export class TextFace implements Face {
     this.matrix.font(font6x9);
     this.matrix
       .afterSync(() => {
-        const stringWidth = font4x6.stringWidth(text);
-        if (this.offset > -stringWidth) {
-          setTimeout(() => {
-            this.offset--;
-            this.scrollingDisplayText(text);
-            this.matrix.sync();
-          }, rate);
-        } else {
-          console.log("animation is over");
-          this.animationIsOver = true;
+        if (this.enabled) {
+          const stringWidth = font4x6.stringWidth(text);
+          if (this.offset > -stringWidth) {
+            setTimeout(() => {
+              this.offset--;
+              this.scrollingDisplayText(text);
+              this.matrix.sync();
+            }, rate);
+          } else {
+            console.log("animation is over");
+            this.animationIsOver = true;
+          }
         }
       })
       .sync();

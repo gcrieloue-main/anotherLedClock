@@ -36,7 +36,11 @@ export class PulserFace implements Face {
           this.matrix.fgColor(pulser.nextColor(t)).setPixel(pulser.x, pulser.y);
         });
 
-        setTimeout(() => this.matrix.sync(), 0);
+        setTimeout(() => {
+          if (this.enabled) {
+            this.matrix.sync();
+          }
+        }, 0);
       }
     });
 
