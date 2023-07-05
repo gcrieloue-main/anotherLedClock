@@ -5,7 +5,8 @@ import { Colors } from "./Constants";
 const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class CircleFace implements Face {
-  public enabled = true;
+  public name = "Circle";
+  public enabled = false;
   matrix: LedMatrixInstance;
   config: MatrixConfig;
 
