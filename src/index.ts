@@ -5,7 +5,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 
 import { PulserFace } from "./PulserFace";
-import { ClockFace } from "./ClockFace";
+import { ClockFace, ClockStyleEnum } from "./ClockFace";
 import { TextFace } from "./TextFace";
 
 import { matrix } from "./Matrix";
@@ -40,10 +40,10 @@ function stop() {
     .sync();
 }
 
-function showClock() {
+function showClock(style: ClockStyleEnum = ClockStyleEnum.CLASSIC) {
   if (!clockFace.enabled) {
     enableFace(clockFace);
-    clockFace.display();
+    clockFace.display(style);
   }
 }
 
@@ -100,11 +100,13 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 3005;
 
-app.get("/clock", async (req: Request, res: Response) => {
+app.get("/clock/:style", async (req: Request, res: Response) => {
+  const param: string = req.params.style;
+  const style = (param as ClockStyleEnum) || ClockStyleEnum.CLASSIC;
   const msg = "Clock";
   console.log(msg);
 
-  showClock();
+  showClock(style);
   res.send(msg);
 });
 

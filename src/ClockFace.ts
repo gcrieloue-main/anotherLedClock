@@ -21,6 +21,11 @@ function formatAMPM(date: Date) {
   return ampm;
 }
 
+export enum ClockStyleEnum {
+  BORDER = "BORDER",
+  CLASSIC = "CLASSIC",
+}
+
 export class ClockFace implements Face {
   public name = "Clock";
   matrix: LedMatrixInstance;
@@ -32,13 +37,13 @@ export class ClockFace implements Face {
     this.config = config;
   }
 
-  public async display() {
-    this.displayClock();
+  public async display(style = ClockStyleEnum.CLASSIC) {
+    this.displayClock(style);
 
     this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
       setTimeout(() => {
         if (this.enabled) {
-          this.displayClock();
+          this.displayClock(style);
           this.matrix.sync();
         }
       }, 10000);
@@ -47,7 +52,7 @@ export class ClockFace implements Face {
     this.matrix.sync();
   }
 
-  public async displayClock() {
+  public async displayClock(style: ClockStyleEnum) {
     const time = new Date();
     const timeStr = formatTime(time);
     const ampmStr = formatAMPM(time);
@@ -58,10 +63,21 @@ export class ClockFace implements Face {
       .fill()
       .fgColor(this.config.primaryColor)
       .font(fontTom)
-      .drawText(timeStr, 3, 5)
-      .fgColor(this.config.alternateColor)
-      //  .drawRect(0, 0, this.matrix.width() - 1, 1)
-      .drawRect(0, this.matrix.height() - 2, this.matrix.width() - 1, 1)
+      .drawText(timeStr, 3, 5);
+
+    if (style == styleEnum.CLASSIC) {
+      this.matrix
+        .fgColor(this.config.alternateColor)
+        //  .drawRect(0, 0, this.matrix.width() - 1, 1)
+        .drawRect(0, this.matrix.height() - 2, this.matrix.width() - 1, 1);
+    } else if (style == styleEnum.BORDER) {
+      this.matrix
+        .fgColor(this.config.alternateColor)
+        //  .drawRect(0, 0, this.matrix.width() - 1, 1)
+        .drawRect(0, this.matrix.height() - 1, this.matrix.width() - 1, 0);
+    }
+
+    this.matrix
       .fgColor(this.config.secondaryColor)
       .font(font4x6)
       .drawText(ampmStr, 23, 5);
