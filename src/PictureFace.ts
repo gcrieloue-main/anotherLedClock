@@ -26,7 +26,6 @@ export class PictureFace implements Face {
     console.log(`loading pic ${icon}...`);
     const pxs = await this.loadPic(icon);
     console.log("pic loaded");
-    console.log(pxs);
 
     pxs.forEach((px: Pixel) =>
       this.matrix.fgColor(px.color).setPixel(px.x, px.y)
@@ -39,9 +38,10 @@ export class PictureFace implements Face {
   public async loadPic(icon: string): Promise<Pixel[]> {
     return new Promise((resolve, reject) => {
       let pxs: Pixel[] = [];
+      const xOffset = 10;
 
       getPixels(
-        "./src/" + icon + ".png",
+        "./src/icons/" + icon + ".png",
         (
           err: any,
           pixels: {
@@ -63,7 +63,7 @@ export class PictureFace implements Face {
               const color = parseInt(
                 `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
               );
-              pxs.push({ x, y, color });
+              pxs.push({ x: x + xOffset, y, color });
             }
           }
 
