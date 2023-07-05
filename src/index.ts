@@ -26,6 +26,13 @@ const allFaces = [pulserFace, clockFace, textFace, circleFace, colorFace];
 
 // ============= Features =============
 
+function stop() {
+  matrix
+    .clear()
+    .afterSync(() => {})
+    .sync();
+}
+
 function showClock() {
   if (!clockFace.enabled) {
     enableFace(clockFace);
@@ -35,13 +42,6 @@ function showClock() {
 
 const defaultFace = showClock;
 
-function stop() {
-  matrix
-    .clear()
-    .afterSync(() => {})
-    .sync();
-}
-
 function enableFace(face: Face) {
   allFaces.forEach((face) => (face.enabled = false));
   face.enabled = true;
@@ -49,6 +49,7 @@ function enableFace(face: Face) {
 
 async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
   if (face.enabled) return;
+  console.log("face already enabled");
 
   enableFace(face);
 

@@ -7,7 +7,7 @@ const font6x9 = new Font("4x6", "fonts/4x6.bdf");
 const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 export class TextFace implements Face {
-  public enabled = true;
+  public enabled = false;
   public animationIsOver = true;
   matrix: LedMatrixInstance;
   offset: number = 0;
