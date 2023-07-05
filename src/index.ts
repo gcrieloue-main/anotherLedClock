@@ -33,6 +33,8 @@ function showClock() {
   }
 }
 
+const defaultFace = showClock;
+
 async function showPicture(picture: string) {
   enableFace(pictureFace);
   await pictureFace.display(picture);
@@ -48,10 +50,6 @@ function stop() {
     .clear()
     .afterSync(() => {})
     .sync();
-}
-
-function defaultFace() {
-  showClock();
 }
 
 function enableFace(face: Face) {
@@ -77,12 +75,21 @@ async function colors(duration?: number) {
   await colorFace.display();
 }
 
+async function runFace(
+  face: Face,
+  fn: (...args: any[]) => Promise<any | void>
+) {
+  enableFace(face);
+  face.enabled = true;
+  await fn();
+  defaultFace();
+}
+
 // ============= Start =============
 
 (async () => {
   matrix.brightness(matrixConfig.brightness);
-  await pulse(5000);
-  defaultFace();
+  runFace(pulserFace, () => pulse(5000));
 })();
 
 // ============= API =============
