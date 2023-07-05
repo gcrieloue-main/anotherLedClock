@@ -103,7 +103,7 @@ const port = process.env.PORT || 3005;
 app.get("/clock/:style?", async (req: Request, res: Response) => {
   const param: string = req.params.style;
   const style = (param as ClockStyleEnum) || ClockStyleEnum.CLASSIC;
-  const msg = "Clock";
+  const msg = "Clock with style " + style;
   console.log(msg);
 
   showClock(style);

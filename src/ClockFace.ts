@@ -68,13 +68,16 @@ export class ClockFace implements Face {
     if (style == ClockStyleEnum.CLASSIC) {
       this.matrix
         .fgColor(this.config.alternateColor)
-        //  .drawRect(0, 0, this.matrix.width() - 1, 1)
         .drawRect(0, this.matrix.height() - 2, this.matrix.width() - 1, 1);
     } else if (style == ClockStyleEnum.BORDER) {
       this.matrix
         .fgColor(this.config.alternateColor)
-        //  .drawRect(0, 0, this.matrix.width() - 1, 1)
-        .drawRect(0, this.matrix.height() - 1, this.matrix.width() - 1, 0);
+        .drawRect(
+          0,
+          this.matrix.height() - 1,
+          this.matrix.width() - 1,
+          this.matrix.height()
+        );
     }
 
     this.matrix
