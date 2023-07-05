@@ -9,6 +9,8 @@ interface Pixel {
   color: number;
 }
 
+const paddingWithZero = (s: string) => ("00" + s).slice(-2);
+
 export class PictureFace implements Face {
   public enabled = true;
   matrix: LedMatrixInstance;
@@ -61,10 +63,9 @@ export class PictureFace implements Face {
               const g = pixels.get(x, y, 1);
               const b = pixels.get(x, y, 2);
               const color = parseInt(
-                `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
-              );
-              console.log(
-                `0x${r.toString(16)} ${g.toString(16)} ${b.toString(16)}`
+                `0x${paddingWithZero(r.toString(16))}${paddingWithZero(
+                  g.toString(16)
+                )}${paddingWithZero(b.toString(16))}`
               );
               pxs.push({ x: x + xOffset, y, color });
             }
