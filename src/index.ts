@@ -49,8 +49,10 @@ function enableFace(face: Face) {
 }
 
 async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
-  if (face.enabled) return;
-  console.log(`face ${face.name} already enabled`);
+  if (face.enabled) {
+    console.log(`face ${face.name} already enabled`);
+    return;
+  }
 
   enableFace(face);
 
