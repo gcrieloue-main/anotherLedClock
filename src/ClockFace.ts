@@ -22,8 +22,9 @@ function formatAMPM(date: Date) {
 }
 
 export class ClockFace implements Face {
+  public name = "Clock";
   matrix: LedMatrixInstance;
-  public enabled = true;
+  public enabled = false;
   config: MatrixConfig;
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {

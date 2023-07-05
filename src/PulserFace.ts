@@ -12,7 +12,8 @@ class Pulser {
 }
 
 export class PulserFace implements Face {
-  public enabled = true;
+  public name = "Pulser";
+  public enabled = false;
   matrix: LedMatrixInstance;
 
   constructor(ledMatrix: LedMatrixInstance) {

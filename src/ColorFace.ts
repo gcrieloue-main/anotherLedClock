@@ -3,7 +3,8 @@ import { MatrixConfig } from "./MatrixConfig";
 import { Colors } from "./Constants";
 
 export class ColorFace implements Face {
-  public enabled = true;
+  public name = "Color";
+  public enabled = false;
   matrix: LedMatrixInstance;
   offset: number = 0;
   config: MatrixConfig;

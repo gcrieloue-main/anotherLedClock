@@ -43,13 +43,14 @@ function showClock() {
 const defaultFace = showClock;
 
 function enableFace(face: Face) {
+  console.log(`enable face ${face.name}`);
   allFaces.forEach((face) => (face.enabled = false));
   face.enabled = true;
 }
 
 async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
   if (face.enabled) return;
-  console.log("face already enabled");
+  console.log(`face ${face.name} already enabled`);
 
   enableFace(face);
 
@@ -95,7 +96,7 @@ app.get("/clock", async (req: Request, res: Response) => {
 
 app.get("/text/:text", async (req: Request, res: Response) => {
   const txt = req.params.text;
-  var msg = "Text received : " + txt;
+  var msg = "> Text received : " + txt;
 
   if (!textFace.animationIsOver) {
     msg += ", skipped";
@@ -112,7 +113,7 @@ app.get("/text/:text", async (req: Request, res: Response) => {
 });
 
 app.get("/animation/pulse", async (req: Request, res: Response) => {
-  const msg = "Pulse";
+  const msg = "> Pulse";
   console.log(msg);
   res.send(msg);
 
@@ -120,7 +121,7 @@ app.get("/animation/pulse", async (req: Request, res: Response) => {
 });
 
 app.get("/animation/colors", async (req: Request, res: Response) => {
-  const msg = "Colors";
+  const msg = "> Colors";
   console.log(msg);
   res.send(msg);
 
@@ -128,7 +129,7 @@ app.get("/animation/colors", async (req: Request, res: Response) => {
 });
 
 app.get("/animation/circle", async (req: Request, res: Response) => {
-  const msg = "Circle";
+  const msg = "> Circle";
   console.log(msg);
   res.send(msg);
 
@@ -137,7 +138,7 @@ app.get("/animation/circle", async (req: Request, res: Response) => {
 
 app.get("/picture/:picture", async (req: Request, res: Response) => {
   const picture = req.params.picture;
-  const msg = "Picture " + picture;
+  const msg = "> Picture " + picture;
   console.log(msg);
   res.send(msg);
 
@@ -153,7 +154,7 @@ app.get(
   "/config/brightness/:brightness",
   async (req: Request, res: Response) => {
     const brightness = req.params.brightness;
-    const msg = "Brightness : " + brightness;
+    const msg = "> Brightness : " + brightness;
     console.log(msg);
     res.send(msg);
 
@@ -165,7 +166,7 @@ app.get(
 
 app.get("/config/primary/:primary", async (req: Request, res: Response) => {
   const primary = req.params.primary;
-  const msg = "Primary : " + primary;
+  const msg = "> Primary : " + primary;
   console.log(msg);
   res.send(msg);
 
@@ -174,7 +175,7 @@ app.get("/config/primary/:primary", async (req: Request, res: Response) => {
 
 app.get("/config/secondary/:secondary", async (req: Request, res: Response) => {
   const secondary = req.params.secondary;
-  const msg = "Secondary : " + secondary;
+  const msg = "> Secondary : " + secondary;
   console.log(msg);
   res.send(msg);
 
@@ -183,7 +184,7 @@ app.get("/config/secondary/:secondary", async (req: Request, res: Response) => {
 
 app.get("/config/alternate/:alternate", async (req: Request, res: Response) => {
   const alternate = req.params.alternate;
-  const msg = "Alternate : " + alternate;
+  const msg = "> Alternate : " + alternate;
   console.log(msg);
   res.send(msg);
 
@@ -191,7 +192,7 @@ app.get("/config/alternate/:alternate", async (req: Request, res: Response) => {
 });
 
 app.get("/stop", async (req: Request, res: Response) => {
-  const msg = "Stop";
+  const msg = "> Stop";
   console.log(msg);
   res.send(msg);
 

@@ -12,7 +12,8 @@ interface Pixel {
 const paddingWithZero = (s: string) => ("00" + s).slice(-2);
 
 export class PictureFace implements Face {
-  public enabled = true;
+  public name = "Picture";
+  public enabled = false;
   matrix: LedMatrixInstance;
   offset: number = 0;
   config: MatrixConfig;
