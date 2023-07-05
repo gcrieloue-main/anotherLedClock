@@ -65,12 +65,12 @@ export class ClockFace implements Face {
       .font(fontTom)
       .drawText(timeStr, 3, 5);
 
-    if (style == styleEnum.CLASSIC) {
+    if (style == ClockStyleEnum.CLASSIC) {
       this.matrix
         .fgColor(this.config.alternateColor)
         //  .drawRect(0, 0, this.matrix.width() - 1, 1)
         .drawRect(0, this.matrix.height() - 2, this.matrix.width() - 1, 1);
-    } else if (style == styleEnum.BORDER) {
+    } else if (style == ClockStyleEnum.BORDER) {
       this.matrix
         .fgColor(this.config.alternateColor)
         //  .drawRect(0, 0, this.matrix.width() - 1, 1)
