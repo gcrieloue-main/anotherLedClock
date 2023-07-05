@@ -22,7 +22,14 @@ const colorFace = new ColorFace(matrix, matrixConfig);
 const circleFace = new CircleFace(matrix, matrixConfig);
 const pictureFace = new PictureFace(matrix, matrixConfig);
 
-const allFaces = [pulserFace, clockFace, textFace, circleFace, colorFace];
+const allFaces: Face[] = [
+  pulserFace,
+  clockFace,
+  textFace,
+  circleFace,
+  colorFace,
+  pictureFace,
+];
 
 // ============= Features =============
 
@@ -43,14 +50,19 @@ function showClock() {
 const defaultFace = showClock;
 
 function enableFace(face: Face) {
-  console.log(`enable face ${face.name}`);
+  console.log(`Enable face ${face.name}`);
   allFaces.forEach((face) => (face.enabled = false));
   face.enabled = true;
 }
 
 async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
+  if (!allFaces.includes(face)) {
+    console.warn(`all faces array does nort include ${face.name} !`);
+    return;
+  }
+
   if (face.enabled) {
-    console.log(`face ${face.name} already enabled`);
+    console.log(`Face ${face.name} already enabled`);
     return;
   }
 

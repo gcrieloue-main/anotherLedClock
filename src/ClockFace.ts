@@ -33,7 +33,6 @@ export class ClockFace implements Face {
   }
 
   public async display() {
-    console.log("display clock");
     this.displayClock();
 
     this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
