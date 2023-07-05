@@ -31,19 +31,20 @@ export class ClockFace implements Face {
   matrix: LedMatrixInstance;
   public enabled = false;
   config: MatrixConfig;
+  public style = ClockStyleEnum.CLASSIC;
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix;
     this.config = config;
   }
 
-  public async display(style = ClockStyleEnum.CLASSIC) {
-    this.displayClock(style);
+  public async display() {
+    this.displayClock();
 
     this.matrix.afterSync((mat: LedMatrixInstance, dt: number, t: number) => {
       setTimeout(() => {
         if (this.enabled) {
-          this.displayClock(style);
+          this.displayClock();
           this.matrix.sync();
         }
       }, 10000);
@@ -52,7 +53,7 @@ export class ClockFace implements Face {
     this.matrix.sync();
   }
 
-  public async displayClock(style: ClockStyleEnum) {
+  private async displayClock() {
     const time = new Date();
     const timeStr = formatTime(time);
     const ampmStr = formatAMPM(time);
@@ -65,12 +66,12 @@ export class ClockFace implements Face {
       .font(fontTom)
       .drawText(timeStr, 3, 5);
 
-    if (style == ClockStyleEnum.CLASSIC) {
+    if (this.style == ClockStyleEnum.CLASSIC) {
       console.log("with classic");
       this.matrix
         .fgColor(this.config.alternateColor)
         .drawRect(0, this.matrix.height() - 2, this.matrix.width() - 1, 1);
-    } else if (style == ClockStyleEnum.BORDER) {
+    } else if (this.style == ClockStyleEnum.BORDER) {
       console.log("with border");
       this.matrix
         .fgColor(this.config.alternateColor)

@@ -41,9 +41,10 @@ function stop() {
 }
 
 function showClock(style: ClockStyleEnum = ClockStyleEnum.CLASSIC) {
+  clockFace.style = style;
   if (!clockFace.enabled) {
     enableFace(clockFace);
-    clockFace.display(style);
+    clockFace.display();
   }
 }
 
