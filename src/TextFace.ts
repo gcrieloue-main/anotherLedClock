@@ -39,8 +39,8 @@ export class TextFace implements Face {
     } else {
       const { firstLine, secondLine } = this.computeTwoLines(text);
       if (
-        font4x6.stringWidth(firstLine) < w &&
-        font4x6.stringWidth(secondLine) < w
+        font4x6.stringWidth(firstLine) < w - 1 &&
+        font4x6.stringWidth(secondLine) < w - 1
       ) {
         this.twoLineDisplay(firstLine, secondLine);
         await wait(10000);
@@ -103,8 +103,8 @@ export class TextFace implements Face {
     const textZoneHeight = 2 * fontHeight + 1;
     this.matrix
       .clear()
-      .drawText(firstLine, 0, (h - textZoneHeight) / 2)
-      .drawText(secondLine, 0, (h - textZoneHeight) / 2 + textZoneHeight / 2)
+      .drawText(firstLine, 1, (h - textZoneHeight) / 2)
+      .drawText(secondLine, 1, (h - textZoneHeight) / 2 + textZoneHeight / 2)
       .sync();
   }
 
