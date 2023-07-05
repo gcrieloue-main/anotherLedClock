@@ -38,7 +38,7 @@ export class PictureFace implements Face {
   public async loadPic(icon: string): Promise<Pixel[]> {
     return new Promise((resolve, reject) => {
       let pxs: Pixel[] = [];
-      const xOffset = 10;
+      const xOffset = 8;
 
       getPixels(
         "./src/icons/" + icon + ".png",
@@ -62,6 +62,9 @@ export class PictureFace implements Face {
               const b = pixels.get(x, y, 2);
               const color = parseInt(
                 `0x${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+              );
+              console.log(
+                `0x${r.toString(16)} ${g.toString(16)} ${b.toString(16)}`
               );
               pxs.push({ x: x + xOffset, y, color });
             }
