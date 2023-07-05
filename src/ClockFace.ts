@@ -66,10 +66,12 @@ export class ClockFace implements Face {
       .drawText(timeStr, 3, 5);
 
     if (style == ClockStyleEnum.CLASSIC) {
+      console.log("with classic");
       this.matrix
         .fgColor(this.config.alternateColor)
         .drawRect(0, this.matrix.height() - 2, this.matrix.width() - 1, 1);
     } else if (style == ClockStyleEnum.BORDER) {
+      console.log("with border");
       this.matrix
         .fgColor(this.config.alternateColor)
         .drawRect(
