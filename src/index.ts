@@ -35,16 +35,6 @@ function showClock() {
 
 const defaultFace = showClock;
 
-async function showPicture(picture: string) {
-  enableFace(pictureFace);
-  await pictureFace.display(picture);
-}
-
-async function text(txt: string) {
-  enableFace(textFace);
-  await textFace.display(txt);
-}
-
 function stop() {
   matrix
     .clear()
@@ -57,23 +47,19 @@ function enableFace(face: Face) {
   face.enabled = true;
 }
 
-async function circle(duration?: number) {
-  enableFace(circleFace);
+const showPicture = (picture: string) =>
+  runFace(pictureFace, () => pictureFace.display(picture));
 
-  await circleFace.display();
-}
+const text = (txt: string) => runFace(textFace, () => textFace.display(txt));
 
-async function pulse(duration?: number) {
-  enableFace(pulserFace);
+const circle = (duration?: number) =>
+  runFace(circleFace, () => circleFace.display());
 
-  await pulserFace.display(duration);
-}
+const pulse = (duration?: number) =>
+  runFace(pulserFace, () => pulserFace.display(duration));
 
-async function colors(duration?: number) {
-  enableFace(colorFace);
-
-  await colorFace.display();
-}
+const colors = (duration?: number) =>
+  runFace(colorFace, () => colorFace.display());
 
 async function runFace(
   face: Face,
