@@ -125,7 +125,7 @@ const text = (txt: string) => runFace(textFace, () => textFace.display(txt));
 
 (async () => {
   matrix.brightness(matrixConfig.brightness);
-  switchTheme("orange");
+  switchTheme("blue");
   runFaceDefaultWithDuration(pulserFace, 5000);
 })();
 
