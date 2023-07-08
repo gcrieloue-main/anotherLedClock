@@ -25,10 +25,11 @@ export class RandomFace implements Face {
     this.matrix.clear();
 
     this.matrix.afterSync(() => {
-      const x = randomIntFromInterval(0, 31);
-      const y = randomIntFromInterval(0, 15);
+      const x: number = randomIntFromInterval(0, 31);
+      const y: number = randomIntFromInterval(0, 15);
+      const color: number = parseInt("0x" + randomElement(Colors));
 
-      this.matrix.fgColor(randomElement(Colors)).setPixel(x, y);
+      this.matrix.fgColor(color).setPixel(x, y);
 
       setTimeout(() => {
         if (this.enabled) {
