@@ -1,3 +1,4 @@
+import { truncate } from "fs/promises";
 import {
   LedMatrix,
   GpioMapping,
@@ -17,6 +18,7 @@ export const matrix = new LedMatrix(
     }),
     pwmBits: 11, //default 11
     pwmLsbNanoseconds: 130, //default 130
+    showRefreshRate: true,
   },
   {
     ...LedMatrix.defaultRuntimeOptions(),
