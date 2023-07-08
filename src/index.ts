@@ -103,7 +103,7 @@ const colors = (duration?: number) =>
   runFace(colorFace, () => colorFace.display());
 
 const random = (duration?: number) =>
-  runFace(randomFace, () => randomFace.display());
+  runFace(randomFace, () => randomFace.display(duration));
 
 // ============= Start =============
 
