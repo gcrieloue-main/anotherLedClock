@@ -175,7 +175,11 @@ app.get("/animation/random/:duration?", async (req: Request, res: Response) => {
   const param: string = req.params.duration;
   const duration = parseInt(param) || undefined;
 
-  const msg = "> Random";
+  var msg = "> Random";
+  if (duration) {
+    msg += " with duration " + duration;
+  }
+
   console.log(msg);
   res.send(msg);
 
