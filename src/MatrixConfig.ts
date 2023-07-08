@@ -1,7 +1,7 @@
 export class MatrixConfig {
   public primaryColor = 0xffffff;
-  public secondaryColor = 0x3333ff;
-  public alternateColor = 0x1111dd;
+  public secondaryColor = 0x92a8d1;
+  public alternateColor = 0x92a8d1;
   public brightness = 100;
 
   public config = () => {

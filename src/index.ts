@@ -49,12 +49,24 @@ function stop() {
 function switchTheme(theme: string) {
   if (theme == "default") {
     matrixConfig.primaryColor = 0xffffff;
-    matrixConfig.secondaryColor = 0x3333ff;
-    matrixConfig.alternateColor = 0x1111dd;
+    matrixConfig.secondaryColor = 0x92a8d1;
+    matrixConfig.alternateColor = 0x92a8d1;
   } else if (theme == "orange") {
     matrixConfig.primaryColor = 0xffffff;
     matrixConfig.secondaryColor = 0xffa500;
     matrixConfig.alternateColor = 0xffa500;
+  } else if ((theme = "purple")) {
+    matrixConfig.primaryColor = 0xffffff;
+    matrixConfig.secondaryColor = 0x6b5b95;
+    matrixConfig.alternateColor = 0x6b5b95;
+  } else if (theme == "green") {
+    matrixConfig.primaryColor = 0xffffff;
+    matrixConfig.secondaryColor = 0x88b04b;
+    matrixConfig.alternateColor = 0x88b04b;
+  } else if (theme == "pink") {
+    matrixConfig.primaryColor = 0xffffff;
+    matrixConfig.secondaryColor = 0xbc243c;
+    matrixConfig.alternateColor = 0xbc243c;
   }
 }
 
