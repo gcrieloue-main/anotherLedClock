@@ -18,11 +18,12 @@ interface VolumeBar {
 }
 
 export class VolumeBarsFace implements Face {
-  public name = "VolumeBars";
-  public enabled = false;
-  matrix: LedMatrixInstance;
-  config: MatrixConfig;
-  volumeBars: VolumeBar[] = [];
+  name = "VolumeBars";
+  enabled = false;
+  private matrix: LedMatrixInstance;
+  private config: MatrixConfig;
+  private volumeBars: VolumeBar[] = [];
+  private refreshRate = 50;
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix;
@@ -30,6 +31,24 @@ export class VolumeBarsFace implements Face {
   }
 
   public async display(duration = 10000) {
+    const colors = [
+      "#2dfe00",
+      "19d540",
+      "14ff00",
+      "19d540",
+      "7cd42f",
+      "e3c50f",
+      "ced70e",
+      "f7ff05",
+      "fbff00",
+      "c9c23a",
+      "d69014",
+      "de9a0b",
+      "bf0707",
+      "d10b0b",
+      "ff0000",
+    ];
+
     this.volumeBars = [];
     this.matrix.clear();
 
@@ -53,7 +72,6 @@ export class VolumeBarsFace implements Face {
     this.matrix.afterSync(() => {
       this.matrix.clear();
 
-      const color: number = parseInt("0x" + randomElement(Colors));
       this.volumeBars.forEach((bar) => {
         if (randomBoolean() && bar.level < 100) {
           bar.level++;
@@ -62,7 +80,7 @@ export class VolumeBarsFace implements Face {
         }
         for (var y = 0; y < bar.level; y++) {
           this.matrix
-            .fgColor(color)
+            .fgColor(colors[bar.level])
             .drawRect(bar.x, this.matrix.height() - y, 1, 0);
         }
       });
@@ -70,7 +88,7 @@ export class VolumeBarsFace implements Face {
         if (this.enabled) {
           this.matrix.sync();
         }
-      }, 200);
+      }, this.refreshRate);
     });
 
     this.matrix.sync();
