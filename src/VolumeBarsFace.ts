@@ -57,7 +57,7 @@ export class VolumeBarsFace implements Face {
       this.volumeBars.forEach((bar) => {
         if (randomBoolean() && bar.level < 15) {
           bar.level++;
-        } else {
+        } else if (bar.level > 0) {
           bar.level--;
         }
         for (var y = 0; y < bar.level; y++) {
