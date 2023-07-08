@@ -15,7 +15,6 @@ import { CircleFace } from "./CircleFace";
 import { PictureFace } from "./PictureFace";
 import { RandomFace } from "./RandomFace";
 import { VolumeBarsFace } from "./VolumeBarsFace";
-import { dir } from "console";
 
 const matrixConfig = new MatrixConfig();
 const pulserFace = new PulserFace(matrix);
