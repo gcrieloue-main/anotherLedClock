@@ -1,13 +1,9 @@
 import { LedMatrixInstance } from "rpi-led-matrix";
 import { MatrixConfig } from "./MatrixConfig";
-import { Colors } from "./Constants";
 
 const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
 
 const randomBoolean = () => Math.random() < 0.5;
-
-const randomElement = (array: any[]) =>
-  array[Math.floor(Math.random() * array.length)];
 
 const randomIntFromInterval = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1) + min);
@@ -21,7 +17,7 @@ export class VolumeBarsFace implements Face {
   name = "VolumeBars";
   enabled = false;
   private matrix: LedMatrixInstance;
-  private config: MatrixConfig;
+  config: MatrixConfig;
   private volumeBars: VolumeBar[] = [];
   private refreshRate = 50;
 
