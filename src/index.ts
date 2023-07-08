@@ -36,8 +36,20 @@ const allFaces: Face[] = [
 function stop() {
   matrix
     .clear()
-    .afterSync(() => {})
+    .afterSync(() => undefined)
     .sync();
+}
+
+function switchTheme(theme: string) {
+  if (theme == "default") {
+    matrixConfig.primaryColor = 0xffffff;
+    matrixConfig.secondaryColor = 0x3333ff;
+    matrixConfig.alternateColor = 0x1111dd;
+  } else if (theme == "orange") {
+    matrixConfig.primaryColor = 0xffffff;
+    matrixConfig.secondaryColor = 0xffffff;
+    matrixConfig.alternateColor = 0xffffff;
+  }
 }
 
 function showClock(style: ClockStyleEnum = ClockStyleEnum.CLASSIC) {
@@ -206,6 +218,15 @@ app.get("/config/alternate/:alternate", async (req: Request, res: Response) => {
   res.send(msg);
 
   matrixConfig.alternateColor = parseInt(alternate);
+});
+
+app.get("/config/theme/:theme", async (req: Request, res: Response) => {
+  const theme = req.params.theme;
+  const msg = "> Theme : " + theme;
+  console.log(msg);
+  res.send(msg);
+
+  switchTheme(theme);
 });
 
 app.get("/stop", async (req: Request, res: Response) => {
