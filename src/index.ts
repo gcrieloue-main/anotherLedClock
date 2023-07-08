@@ -13,6 +13,7 @@ import { MatrixConfig } from "./MatrixConfig";
 import { ColorFace } from "./ColorFace";
 import { CircleFace } from "./CircleFace";
 import { PictureFace } from "./PictureFace";
+import { RandomFace } from "./RandomFace";
 
 const matrixConfig = new MatrixConfig();
 const pulserFace = new PulserFace(matrix);
@@ -21,6 +22,7 @@ const textFace = new TextFace(matrix, matrixConfig);
 const colorFace = new ColorFace(matrix, matrixConfig);
 const circleFace = new CircleFace(matrix, matrixConfig);
 const pictureFace = new PictureFace(matrix, matrixConfig);
+const randomFace = new RandomFace(matrix, matrixConfig);
 
 const allFaces: Face[] = [
   pulserFace,
@@ -28,6 +30,7 @@ const allFaces: Face[] = [
   textFace,
   circleFace,
   colorFace,
+  randomFace,
   pictureFace,
 ];
 
@@ -99,6 +102,9 @@ const pulse = (duration?: number) =>
 const colors = (duration?: number) =>
   runFace(colorFace, () => colorFace.display());
 
+const random = (duration?: number) =>
+  runFace(colorFace, () => colorFace.display());
+
 // ============= Start =============
 
 (async () => {
@@ -163,6 +169,14 @@ app.get("/animation/circle", async (req: Request, res: Response) => {
   res.send(msg);
 
   await circle();
+});
+
+app.get("/animation/random", async (req: Request, res: Response) => {
+  const msg = "> Random";
+  console.log(msg);
+  res.send(msg);
+
+  await random();
 });
 
 app.get("/picture/:picture", async (req: Request, res: Response) => {
