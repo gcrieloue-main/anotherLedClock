@@ -7,14 +7,3 @@ export const randomElement = (array: any[]) =>
 
 export const randomIntFromInterval = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1) + min);
-
-const runFaceDefault = async (face: SimpleDisplay) => {
-  runFace(face, () => face.display());
-};
-
-const runFaceDefaultWithDuration = async (
-  face: SimpleDisplayWithDuration,
-  duration?: number
-) => {
-  runFace(face, () => face.display(duration));
-};
