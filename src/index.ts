@@ -14,6 +14,8 @@ import { ColorFace } from "./ColorFace";
 import { CircleFace } from "./CircleFace";
 import { PictureFace } from "./PictureFace";
 import { RandomFace } from "./RandomFace";
+import { VolumeBarsFace } from "./VolumeBarsFace";
+import { dir } from "console";
 
 const matrixConfig = new MatrixConfig();
 const pulserFace = new PulserFace(matrix);
@@ -23,6 +25,7 @@ const colorFace = new ColorFace(matrix, matrixConfig);
 const circleFace = new CircleFace(matrix, matrixConfig);
 const pictureFace = new PictureFace(matrix, matrixConfig);
 const randomFace = new RandomFace(matrix, matrixConfig);
+const volumeBarsFace = new VolumeBarsFace(matrix, matrixConfig);
 
 const allFaces: Face[] = [
   pulserFace,
@@ -31,6 +34,7 @@ const allFaces: Face[] = [
   circleFace,
   colorFace,
   randomFace,
+  volumeBarsFace,
   pictureFace,
 ];
 
@@ -88,28 +92,36 @@ async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
   defaultFace();
 }
 
+const runFaceDefault = async (face: SimpleDisplay) => {
+  runFace(face, () => face.display());
+};
+
+const runFaceDefaultWithDuration = async (
+  face: SimpleDisplayWithDuration,
+  duration?: number
+) => {
+  runFace(face, () => face.display(duration));
+};
+
 const showPicture = (picture: string) =>
   runFace(pictureFace, () => pictureFace.display(picture));
 
 const text = (txt: string) => runFace(textFace, () => textFace.display(txt));
 
-const circle = (duration?: number) =>
-  runFace(circleFace, () => circleFace.display());
+const circle = (duration?: number) => runFaceDefault(circleFace);
 
 const pulse = (duration?: number) =>
-  runFace(pulserFace, () => pulserFace.display(duration));
+  runFaceDefaultWithDuration(pulserFace, duration);
 
-const colors = (duration?: number) =>
-  runFace(colorFace, () => colorFace.display());
+const colors = (duration?: number) => runFaceDefault(colorFace);
 
-const random = (duration?: number) =>
-  runFace(randomFace, () => randomFace.display(duration));
+const random = (duration?: number) => runFaceDefaultWithDuration(randomFace);
 
 // ============= Start =============
 
 (async () => {
   matrix.brightness(matrixConfig.brightness);
-  runFace(pulserFace, () => pulse(5000));
+  pulse(5000);
 })();
 
 // ============= API =============
