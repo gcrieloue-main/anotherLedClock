@@ -107,20 +107,11 @@ const showPicture = (picture: string) =>
 
 const text = (txt: string) => runFace(textFace, () => textFace.display(txt));
 
-const circle = (duration?: number) => runFaceDefault(circleFace);
-
-const pulse = (duration?: number) =>
-  runFaceDefaultWithDuration(pulserFace, duration);
-
-const colors = (duration?: number) => runFaceDefault(colorFace);
-
-const random = (duration?: number) => runFaceDefaultWithDuration(randomFace);
-
 // ============= Start =============
 
 (async () => {
   matrix.brightness(matrixConfig.brightness);
-  pulse(5000);
+  runFaceDefaultWithDuration(pulserFace, 5000);
 })();
 
 // ============= API =============
@@ -163,7 +154,7 @@ app.get("/animation/pulse", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  await pulse();
+  await runFaceDefault(pulserFace);
 });
 
 app.get("/animation/colors", async (req: Request, res: Response) => {
@@ -171,7 +162,7 @@ app.get("/animation/colors", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  await colors();
+  await runFaceDefault(colorFace);
 });
 
 app.get("/animation/circle", async (req: Request, res: Response) => {
@@ -179,7 +170,7 @@ app.get("/animation/circle", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  await circle();
+  await runFaceDefault(circleFace);
 });
 
 app.get("/animation/random/:duration?", async (req: Request, res: Response) => {
@@ -194,7 +185,7 @@ app.get("/animation/random/:duration?", async (req: Request, res: Response) => {
   console.log(msg);
   res.send(msg);
 
-  await random(duration);
+  await runFaceDefaultWithDuration(randomFace, duration);
 });
 
 app.get("/picture/:picture", async (req: Request, res: Response) => {
