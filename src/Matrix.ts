@@ -16,7 +16,7 @@ export const matrix = new LedMatrix(
       type: PixelMapperType.U,
     }),
     pwmBits: 11, //default 11
-    pwmLsbNanoseconds: 200, //default 130
+    pwmLsbNanoseconds: 130, //default 130
   },
   {
     ...LedMatrix.defaultRuntimeOptions(),
