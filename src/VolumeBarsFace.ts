@@ -55,7 +55,7 @@ export class VolumeBarsFace implements Face {
 
       const color: number = parseInt("0x" + randomElement(Colors));
       this.volumeBars.forEach((bar) => {
-        if (randomBoolean() && bar.level < 15) {
+        if (randomBoolean() && bar.level < 100) {
           bar.level++;
         } else if (bar.level > 0) {
           bar.level--;
@@ -70,7 +70,7 @@ export class VolumeBarsFace implements Face {
         if (this.enabled) {
           this.matrix.sync();
         }
-      }, 50);
+      }, 200);
     });
 
     this.matrix.sync();
