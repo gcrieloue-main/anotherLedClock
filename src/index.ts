@@ -50,8 +50,8 @@ function switchTheme(theme: string) {
     matrixConfig.alternateColor = 0x1111dd;
   } else if (theme == "orange") {
     matrixConfig.primaryColor = 0xffffff;
-    matrixConfig.secondaryColor = 0xffffff;
-    matrixConfig.alternateColor = 0xffffff;
+    matrixConfig.secondaryColor = 0xffa500;
+    matrixConfig.alternateColor = 0xffa500;
   }
 }
 
@@ -103,7 +103,7 @@ const colors = (duration?: number) =>
   runFace(colorFace, () => colorFace.display());
 
 const random = (duration?: number) =>
-  runFace(colorFace, () => colorFace.display());
+  runFace(randomFace, () => randomFace.display());
 
 // ============= Start =============
 

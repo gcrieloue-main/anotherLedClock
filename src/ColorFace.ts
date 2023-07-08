@@ -1,6 +1,7 @@
 import { LedMatrixInstance } from "rpi-led-matrix";
 import { MatrixConfig } from "./MatrixConfig";
 import { Colors } from "./Constants";
+import { wait } from "./Utils";
 
 export class ColorFace implements Face {
   public name = "Color";
@@ -14,7 +15,7 @@ export class ColorFace implements Face {
     this.config = config;
   }
 
-  public async display() {
+  public async display(duration = 10000) {
     this.matrix.clear();
 
     var i = 0;
@@ -28,5 +29,6 @@ export class ColorFace implements Face {
     }
 
     this.matrix.sync();
+    await wait(duration);
   }
 }
