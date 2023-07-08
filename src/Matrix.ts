@@ -17,7 +17,7 @@ export const matrix = new LedMatrix(
     }),
     pwmBits: 11, //default 11
     pwmLsbNanoseconds: 130, //default 130
-    showRefreshRate: true,
+    //showRefreshRate: true,
     limitRefreshRateHz: 250, // 0 for no limit rate
   },
   {
