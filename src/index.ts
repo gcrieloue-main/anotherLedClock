@@ -171,12 +171,15 @@ app.get("/animation/circle", async (req: Request, res: Response) => {
   await circle();
 });
 
-app.get("/animation/random", async (req: Request, res: Response) => {
+app.get("/animation/random/:duration?", async (req: Request, res: Response) => {
+  const param: string = req.params.duration;
+  const duration = parseInt(param) || undefined;
+
   const msg = "> Random";
   console.log(msg);
   res.send(msg);
 
-  await random();
+  await random(duration);
 });
 
 app.get("/picture/:picture", async (req: Request, res: Response) => {
