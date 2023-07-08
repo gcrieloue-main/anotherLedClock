@@ -29,7 +29,7 @@ export class RandomFace implements Face {
       const y: number = randomIntFromInterval(0, 15);
       const color: number = parseInt("0x" + randomElement(Colors));
 
-      this.matrix.fgColor(color).setPixel(x, y);
+      this.matrix.fgColor(color).drawRect(x, y, 2, 2);
 
       setTimeout(() => {
         if (this.enabled) {
