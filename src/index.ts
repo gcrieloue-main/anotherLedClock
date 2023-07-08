@@ -40,6 +40,8 @@ const allFaces: Face[] = [
 // ============= Features =============
 
 function stop() {
+  allFaces.forEach((face) => (face.enabled = false));
+
   matrix
     .clear()
     .afterSync(() => undefined)
