@@ -19,7 +19,7 @@ export class VolumeBarsFace implements Face {
   private matrix: LedMatrixInstance;
   config: MatrixConfig;
   private volumeBars: VolumeBar[] = [];
-  private refreshRate = 50;
+  private refreshRate = 100;
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix;
@@ -76,7 +76,7 @@ export class VolumeBarsFace implements Face {
         }
         for (var y = 0; y < bar.level; y++) {
           this.matrix
-            .fgColor(parseInt("0x" + colors[bar.level]))
+            .fgColor(parseInt("0x" + colors[y]))
             .drawRect(bar.x, this.matrix.height() - y, 1, 0);
         }
       });
