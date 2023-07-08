@@ -188,6 +188,24 @@ app.get("/animation/random/:duration?", async (req: Request, res: Response) => {
   await runFaceDefaultWithDuration(randomFace, duration);
 });
 
+app.get(
+  "/animation/volumeBars/:duration?",
+  async (req: Request, res: Response) => {
+    const param: string = req.params.duration;
+    const duration = parseInt(param) || undefined;
+
+    var msg = "> VolumeBars";
+    if (duration) {
+      msg += " with duration " + duration;
+    }
+
+    console.log(msg);
+    res.send(msg);
+
+    await runFaceDefaultWithDuration(volumeBarsFace, duration);
+  }
+);
+
 app.get("/picture/:picture", async (req: Request, res: Response) => {
   const picture = req.params.picture;
   const msg = "> Picture " + picture;
