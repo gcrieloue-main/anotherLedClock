@@ -76,7 +76,7 @@ export class VolumeBarsFace implements Face {
         }
         for (var y = 0; y < bar.level; y++) {
           this.matrix
-            .fgColor(parseInt(")x" + colors[bar.level]))
+            .fgColor(parseInt("0x" + colors[bar.level]))
             .drawRect(bar.x, this.matrix.height() - y, 1, 0);
         }
       });
