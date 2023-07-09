@@ -1,34 +1,34 @@
-import { LedMatrixInstance } from "rpi-led-matrix";
-import { MatrixConfig } from "./MatrixConfig";
-import { Colors } from "./Constants";
-import { wait } from "./Utils";
+import { LedMatrixInstance } from 'rpi-led-matrix'
+import { MatrixConfig } from './MatrixConfig'
+import { Colors } from './Constants'
+import { wait } from './Utils'
 
 export class ColorFace implements Face {
-  public name = "Color";
-  public enabled = false;
-  matrix: LedMatrixInstance;
-  offset: number = 0;
-  config: MatrixConfig;
+  public name = 'Color'
+  public enabled = false
+  matrix: LedMatrixInstance
+  offset: number = 0
+  config: MatrixConfig
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
-    this.matrix = ledMatrix;
-    this.config = config;
+    this.matrix = ledMatrix
+    this.config = config
   }
 
   public async display(duration = 10000) {
-    this.matrix.clear();
+    this.matrix.clear()
 
-    var i = 0;
+    var i = 0
     for (var x = 0; x < 32; x++) {
       for (var y = 0; y < 16; y++) {
         this.matrix
-          .fgColor(parseInt("0x" + Colors[i % Colors.length]))
-          .setPixel(x, y);
-        i++;
+          .fgColor(parseInt('0x' + Colors[i % Colors.length]))
+          .setPixel(x, y)
+        i++
       }
     }
 
-    this.matrix.sync();
-    await wait(duration);
+    this.matrix.sync()
+    await wait(duration)
   }
 }

@@ -3,7 +3,7 @@ import {
   GpioMapping,
   LedMatrixUtils,
   PixelMapperType,
-} from "rpi-led-matrix";
+} from 'rpi-led-matrix'
 
 export const matrix = new LedMatrix(
   {
@@ -23,5 +23,5 @@ export const matrix = new LedMatrix(
   {
     ...LedMatrix.defaultRuntimeOptions(),
     gpioSlowdown: 1,
-  }
-);
+  },
+)

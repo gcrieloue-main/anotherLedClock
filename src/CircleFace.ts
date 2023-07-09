@@ -1,56 +1,56 @@
-import { LedMatrixInstance } from "rpi-led-matrix";
-import { MatrixConfig } from "./MatrixConfig";
-import { Colors } from "./Constants";
+import { LedMatrixInstance } from 'rpi-led-matrix'
+import { MatrixConfig } from './MatrixConfig'
+import { Colors } from './Constants'
 
-const wait = (t: number) => new Promise((ok) => setTimeout(ok, t));
+const wait = (t: number) => new Promise(ok => setTimeout(ok, t))
 
 export class CircleFace implements Face {
-  public name = "Circle";
-  public enabled = false;
-  matrix: LedMatrixInstance;
-  config: MatrixConfig;
+  public name = 'Circle'
+  public enabled = false
+  matrix: LedMatrixInstance
+  config: MatrixConfig
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
-    this.matrix = ledMatrix;
-    this.config = config;
+    this.matrix = ledMatrix
+    this.config = config
   }
 
   public async display(duration = 10000) {
-    this.matrix.clear();
+    this.matrix.clear()
 
-    const circles: { color: number; r: number }[] = [];
+    const circles: { color: number; r: number }[] = []
 
-    var i = 0;
+    var i = 0
     this.matrix.afterSync(() => {
       if (circles.length > 15) {
-        circles.shift();
+        circles.shift()
       }
       const newCircle = {
-        color: parseInt("0x" + Colors[i % Colors.length]),
+        color: parseInt('0x' + Colors[i % Colors.length]),
         r: 0,
-      };
-      i++;
-      circles.push(newCircle);
+      }
+      i++
+      circles.push(newCircle)
 
       for (var circle of circles) {
-        circle.r++;
+        circle.r++
         this.matrix
           .fgColor(circle.color)
           .drawCircle(
             this.matrix.width() / 2,
             this.matrix.height() / 2,
-            circle.r
-          );
+            circle.r,
+          )
       }
       setTimeout(() => {
         if (this.enabled) {
-          this.matrix.sync();
+          this.matrix.sync()
         }
-      }, 50);
-    });
+      }, 50)
+    })
 
-    this.matrix.sync();
+    this.matrix.sync()
 
-    await wait(duration);
+    await wait(duration)
   }
 }
