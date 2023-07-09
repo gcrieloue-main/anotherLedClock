@@ -49,7 +49,7 @@ export class ClockFace implements Face {
       .fill()
       .fgColor(this.config.primaryColor)
       .font(fontTom)
-      .drawText(timeStr, time.getHours().toString().length > 1 ? 2 : 3, 5);
+      .drawText(timeStr, (time.getHours() + 1) % 12 > 9 ? 2 : 3, 5);
 
     if (this.style == ClockStyleEnum.CLASSIC) {
       this.matrix
