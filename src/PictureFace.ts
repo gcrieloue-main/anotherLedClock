@@ -58,6 +58,11 @@ export class PictureFace implements Face {
             reject(reason)
           }
 
+          const width = pixels.shape[0]
+          const height = pixels.shape[1]
+
+          console.log(width + 'x' + height)
+
           for (let y = 0; y < 16; y++) {
             for (let x = 0; x < 16; x++) {
               const r = pixels.get(x, y, 0)
