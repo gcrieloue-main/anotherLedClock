@@ -49,6 +49,7 @@ function stop() {
 }
 
 function switchTheme(theme: string) {
+  console.log(`theme ${theme} set`)
   if (theme == 'default') {
     matrixConfig.primaryColor = 0xffffff
     matrixConfig.secondaryColor = 0x92a8d1
@@ -285,7 +286,7 @@ app.get('/config/theme/:theme', async (req: Request, res: Response) => {
   console.log(msg)
   res.send(msg)
 
-  await switchTheme(theme)
+  switchTheme(theme)
 })
 
 app.get('/stop', async (req: Request, res: Response) => {
