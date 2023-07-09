@@ -41,7 +41,6 @@ export class PictureFace implements Face {
   public async loadPic(icon: string): Promise<Pixel[]> {
     return new Promise((resolve, reject) => {
       let pxs: Pixel[] = []
-      const xOffset = 8
 
       getPixels(
         './src/icons/' + icon + '.png',
@@ -60,11 +59,10 @@ export class PictureFace implements Face {
 
           const width = pixels.shape[0]
           const height = pixels.shape[1]
+          const xOffset = (this.matrix.width - width) / 2
 
-          console.log(width + 'x' + height)
-
-          for (let y = 0; y < 16; y++) {
-            for (let x = 0; x < 16; x++) {
+          for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
               const r = pixels.get(x, y, 0)
               const g = pixels.get(x, y, 1)
               const b = pixels.get(x, y, 2)
