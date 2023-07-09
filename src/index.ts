@@ -99,9 +99,10 @@ async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
     return;
   }
 
+  matrix.afterSync(() => undefined);
   enableFace(face);
-
   await fn();
+
   defaultFace();
 }
 
