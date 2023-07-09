@@ -4,23 +4,6 @@ import { MatrixConfig } from "./MatrixConfig";
 const font4x6 = new Font("4x6", "fonts/4x6.bdf");
 const fontTom = new Font("tom", "fonts/tom-thumb.bdf");
 
-function formatTime(date: Date) {
-  var hours = date.getHours() + 1;
-  var minutes = date.getMinutes();
-  //var ampm = hours >= 12 ? "pm" : "am";
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  var strMinutes = minutes < 10 ? "0" + minutes : minutes;
-  var strTime = hours + ":" + strMinutes; //+ " " + ampm;
-  return strTime;
-}
-
-function formatAMPM(date: Date) {
-  var hours = date.getHours() + 1;
-  var ampm = hours >= 12 ? "pm" : "am";
-  return ampm;
-}
-
 export enum ClockStyleEnum {
   BORDER = "BORDER",
   CLASSIC = "CLASSIC",
@@ -32,6 +15,8 @@ export class ClockFace implements Face {
   public enabled = false;
   config: MatrixConfig;
   public style = ClockStyleEnum.CLASSIC;
+  private dotDisplayed = true;
+  private rate = 1000;
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix;
@@ -47,7 +32,7 @@ export class ClockFace implements Face {
           this.displayClock();
           this.matrix.sync();
         }
-      }, 10000);
+      }, this.rate);
     });
 
     this.matrix.sync();
@@ -55,8 +40,8 @@ export class ClockFace implements Face {
 
   private async displayClock() {
     const time = new Date();
-    const timeStr = formatTime(time);
-    const ampmStr = formatAMPM(time);
+    const timeStr = this.formatTime(time);
+    const ampmStr = this.formatAMPM(time);
     //console.log("display", timeStr);
     this.matrix
       .clear()
@@ -85,5 +70,24 @@ export class ClockFace implements Face {
       .fgColor(this.config.secondaryColor)
       .font(font4x6)
       .drawText(ampmStr, 23, 5);
+
+    this.dotDisplayed = !this.dotDisplayed;
+  }
+
+  private formatTime(date: Date) {
+    var hours = date.getHours() + 1;
+    var minutes = date.getMinutes();
+    //var ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    var strMinutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + (this.dotDisplayed ? ":" : " ") + strMinutes; //+ " " + ampm;
+    return strTime;
+  }
+
+  private formatAMPM(date: Date) {
+    var hours = date.getHours() + 1;
+    var ampm = hours >= 12 ? "pm" : "am";
+    return ampm;
   }
 }
