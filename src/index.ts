@@ -245,7 +245,7 @@ app.get(
 
     const brightnessNumber = parseInt(brightness, 10);
     matrixConfig.brightness = brightnessNumber;
-    matrix.brightness(brightnessNumber).sync();
+    matrix.brightness(brightnessNumber);
   }
 );
 
