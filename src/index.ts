@@ -49,7 +49,6 @@ function stop() {
 }
 
 function switchTheme(theme: string) {
-  console.log(`theme ${theme} set`)
   if (theme == 'default') {
     matrixConfig.primaryColor = 0xffffff
     matrixConfig.secondaryColor = 0x92a8d1
@@ -58,7 +57,7 @@ function switchTheme(theme: string) {
     matrixConfig.primaryColor = 0xffffff
     matrixConfig.secondaryColor = 0xffa500
     matrixConfig.alternateColor = 0xffa500
-  } else if ((theme = 'purple')) {
+  } else if (theme == 'purple') {
     matrixConfig.primaryColor = 0xffffff
     matrixConfig.secondaryColor = 0x6b5b95
     matrixConfig.alternateColor = 0x6b5b95
