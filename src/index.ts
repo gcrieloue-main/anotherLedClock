@@ -285,7 +285,7 @@ app.get('/config/theme/:theme', async (req: Request, res: Response) => {
   console.log(msg)
   res.send(msg)
 
-  switchTheme(theme)
+  await switchTheme(theme)
 })
 
 app.get('/stop', async (req: Request, res: Response) => {
