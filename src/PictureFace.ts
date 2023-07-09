@@ -59,7 +59,7 @@ export class PictureFace implements Face {
 
           const width = pixels.shape[0]
           const height = pixels.shape[1]
-          const xOffset = (this.matrix.width - width) / 2
+          const xOffset = (this.matrix.width() - width) / 2
 
           for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
