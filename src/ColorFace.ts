@@ -21,14 +21,17 @@ export class ColorFace implements Face {
   public async display(duration = 10000) {
     this.matrix.clear()
 
+    this.x = 0
+    this.i = 0
+
     this.matrix.afterSync(() => {
       for (var y = 0; y < 16; y++) {
         this.matrix
           .fgColor(parseInt('0x' + Colors[this.i % Colors.length]))
-          .setPixel(this.x, y)
+          .setPixel(this.x % 32, y)
         this.i++
       }
-      this.x == this.x++ % 32
+      this.x++
 
       setTimeout(() => {
         if (this.enabled) {
