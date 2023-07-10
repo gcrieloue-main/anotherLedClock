@@ -31,14 +31,14 @@ export class ArrowFace implements Face {
       for (var arrow of this.arrows) {
         this.matrix
           .fgColor(arrow.color)
-          .drawLine(arrow.x, 0, arrow.x + squareSideSize / 2, squareSideSize)
+          .drawLine(arrow.x, 0, arrow.x + squareSideSize, squareSideSize)
         this.matrix
           .fgColor(arrow.color)
           .drawLine(
             arrow.x,
             squareSideSize,
-            arrow.x + squareSideSize / 2,
-            squareSideSize,
+            arrow.x + squareSideSize,
+            this.matrix.height(),
           )
         arrow.x--
       }
