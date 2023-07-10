@@ -1,5 +1,6 @@
 import { LedMatrixInstance, Font } from 'rpi-led-matrix'
 import { MatrixConfig } from './MatrixConfig'
+import { paddingWithZero } from './Utils'
 
 const font4x6 = new Font('4x6', 'fonts/4x6.bdf')
 const fontTom = new Font('tom', 'fonts/tom-thumb.bdf')
@@ -41,7 +42,7 @@ export class ClockFace implements Face {
 
   private displayAmpPmClock() {
     const time = new Date()
-    const timeStr = this.formatTime(time)
+    const timeStr = this.format12Time(time)
     const ampmStr = this.formatAMPM(time)
 
     this.matrix
@@ -57,11 +58,7 @@ export class ClockFace implements Face {
 
   private display24Clock() {
     const date = new Date()
-    var hours = date.getHours() + 1
-    var minutes = date.getMinutes()
-    var strHours = hours < 10 ? '0' + hours : hours
-    var strMinutes = minutes < 10 ? '0' + minutes : minutes
-    var timeStr = strHours + (this.dotDisplayed ? ':' : ' ') + strMinutes
+    var timeStr = this.format24Time(date)
 
     this.matrix
       .clear()
@@ -101,19 +98,28 @@ export class ClockFace implements Face {
     this.dotDisplayed = !this.dotDisplayed
   }
 
-  private formatTime(date: Date) {
-    var hours = date.getHours() + 1
+  private format12Time(date: Date) {
+    const date = new Date()
+    var hours = date.getHours()
     var minutes = date.getMinutes()
     //var ampm = hours >= 12 ? "pm" : "am";
     hours = hours % 12
     hours = hours ? hours : 12 // the hour '0' should be '12'
-    var strMinutes = minutes < 10 ? '0' + minutes : minutes
+    var strMinutes = paddingWithZero(minutes.toString())
     var strTime = hours + (this.dotDisplayed ? ':' : ' ') + strMinutes //+ " " + ampm;
     return strTime
   }
 
+  private format24Time(date: Date) {
+    var hours = date.getHours()
+    var minutes = date.getMinutes()
+    var strHours = paddingWithZero(hours.toString())
+    var strMinutes = paddingWithZero(minutes.toString())
+    return strHours + (this.dotDisplayed ? ':' : ' ') + strMinutes
+  }
+
   private formatAMPM(date: Date) {
-    var hours = date.getHours() + 1
+    var hours = date.getHours()
     var ampm = hours >= 12 ? 'pm' : 'am'
     return ampm
   }

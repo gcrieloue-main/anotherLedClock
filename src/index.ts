@@ -77,8 +77,11 @@ function switchTheme(theme: string) {
   }
 }
 
-function showClock(style: ClockStyleEnum = ClockStyleEnum.CLASSIC) {
-  clockFace.style = style
+function showClock(style: ClockStyleEnum) {
+  if (style) {
+    clockFace.style = style
+  }
+
   if (!clockFace.enabled) {
     enableFace(clockFace)
     clockFace.display()
