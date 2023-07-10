@@ -26,8 +26,11 @@ export class ArrowFace implements Face {
     this.matrix.clear()
 
     this.matrix.afterSync(() => {
-      this.arrows.push({ x: 32, color: parseInt('0x' + randomElement(Colors)) })
       const squareSideSize = this.matrix.height() / 2
+      this.arrows.push({
+        x: -squareSideSize,
+        color: parseInt('0x' + randomElement(Colors)),
+      })
       for (var arrow of this.arrows) {
         this.matrix
           .fgColor(arrow.color)
@@ -40,7 +43,7 @@ export class ArrowFace implements Face {
             arrow.x + squareSideSize,
             squareSideSize,
           )
-        arrow.x--
+        arrow.x++
       }
 
       setTimeout(() => {
