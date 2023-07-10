@@ -5,10 +5,11 @@ import { Colors } from './Constants'
 const wait = (t: number) => new Promise(ok => setTimeout(ok, t))
 
 export class CircleFace implements Face {
-  public name = 'Circle'
-  public enabled = false
+  name = 'Circle'
+  enabled = false
   matrix: LedMatrixInstance
   config: MatrixConfig
+  private rate = 50
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix
@@ -46,7 +47,7 @@ export class CircleFace implements Face {
         if (this.enabled) {
           this.matrix.sync()
         }
-      }, 50)
+      }, this.rate)
     })
 
     this.matrix.sync()
