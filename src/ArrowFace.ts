@@ -40,6 +40,7 @@ export class ArrowFace implements Face {
             arrow.x + squareSideSize / 2,
             squareSideSize,
           )
+        arrow.x--
       }
 
       setTimeout(() => {
