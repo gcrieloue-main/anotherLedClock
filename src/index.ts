@@ -15,6 +15,7 @@ import { CircleFace } from './CircleFace'
 import { PictureFace } from './PictureFace'
 import { RandomFace } from './RandomFace'
 import { VolumeBarsFace } from './VolumeBarsFace'
+import { ArrowFace } from './ArrowFace'
 
 const matrixConfig = new MatrixConfig()
 const pulserFace = new PulserFace(matrix)
@@ -25,6 +26,7 @@ const circleFace = new CircleFace(matrix, matrixConfig)
 const pictureFace = new PictureFace(matrix, matrixConfig)
 const randomFace = new RandomFace(matrix, matrixConfig)
 const volumeBarsFace = new VolumeBarsFace(matrix, matrixConfig)
+const arrowFace = new ArrowFace(matrix, matrixConfig)
 
 const allFaces: Face[] = [
   pulserFace,
@@ -35,6 +37,7 @@ const allFaces: Face[] = [
   randomFace,
   volumeBarsFace,
   pictureFace,
+  arrowFace,
 ]
 
 // ============= Features =============
@@ -204,6 +207,21 @@ app.get('/animation/random/:duration?', async (req: Request, res: Response) => {
   res.send(msg)
 
   await runFaceDefaultWithDuration(randomFace, duration)
+})
+
+app.get('/animation/arrow/:duration?', async (req: Request, res: Response) => {
+  const param: string = req.params.duration
+  const duration = parseInt(param) || undefined
+
+  var msg = '> Arrow'
+  if (duration) {
+    msg += ' with duration ' + duration
+  }
+
+  console.log(msg)
+  res.send(msg)
+
+  await runFaceDefaultWithDuration(arrowFace, duration)
 })
 
 app.get(
