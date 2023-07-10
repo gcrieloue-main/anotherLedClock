@@ -99,7 +99,7 @@ export class ClockFace implements Face {
   }
 
   private format12Time(date: Date) {
-    var hours = date.getHours()
+    var hours = date.getHours() + 1
     var minutes = date.getMinutes()
     //var ampm = hours >= 12 ? "pm" : "am";
     hours = hours % 12
@@ -110,7 +110,7 @@ export class ClockFace implements Face {
   }
 
   private format24Time(date: Date) {
-    var hours = date.getHours()
+    var hours = date.getHours() + 1
     var minutes = date.getMinutes()
     var strHours = paddingWithZero(hours.toString())
     var strMinutes = paddingWithZero(minutes.toString())
@@ -118,8 +118,8 @@ export class ClockFace implements Face {
   }
 
   private formatAMPM(date: Date) {
-    var hours = date.getHours()
-    var ampm = hours >= 12 ? 'pm' : 'am'
+    var hours = date.getHours() + 1
+    var ampm = hours >= 12 && hours != 24 ? 'pm' : 'am'
     return ampm
   }
 }
