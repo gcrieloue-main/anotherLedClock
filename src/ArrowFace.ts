@@ -15,7 +15,8 @@ export class ArrowFace implements Face {
   config: MatrixConfig
   private rate = 50
   private arrows: Arrow[] = []
-  private switchColor = false
+  private switchColorIndex = 0
+  private switchColorAfterX = 2
   private currentColor: number
   private colorIndex = 0
 
@@ -30,13 +31,13 @@ export class ArrowFace implements Face {
     this.matrix.clear()
 
     this.matrix.afterSync(() => {
-      if (this.switchColor) {
+      if (this.switchColorIndex % this.switchColorAfterX == 0) {
         this.currentColor = parseInt(
           '0x' + Colors[this.colorIndex % Colors.length],
         )
         this.colorIndex++
       }
-      this.switchColor = !this.switchColor
+      this.switchColorIndex++
 
       const squareSideSize = this.matrix.height() / 2
       this.arrows.push({
