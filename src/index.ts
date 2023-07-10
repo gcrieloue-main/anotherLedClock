@@ -98,7 +98,7 @@ function enableFace(face: Face) {
 
 async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
   if (!allFaces.includes(face)) {
-    console.warn(`all faces array does nort include ${face.name} !`)
+    console.warn(`All faces array does not include ${face.name} !`)
     return
   }
 
@@ -322,5 +322,5 @@ app.get('/endpoints', async (req: Request, res: Response) => {
 })
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`)
+  console.log(`[server]: Clock server is running at http://localhost:${port}`)
 })
