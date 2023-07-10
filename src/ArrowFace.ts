@@ -36,9 +36,9 @@ export class ArrowFace implements Face {
           .fgColor(arrow.color)
           .drawLine(
             arrow.x,
-            squareSideSize,
-            arrow.x + squareSideSize,
             this.matrix.height(),
+            arrow.x + squareSideSize,
+            squareSideSize,
           )
         arrow.x--
       }
