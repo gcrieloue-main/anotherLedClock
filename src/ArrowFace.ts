@@ -1,7 +1,7 @@
 import { LedMatrixInstance } from 'rpi-led-matrix'
 import { MatrixConfig } from './MatrixConfig'
 import { Colors } from './Constants'
-import { randomElement } from './Utils'
+import { randomElement, wait } from './Utils'
 
 interface Arrow {
   x: number
