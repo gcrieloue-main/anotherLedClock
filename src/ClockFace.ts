@@ -43,7 +43,7 @@ export class ClockFace implements Face {
     const time = new Date()
     const timeStr = this.formatTime(time)
     const ampmStr = this.formatAMPM(time)
-    //console.log("display", timeStr);
+
     this.matrix
       .clear()
       .fgColor(this.config.primaryColor)
@@ -66,6 +66,8 @@ export class ClockFace implements Face {
     this.matrix
       .clear()
       .fgColor(this.config.primaryColor)
+      .fill()
+      .fgColor(0)
       .font(fontTom)
       .drawText(
         timeStr,
