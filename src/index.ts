@@ -77,7 +77,7 @@ function switchTheme(theme: string) {
   }
 }
 
-function showClock(style: ClockStyleEnum) {
+function showClock(style?: ClockStyleEnum) {
   if (style) {
     clockFace.style = style
   }
