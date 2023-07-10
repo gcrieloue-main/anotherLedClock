@@ -9,7 +9,7 @@ interface Arrow {
 }
 
 export class ArrowFace implements Face {
-  name = 'Random'
+  name = 'Arrow'
   enabled = false
   matrix: LedMatrixInstance
   config: MatrixConfig
@@ -27,22 +27,18 @@ export class ArrowFace implements Face {
 
     this.matrix.afterSync(() => {
       this.arrows.push({ x: 32, color: parseInt('0x' + randomElement(Colors)) })
+      const squareSideSize = this.matrix.height() / 2
       for (var arrow of this.arrows) {
         this.matrix
           .fgColor(arrow.color)
-          .drawLine(
-            arrow.x,
-            0,
-            arrow.x + this.matrix.height(),
-            this.matrix.height() / 2,
-          )
+          .drawLine(arrow.x, 0, arrow.x + squareSideSize / 2, squareSideSize)
         this.matrix
           .fgColor(arrow.color)
           .drawLine(
             arrow.x,
-            this.matrix.height(),
-            arrow.x + this.matrix.height() / 2,
-            this.matrix.height() / 2,
+            squareSideSize,
+            arrow.x + squareSideSize / 2,
+            squareSideSize,
           )
       }
 

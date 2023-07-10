@@ -215,3 +215,5 @@ export const Colors = [
   'ffffcc',
   'ffffff',
 ]
+
+export const colorToNumber = (color: string) => parseInt('0x' + color)
