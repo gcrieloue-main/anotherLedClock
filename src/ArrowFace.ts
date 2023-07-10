@@ -15,10 +15,13 @@ export class ArrowFace implements Face {
   config: MatrixConfig
   private rate = 50
   private arrows: Arrow[] = []
+  private switchColor = false
+  private currentColor: number
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix
     this.config = config
+    this.currentColor = parseInt('0x' + randomElement(Colors))
   }
 
   public async display(duration = 10000) {
@@ -26,10 +29,15 @@ export class ArrowFace implements Face {
     this.matrix.clear()
 
     this.matrix.afterSync(() => {
+      if (this.switchColor) {
+        this.currentColor = parseInt('0x' + randomElement(Colors))
+      }
+      this.switchColor = !this.switchColor
+
       const squareSideSize = this.matrix.height() / 2
       this.arrows.push({
         x: -squareSideSize,
-        color: parseInt('0x' + randomElement(Colors)),
+        color: this.currentColor,
       })
       for (var arrow of this.arrows) {
         this.matrix
