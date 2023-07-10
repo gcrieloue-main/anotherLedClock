@@ -101,16 +101,16 @@ export class ClockFace implements Face {
   private format12Time(date: Date) {
     var hours = date.getHours() + 1
     var minutes = date.getMinutes()
-    //var ampm = hours >= 12 ? "pm" : "am";
     hours = hours % 12
     hours = hours ? hours : 12 // the hour '0' should be '12'
     var strMinutes = paddingWithZero(minutes.toString())
-    var strTime = hours + (this.dotDisplayed ? ':' : ' ') + strMinutes //+ " " + ampm;
+    var strTime = hours + (this.dotDisplayed ? ':' : ' ') + strMinutes
     return strTime
   }
 
   private format24Time(date: Date) {
     var hours = date.getHours() + 1
+    hours = hours == 24 ? 0 : hours
     var minutes = date.getMinutes()
     var strHours = paddingWithZero(hours.toString())
     var strMinutes = paddingWithZero(minutes.toString())

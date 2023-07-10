@@ -30,6 +30,7 @@ export class TextFace implements Face {
     }
 
     this.matrix
+      .fgColor(this.config.secondaryColor)
       .font(font4x6)
       .afterSync(() => undefined)
       .sync()
