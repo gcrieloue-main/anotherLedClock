@@ -31,7 +31,9 @@ export class ArrowFace implements Face {
 
     this.matrix.afterSync(() => {
       if (this.switchColor) {
-        this.currentColor = parseInt('0x' + Colors[i % Colors.length])
+        this.currentColor = parseInt(
+          '0x' + Colors[this.colorIndex % Colors.length],
+        )
         this.colorIndex++
       }
       this.switchColor = !this.switchColor
