@@ -9,6 +9,9 @@ export class ColorFace implements Face {
   matrix: LedMatrixInstance
   offset: number = 0
   config: MatrixConfig
+  rate = 50
+  x = 0
+  i = 0
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix
@@ -18,15 +21,21 @@ export class ColorFace implements Face {
   public async display(duration = 10000) {
     this.matrix.clear()
 
-    var i = 0
-    for (var x = 0; x < 32; x++) {
+    this.matrix.afterSync(() => {
       for (var y = 0; y < 16; y++) {
         this.matrix
-          .fgColor(parseInt('0x' + Colors[i % Colors.length]))
-          .setPixel(x, y)
-        i++
+          .fgColor(parseInt('0x' + Colors[this.i % Colors.length]))
+          .setPixel(this.x, y)
+        this.i++
       }
-    }
+      this.x++
+
+      setTimeout(() => {
+        if (this.enabled) {
+          this.matrix.sync()
+        }
+      }, this.rate)
+    })
 
     this.matrix.sync()
     await wait(duration)
