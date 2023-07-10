@@ -68,10 +68,10 @@ export class ClockFace implements Face {
       .fgColor(this.config.alternateColor)
       .fill()
       .fgColor(0)
-      .font(font4x6)
+      .font(fontTom)
       .drawText(
         timeStr,
-        (this.matrix.width() - font4x6.stringWidth(timeStr)) / 2,
+        (this.matrix.width() - fontTom.stringWidth(timeStr)) / 2,
         5,
       )
   }
