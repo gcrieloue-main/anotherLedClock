@@ -28,7 +28,7 @@ export class ColorFace implements Face {
           .setPixel(this.x, y)
         this.i++
       }
-      this.x++
+      this.x == this.x++ % 32
 
       setTimeout(() => {
         if (this.enabled) {
