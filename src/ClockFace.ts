@@ -40,39 +40,6 @@ export class ClockFace implements Face {
     this.matrix.sync()
   }
 
-  private displayAmpPmClock() {
-    const time = new Date()
-    const timeStr = this.format12Time(time)
-    const ampmStr = this.formatAMPM(time)
-
-    this.matrix
-      .clear()
-      .fgColor(this.config.primaryColor)
-      .font(fontTom)
-      .drawText(timeStr, (time.getHours() + 1) % 12 > 9 ? 2 : 3, 5)
-    this.matrix
-      .fgColor(this.config.secondaryColor)
-      .font(font4x6)
-      .drawText(ampmStr, 23, 5)
-  }
-
-  private display24Clock() {
-    const date = new Date()
-    var timeStr = this.format24Time(date)
-
-    this.matrix
-      .clear()
-      .fgColor(this.config.alternateColor)
-      .fill()
-      .fgColor(0)
-      .font(fontTom)
-      .drawText(
-        timeStr,
-        (this.matrix.width() - fontTom.stringWidth(timeStr)) / 2,
-        5,
-      )
-  }
-
   private async displayClock() {
     if (this.style == ClockStyleEnum.CLASSIC) {
       this.displayAmpPmClock()
@@ -96,6 +63,39 @@ export class ClockFace implements Face {
     }
 
     this.dotDisplayed = !this.dotDisplayed
+  }
+
+  private displayAmpPmClock() {
+    const time = new Date()
+    const timeStr = this.format12Time(time)
+    const ampmStr = this.formatAMPM(time)
+
+    this.matrix
+      .clear()
+      .fgColor(this.config.primaryColor)
+      .font(fontTom)
+      .drawText(timeStr, (time.getHours() + 1) % 12 > 9 ? 2 : 3, 5)
+    this.matrix
+      .fgColor(this.config.secondaryColor)
+      .font(font4x6)
+      .drawText(ampmStr, 23, 5)
+  }
+
+  private display24Clock() {
+    const time = new Date()
+    var timeStr = this.format24Time(time)
+
+    this.matrix
+      .clear()
+      .fgColor(this.config.alternateColor)
+      .fill()
+      .fgColor(0x000000)
+      .font(fontTom)
+      .drawText(
+        timeStr,
+        (this.matrix.width() - fontTom.stringWidth(timeStr)) / 2,
+        5,
+      )
   }
 
   private format12Time(date: Date) {
