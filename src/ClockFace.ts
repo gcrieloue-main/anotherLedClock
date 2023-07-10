@@ -99,7 +99,6 @@ export class ClockFace implements Face {
   }
 
   private format12Time(date: Date) {
-    const date = new Date()
     var hours = date.getHours()
     var minutes = date.getMinutes()
     //var ampm = hours >= 12 ? "pm" : "am";
