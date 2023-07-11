@@ -19,7 +19,9 @@ export class PictureFace implements Face {
     this.matrix.clear()
 
     console.log(`loading pic ${icon}...`)
-    const picture = await loadPic(icon)
+    const pictures = await loadPic(icon)
+    const picture = pictures[0]
+
     const xOffset = (this.matrix.width() - picture.width) / 2
     console.log('pic loaded')
 
