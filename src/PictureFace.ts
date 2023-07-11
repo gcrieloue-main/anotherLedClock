@@ -28,9 +28,6 @@ export class PictureFace implements Face {
     try {
       const pictures = await loadPic(icon, type)
 
-      const picture = pictures[0]
-      this.displayPicture(picture)
-
       if (pictures.length > 1) {
         setTimeout(() => {
           if (this.enabled) {
@@ -40,6 +37,9 @@ export class PictureFace implements Face {
           }
         }, 50)
       }
+
+      const picture = pictures[0]
+      this.displayPicture(picture)
       await wait(duration)
     } catch (e) {
       console.error('cannot display picture ' + icon)
