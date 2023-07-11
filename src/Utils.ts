@@ -19,41 +19,47 @@ export const loadPic = async (
 ): Promise<Picture[]> => {
   return new Promise((resolve, reject) => {
     getPixels('./src/icons/' + icon + '.' + type, (err: any, image: any) => {
-      let pxs: Pixel[] = []
       let pixels: any
-
-      if (type === 'gif') {
-        const nbFrames = image.shape[0]
-        console.log('gif nb frames : ' + nbFrames)
-        pixels = image.pick(0)
-      } else {
-        pixels = image
-      }
 
       if (err) {
         const reason = 'Bad image path'
         console.log(reason)
         reject(reason)
       } else {
-        const width = pixels.shape[0]
-        const height = pixels.shape[1]
-
-        for (let y = 0; y < height; y++) {
-          for (let x = 0; x < width; x++) {
-            const r = pixels.get(x, y, 0)
-            const g = pixels.get(x, y, 1)
-            const b = pixels.get(x, y, 2)
-            const color = parseInt(
-              `0x${paddingWithZero(r.toString(16))}${paddingWithZero(
-                g.toString(16),
-              )}${paddingWithZero(b.toString(16))}`,
-            )
-            pxs.push({ x, y, color })
-          }
+        if (type === 'gif') {
+          const nbFrames = image.shape[0]
+          console.log('gif nb frames : ' + nbFrames)
+          pixels = image.pick(0)
+          const picture = buildPicture(pixels)
+          resolve([picture])
+        } else {
+          pixels = image
+          const picture = buildPicture(pixels)
+          resolve([picture])
         }
-
-        resolve([{ width, height, pixels: pxs }])
       }
     })
   })
+}
+
+const buildPicture = (pixels: any): Picture => {
+  const width = pixels.shape[0]
+  const height = pixels.shape[1]
+  const pxs: Pixel[] = []
+
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const r = pixels.get(x, y, 0)
+      const g = pixels.get(x, y, 1)
+      const b = pixels.get(x, y, 2)
+      const color = parseInt(
+        `0x${paddingWithZero(r.toString(16))}${paddingWithZero(
+          g.toString(16),
+        )}${paddingWithZero(b.toString(16))}`,
+      )
+      pxs.push({ x, y, color })
+    }
+  }
+
+  return { width, height, pixels: pxs }
 }
