@@ -27,22 +27,28 @@ export class PictureFace implements Face {
     this.frameNumber = 0
     try {
       const pictures = await loadPic(icon, type)
+      const totalFrames = pictures.length
 
-      if (pictures.length > 1) {
-        setTimeout(() => {
-          if (this.enabled) {
-            console.log('show frame number' + this.frameNumber)
-            this.displayPicture(pictures[this.frameNumber % pictures.length])
-            this.matrix.sync()
-          }
-        }, 50)
+      if (totalFrames > 1) {
+        this.matrix.afterSync(() => {
+          console.log(`show frame number ${this.frameNumber}/${totalFrames}`)
+          this.displayPicture(pictures[this.frameNumber % totalFrames])
+
+          setTimeout(() => {
+            if (this.enabled) {
+              this.matrix.sync()
+            }
+          }, 50)
+        })
       }
 
       const picture = pictures[0]
       this.displayPicture(picture)
+      this.matrix.sync()
+
       await wait(duration)
     } catch (e) {
-      console.error('cannot display picture ' + icon)
+      console.error(`cannot display picture ${icon}`)
     }
   }
 
@@ -56,7 +62,5 @@ export class PictureFace implements Face {
     )
 
     this.frameNumber++
-
-    this.matrix.sync()
   }
 }
