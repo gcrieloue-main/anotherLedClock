@@ -16,12 +16,16 @@ export class PictureFace implements Face {
     this.config = config
   }
 
-  public async display(icon: string, duration = 10000) {
+  public async display(
+    icon: string,
+    type: 'png' | 'gif' = 'png',
+    duration = 10000,
+  ) {
     this.matrix.clear()
 
     console.log(`loading pic ${icon}...`)
     this.frameNumber = 0
-    const pictures = await loadPic(icon)
+    const pictures = await loadPic(icon, type)
 
     const picture = pictures[0]
     this.displayPicture(picture)
