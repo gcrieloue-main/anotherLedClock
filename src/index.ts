@@ -173,67 +173,14 @@ app.get('/text/:text', async (req: Request, res: Response) => {
   defaultFace()
 })
 
-app.get('/animation/pulse', async (req: Request, res: Response) => {
-  const msg = '> Pulse'
-  console.log(msg)
-  res.send(msg)
-
-  await runFaceDefault(pulserFace)
-})
-
-app.get('/animation/colors', async (req: Request, res: Response) => {
-  const msg = '> Colors'
-  console.log(msg)
-  res.send(msg)
-
-  await runFaceDefault(colorFace)
-})
-
-app.get('/animation/circle', async (req: Request, res: Response) => {
-  const msg = '> Circle'
-  console.log(msg)
-  res.send(msg)
-
-  await runFaceDefault(circleFace)
-})
-
-app.get('/animation/random/:duration?', async (req: Request, res: Response) => {
-  const param: string = req.params.duration
-  const duration = parseInt(param) || undefined
-
-  var msg = '> Random'
-  if (duration) {
-    msg += ' with duration ' + duration
-  }
-
-  console.log(msg)
-  res.send(msg)
-
-  await runFaceDefaultWithDuration(randomFace, duration)
-})
-
-app.get('/animation/arrow/:duration?', async (req: Request, res: Response) => {
-  const param: string = req.params.duration
-  const duration = parseInt(param) || undefined
-
-  var msg = '> Arrow'
-  if (duration) {
-    msg += ' with duration ' + duration
-  }
-
-  console.log(msg)
-  res.send(msg)
-
-  await runFaceDefaultWithDuration(arrowFace, duration)
-})
-
 app.get(
-  '/animation/volumeBars/:duration?',
+  '/animation/:animation/:duration?',
   async (req: Request, res: Response) => {
     const param: string = req.params.duration
+    const animation: string = req.params.animation
     const duration = parseInt(param) || undefined
 
-    var msg = '> VolumeBars'
+    var msg = '> ' + animation
     if (duration) {
       msg += ' with duration ' + duration
     }
@@ -241,7 +188,19 @@ app.get(
     console.log(msg)
     res.send(msg)
 
-    await runFaceDefaultWithDuration(volumeBarsFace, duration)
+    if (animation == 'random') {
+      await runFaceDefaultWithDuration(randomFace, duration)
+    } else if (animation == 'circle') {
+      await runFaceDefaultWithDuration(circleFace, duration)
+    } else if (animation == 'arrow') {
+      await runFaceDefaultWithDuration(arrowFace, duration)
+    } else if (animation == 'pulse') {
+      await runFaceDefaultWithDuration(pulserFace, duration)
+    } else if (animation == 'volumeBars') {
+      await runFaceDefaultWithDuration(volumeBarsFace, duration)
+    } else if (animation == 'colors') {
+      await runFaceDefaultWithDuration(colorFace, duration)
+    }
   },
 )
 
