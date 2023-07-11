@@ -38,7 +38,7 @@ export class PictureFace implements Face {
             this.displayPicture(pictures[this.frameNumber % pictures.length])
             this.matrix.sync()
           }
-        }, 0)
+        }, 50)
       }
       await wait(duration)
     } catch (e) {
