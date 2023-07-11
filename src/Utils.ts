@@ -13,44 +13,47 @@ export const randomIntFromInterval = (min: number, max: number) =>
 
 export const paddingWithZero = (s: string) => ('00' + s).slice(-2)
 
-export const loadPic = async (icon: string): Promise<Picture> => {
+export const loadPic = async (
+  icon: string,
+  type: 'png' | 'gif' = 'png',
+): Promise<Picture | Picture[]> => {
   return new Promise((resolve, reject) => {
-    let pxs: Pixel[] = []
+    getPixels('./src/icons/' + icon + '.' + type, (err: any, image: any) => {
+      let pxs: Pixel[] = []
+      let pixels: any
 
-    getPixels(
-      './src/icons/' + icon + '.png',
-      (
-        err: any,
-        pixels: {
-          shape: string | any[]
-          get: (arg0: number, arg1: number, arg2: number) => number
-        },
-      ) => {
-        if (err) {
-          const reason = 'Bad image path'
-          console.log(reason)
-          reject(reason)
+      if (type === 'gif') {
+        const nbFrames = image.shape[0]
+        console.log('gif nb frames : ' + nbFrames)
+        pixels = image.pick(0)
+      } else {
+        pixels = image
+      }
+
+      if (err) {
+        const reason = 'Bad image path'
+        console.log(reason)
+        reject(reason)
+      }
+
+      const width = pixels.shape[0]
+      const height = pixels.shape[1]
+
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const r = pixels.get(x, y, 0)
+          const g = pixels.get(x, y, 1)
+          const b = pixels.get(x, y, 2)
+          const color = parseInt(
+            `0x${paddingWithZero(r.toString(16))}${paddingWithZero(
+              g.toString(16),
+            )}${paddingWithZero(b.toString(16))}`,
+          )
+          pxs.push({ x, y, color })
         }
+      }
 
-        const width = pixels.shape[0]
-        const height = pixels.shape[1]
-
-        for (let y = 0; y < height; y++) {
-          for (let x = 0; x < width; x++) {
-            const r = pixels.get(x, y, 0)
-            const g = pixels.get(x, y, 1)
-            const b = pixels.get(x, y, 2)
-            const color = parseInt(
-              `0x${paddingWithZero(r.toString(16))}${paddingWithZero(
-                g.toString(16),
-              )}${paddingWithZero(b.toString(16))}`,
-            )
-            pxs.push({ x, y, color })
-          }
-        }
-
-        resolve({ width, height, pixels: pxs })
-      },
-    )
+      resolve({ width, height, pixels: pxs })
+    })
   })
 }
