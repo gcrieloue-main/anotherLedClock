@@ -29,9 +29,11 @@ export const loadPic = async (
         if (type === 'gif') {
           const nbFrames = image.shape[0]
           console.log('gif nb frames : ' + nbFrames)
-          pixels = image.pick(0)
-          const picture = buildPicture(pixels)
-          resolve([picture])
+          resolve(
+            Array(nbFrames)
+              .fill(0)
+              .map((_, i) => buildPicture(image.pick(i))),
+          )
         } else {
           pixels = image
           const picture = buildPicture(pixels)
