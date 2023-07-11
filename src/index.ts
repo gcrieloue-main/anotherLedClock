@@ -121,8 +121,8 @@ const runFaceDefaultWithDuration = async (
   runFace(face, () => face.display(duration))
 }
 
-const showPicture = (picture: string) =>
-  runFace(pictureFace, () => pictureFace.display(picture))
+const showPicture = (picture: string, type?: 'png' | 'gif') =>
+  runFace(pictureFace, () => pictureFace.display(picture, type))
 
 const text = (txt: string) => runFace(textFace, () => textFace.display(txt))
 
@@ -200,13 +200,14 @@ app.get(
   },
 )
 
-app.get('/picture/:picture', async (req: Request, res: Response) => {
+app.get('/picture/:picture/:type?', async (req: Request, res: Response) => {
   const picture = req.params.picture
+  const type = req.params.type as 'png' | 'gif' | undefined
   const msg = '> Picture ' + picture
   console.log(msg)
   res.send(msg)
 
-  await showPicture(picture)
+  await showPicture(picture, type)
 })
 
 app.get('/config', async (req: Request, res: Response) => {
