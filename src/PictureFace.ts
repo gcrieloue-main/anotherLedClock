@@ -25,20 +25,24 @@ export class PictureFace implements Face {
 
     console.log(`loading pic ${icon}...`)
     this.frameNumber = 0
-    const pictures = await loadPic(icon, type)
+    try {
+      const pictures = await loadPic(icon, type)
 
-    const picture = pictures[0]
-    this.displayPicture(picture)
+      const picture = pictures[0]
+      this.displayPicture(picture)
 
-    if (pictures.length > 1) {
-      setTimeout(() => {
-        if (this.enabled) {
-          this.displayPicture(pictures[this.frameNumber % pictures.length])
-          this.matrix.sync()
-        }
-      }, 0)
+      if (pictures.length > 1) {
+        setTimeout(() => {
+          if (this.enabled) {
+            this.displayPicture(pictures[this.frameNumber % pictures.length])
+            this.matrix.sync()
+          }
+        }, 0)
+      }
+      await wait(duration)
+    } catch (e) {
+      console.error('cannot display picture ' + icon)
     }
-    await wait(duration)
   }
 
   private async displayPicture(picture: Picture) {
