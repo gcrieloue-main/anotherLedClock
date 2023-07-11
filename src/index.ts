@@ -114,10 +114,6 @@ async function runFace(face: Face, fn: (...args: any[]) => Promise<any>) {
   defaultFace()
 }
 
-const runFaceDefault = async (face: SimpleDisplay) => {
-  runFace(face, () => face.display())
-}
-
 const runFaceDefaultWithDuration = async (
   face: SimpleDisplayWithDuration,
   duration?: number,
