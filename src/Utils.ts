@@ -16,7 +16,7 @@ export const paddingWithZero = (s: string) => ('00' + s).slice(-2)
 export const loadPic = async (
   icon: string,
   type: 'png' | 'gif' = 'png',
-): Promise<Picture | Picture[]> => {
+): Promise<Picture[]> => {
   return new Promise((resolve, reject) => {
     getPixels('./src/icons/' + icon + '.' + type, (err: any, image: any) => {
       let pxs: Pixel[] = []
@@ -53,7 +53,7 @@ export const loadPic = async (
         }
       }
 
-      resolve({ width, height, pixels: pxs })
+      resolve([{ width, height, pixels: pxs }])
     })
   })
 }
