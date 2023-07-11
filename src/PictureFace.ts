@@ -31,8 +31,9 @@ export class PictureFace implements Face {
 
       if (totalFrames > 1) {
         this.matrix.afterSync(() => {
-          console.log(`show frame number ${this.frameNumber}/${totalFrames}`)
-          this.displayPicture(pictures[this.frameNumber % totalFrames])
+          const frameIndex = this.frameNumber % totalFrames
+          console.log(`show frame number ${frameIndex}/${totalFrames}`)
+          this.displayPicture(pictures[frameIndex])
 
           setTimeout(() => {
             if (this.enabled) {
