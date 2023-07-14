@@ -74,7 +74,7 @@ export class ClockFace implements Face {
       .clear()
       .fgColor(this.config.primaryColor)
       .font(fontTom)
-      .drawText(timeStr, (time.getHours() + 1) % 12 > 9 ? 2 : 3, 5)
+      .drawText(timeStr, timeStr.length > 4 ? 2 : 3, 5)
     this.matrix
       .fgColor(this.config.secondaryColor)
       .font(font4x6)
