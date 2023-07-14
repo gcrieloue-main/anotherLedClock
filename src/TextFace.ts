@@ -19,7 +19,7 @@ export class TextFace implements Face {
     this.config = config
   }
 
-  public async display(textToDisplay: string) {
+  public async display(textToDisplay: string, duration = 10000) {
     const text = textToDisplay.trim()
     const w = this.matrix.width()
     const stringWidth = font4x6.stringWidth(text)

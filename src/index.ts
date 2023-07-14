@@ -124,7 +124,8 @@ const runFaceDefaultWithDuration = async (
 const showPicture = (picture: string, type?: 'png' | 'gif') =>
   runFace(pictureFace, () => pictureFace.display(picture, type))
 
-const text = (txt: string) => runFace(textFace, () => textFace.display(txt))
+const text = (txt: string, duration?: number) =>
+  runFace(textFace, () => textFace.display(txt, duration))
 
 // ============= Start =============
 
@@ -151,9 +152,14 @@ app.get('/clock/:style?', async (req: Request, res: Response) => {
   res.send(msg)
 })
 
-app.get('/text/:text', async (req: Request, res: Response) => {
+app.get('/text/:text/:duration?', async (req: Request, res: Response) => {
   const txt = req.params.text
   var msg = '> Text received : ' + txt
+  const duration = parseInt(req.params.duration) || undefined
+
+  if (duration) {
+    msg += ' with duration ' + duration
+  }
 
   if (!textFace.animationIsOver) {
     msg += ', skipped'
@@ -165,7 +171,7 @@ app.get('/text/:text', async (req: Request, res: Response) => {
   console.log(msg)
   res.send(msg)
 
-  await text(txt)
+  await text(txt, duration)
   defaultFace()
 })
 
