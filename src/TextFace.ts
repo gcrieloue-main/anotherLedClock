@@ -37,7 +37,7 @@ export class TextFace implements Face {
 
     if (stringWidth < w) {
       this.simpleDisplay(text)
-      await wait(10000)
+      await wait(duration)
     } else {
       const { firstLine, secondLine } = this.computeTwoLines(text)
       if (
@@ -45,7 +45,7 @@ export class TextFace implements Face {
         font4x6.stringWidth(secondLine) < w - 1
       ) {
         this.twoLineDisplay(firstLine, secondLine)
-        await wait(10000)
+        await wait(duration)
       } else {
         await this.scrollingDisplay(text)
       }
