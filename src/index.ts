@@ -16,7 +16,7 @@ import { PictureFace } from './PictureFace'
 import { RandomFace } from './RandomFace'
 import { VolumeBarsFace } from './VolumeBarsFace'
 import { ArrowFace } from './ArrowFace'
-import { LifeGameFace } from '../LifeGameFace'
+import { LifeGameFace } from './LifeGameFace'
 
 const matrixConfig = new MatrixConfig()
 const pulserFace = new PulserFace(matrix)
