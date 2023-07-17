@@ -35,7 +35,7 @@ export class LifeGameFace implements Face {
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
           const neighbors = this.countNeighbors(i, j)
-          if (this.matrix[i][j] === 1) {
+          if (this.matrixArray[i][j] === 1) {
             // Si une cellule vivante a moins de deux voisins ou plus de trois voisins, elle meurt
             if (neighbors < 2 || neighbors > 3) {
               newMatrix[i][j] = 0
