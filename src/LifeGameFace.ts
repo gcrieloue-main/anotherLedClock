@@ -23,6 +23,9 @@ export class LifeGameFace implements Face {
 
     this.matrix.clear()
     this.matrixArray = new Array(rows)
+    for (let i = 0; i < rows; i++) {
+      this.matrixArray[i] = new Array(cols).fill(0)
+    }
 
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
@@ -32,6 +35,9 @@ export class LifeGameFace implements Face {
 
     this.matrix.afterSync(() => {
       let newMatrix = new Array(rows)
+      for (let i = 0; i < rows; i++) {
+        newMatrix[i] = new Array(cols).fill(0)
+      }
 
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
