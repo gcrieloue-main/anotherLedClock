@@ -10,7 +10,7 @@ export class LifeGameFace implements Face {
   config: MatrixConfig
   rate = 50
 
-  matrixArray = new Array(16)
+  matrixArray: number[][] = []
 
   constructor(ledMatrix: LedMatrixInstance, config: MatrixConfig) {
     this.matrix = ledMatrix
