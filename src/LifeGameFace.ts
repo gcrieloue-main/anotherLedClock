@@ -22,11 +22,11 @@ export class LifeGameFace implements Face {
     const cols = 32
 
     this.matrix.clear()
+
     this.matrixArray = new Array(rows)
     for (let i = 0; i < rows; i++) {
       this.matrixArray[i] = new Array(cols).fill(0)
     }
-
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
         this.matrixArray[i][j] = Math.random() > 0.5 ? 1 : 0
@@ -80,7 +80,7 @@ export class LifeGameFace implements Face {
   }
 
   // Fonction pour compter le nombre de voisins d'une cellule donnée
-  countNeighbors(row: number, col: number) {
+  countNeighbors(row: number, col: number): number {
     const rows = 16
     const cols = 32
 
