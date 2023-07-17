@@ -16,6 +16,7 @@ import { PictureFace } from './PictureFace'
 import { RandomFace } from './RandomFace'
 import { VolumeBarsFace } from './VolumeBarsFace'
 import { ArrowFace } from './ArrowFace'
+import { LifeGameFace } from '../LifeGameFace'
 
 const matrixConfig = new MatrixConfig()
 const pulserFace = new PulserFace(matrix)
@@ -27,6 +28,7 @@ const pictureFace = new PictureFace(matrix, matrixConfig)
 const randomFace = new RandomFace(matrix, matrixConfig)
 const volumeBarsFace = new VolumeBarsFace(matrix, matrixConfig)
 const arrowFace = new ArrowFace(matrix, matrixConfig)
+const lifeGameFace = new LifeGameFace(matrix, matrixConfig)
 
 const allFaces: Face[] = [
   pulserFace,
@@ -38,6 +40,7 @@ const allFaces: Face[] = [
   volumeBarsFace,
   pictureFace,
   arrowFace,
+  lifeGameFace,
 ]
 
 // ============= Features =============
@@ -202,6 +205,8 @@ app.get(
       await runFaceDefaultWithDuration(volumeBarsFace, duration)
     } else if (animation == 'colors') {
       await runFaceDefaultWithDuration(colorFace, duration)
+    } else if (animation == 'lifeGame') {
+      await runFaceDefaultWithDuration(lifeGameFace, duration)
     }
   },
 )
