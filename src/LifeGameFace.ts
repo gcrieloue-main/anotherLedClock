@@ -24,8 +24,8 @@ export class LifeGameFace implements Face {
     for (let i = 0; i < this.matrix.width(); i++) {
       this.matrixArray[i] = new Array(this.matrix.height()).fill(0)
     }
-    for (let i = 0; i < this.matrix.width; i++) {
-      for (let j = 0; j < this.matrix.height; j++) {
+    for (let i = 0; i < this.matrix.width(); i++) {
+      for (let j = 0; j < this.matrix.height(); j++) {
         this.matrixArray[i][j] = Math.random() > 0.5 ? 1 : 0
       }
     }
