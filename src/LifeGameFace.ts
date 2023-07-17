@@ -8,7 +8,7 @@ export class LifeGameFace implements Face {
   matrix: LedMatrixInstance
   offset: number = 0
   config: MatrixConfig
-  rate = 50
+  rate = 100
 
   matrixArray: number[][] = []
 
