@@ -20,9 +20,9 @@ export class LifeGameFace implements Face {
   public async display(duration = 10000) {
     this.matrix.clear()
 
-    this.matrixArray = new Array(this.matrix.width)
-    for (let i = 0; i < this.matrix.width; i++) {
-      this.matrixArray[i] = new Array(this.matrix.height).fill(0)
+    this.matrixArray = new Array(this.matrix.width())
+    for (let i = 0; i < this.matrix.width(); i++) {
+      this.matrixArray[i] = new Array(this.matrix.height()).fill(0)
     }
     for (let i = 0; i < this.matrix.width; i++) {
       for (let j = 0; j < this.matrix.height; j++) {
@@ -31,13 +31,13 @@ export class LifeGameFace implements Face {
     }
 
     this.matrix.afterSync(() => {
-      let newMatrix = new Array(this.matrix.width)
-      for (let i = 0; i < this.matrix.widthows; i++) {
-        newMatrix[i] = new Array(this.matrix.height).fill(0)
+      let newMatrix = new Array(this.matrix.width())
+      for (let i = 0; i < this.matrix.width(); i++) {
+        newMatrix[i] = new Array(this.matrix.height()).fill(0)
       }
 
-      for (let i = 0; i < this.matrix.width; i++) {
-        for (let j = 0; j < this.matrix.height; j++) {
+      for (let i = 0; i < this.matrix.width(); i++) {
+        for (let j = 0; j < this.matrix.height(); j++) {
           const neighbors = this.countNeighbors(i, j)
           if (this.matrixArray[i][j] === 1) {
             // Si une cellule vivante a moins de deux voisins ou plus de trois voisins, elle meurt
@@ -57,8 +57,8 @@ export class LifeGameFace implements Face {
 
       this.matrixArray = newMatrix
 
-      for (let i = 0; i < this.matrix.width; i++) {
-        for (let j = 0; j < this.matrix.height; j++) {
+      for (let i = 0; i < this.matrix.width(); i++) {
+        for (let j = 0; j < this.matrix.height(); j++) {
           this.matrix
             .fgColor(this.matrixArray[i][j] === 1 ? 0xffffff : 0)
             .setPixel(i, j)
@@ -85,9 +85,9 @@ export class LifeGameFace implements Face {
         const neighborCol = col + j
         if (
           neighborRow >= 0 &&
-          neighborRow < this.matrix.width &&
+          neighborRow < this.matrix.width() &&
           neighborCol >= 0 &&
-          neighborCol < this.matrix.height &&
+          neighborCol < this.matrix.height() &&
           !(i === 0 && j === 0)
         ) {
           count += this.matrixArray[neighborRow][neighborCol]
