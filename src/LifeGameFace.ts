@@ -51,6 +51,8 @@ export class LifeGameFace implements Face {
         }
       }
 
+      this.matrixArray = newMatrix
+
       for (let i = 0; i < 16; i++) {
         for (let j = 0; j < 32; j++) {
           this.matrix
