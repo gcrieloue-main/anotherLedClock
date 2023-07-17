@@ -22,9 +22,10 @@ export class LifeGameFace implements Face {
     const cols = 32
 
     this.matrix.clear()
+    this.matrixArray = new Array(rows)
 
-    for (let i = 0; i < 16; i++) {
-      for (let j = 0; j < 32; j++) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
         this.matrixArray[i][j] = Math.random() > 0.5 ? 1 : 0
       }
     }
