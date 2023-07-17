@@ -18,29 +18,26 @@ export class LifeGameFace implements Face {
   }
 
   public async display(duration = 10000) {
-    const rows = 16
-    const cols = 32
-
     this.matrix.clear()
 
-    this.matrixArray = new Array(rows)
-    for (let i = 0; i < rows; i++) {
-      this.matrixArray[i] = new Array(cols).fill(0)
+    this.matrixArray = new Array(this.matrix.width)
+    for (let i = 0; i < this.matrix.width; i++) {
+      this.matrixArray[i] = new Array(this.matrix.height).fill(0)
     }
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
+    for (let i = 0; i < this.matrix.width; i++) {
+      for (let j = 0; j < this.matrix.height; j++) {
         this.matrixArray[i][j] = Math.random() > 0.5 ? 1 : 0
       }
     }
 
     this.matrix.afterSync(() => {
-      let newMatrix = new Array(rows)
-      for (let i = 0; i < rows; i++) {
-        newMatrix[i] = new Array(cols).fill(0)
+      let newMatrix = new Array(this.matrix.width)
+      for (let i = 0; i < this.matrix.widthows; i++) {
+        newMatrix[i] = new Array(this.matrix.height).fill(0)
       }
 
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
+      for (let i = 0; i < this.matrix.width; i++) {
+        for (let j = 0; j < this.matrix.height; j++) {
           const neighbors = this.countNeighbors(i, j)
           if (this.matrixArray[i][j] === 1) {
             // Si une cellule vivante a moins de deux voisins ou plus de trois voisins, elle meurt
@@ -60,8 +57,8 @@ export class LifeGameFace implements Face {
 
       this.matrixArray = newMatrix
 
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
+      for (let i = 0; i < this.matrix.width; i++) {
+        for (let j = 0; j < this.matrix.height; j++) {
           this.matrix
             .fgColor(this.matrixArray[i][j] === 1 ? 0xffffff : 0)
             .setPixel(i, j)
@@ -81,9 +78,6 @@ export class LifeGameFace implements Face {
 
   // Fonction pour compter le nombre de voisins d'une cellule donnée
   countNeighbors(row: number, col: number): number {
-    const rows = 16
-    const cols = 32
-
     let count = 0
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
@@ -91,9 +85,9 @@ export class LifeGameFace implements Face {
         const neighborCol = col + j
         if (
           neighborRow >= 0 &&
-          neighborRow < rows &&
+          neighborRow < this.matrix.width &&
           neighborCol >= 0 &&
-          neighborCol < cols &&
+          neighborCol < this.matrix.height &&
           !(i === 0 && j === 0)
         ) {
           count += this.matrixArray[neighborRow][neighborCol]
