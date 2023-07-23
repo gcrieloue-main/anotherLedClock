@@ -164,12 +164,12 @@ app.get('/text/:text/:duration?', async (req: Request, res: Response) => {
     msg += ' with duration ' + duration
   }
 
-  // if (!textFace.animationIsOver) {
-  //   msg += ', skipped'
-  //   console.log(msg)
-  //   res.send(msg)
-  //   return
-  // }
+  if (textFace.enabled) {
+    msg += ', skipped'
+    console.log(msg)
+    res.send(msg)
+    return
+  }
 
   console.log(msg)
   res.send(msg)

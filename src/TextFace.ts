@@ -24,11 +24,6 @@ export class TextFace implements Face {
     const w = this.matrix.width()
     const stringWidth = font4x6.stringWidth(text)
 
-    // if (!this.animationIsOver) {
-    //   console.log('animation not over !')
-    //   await this.waitForAnimation()
-    // }
-
     this.matrix
       .fgColor(this.config.secondaryColor)
       .font(font4x6)
@@ -113,6 +108,7 @@ export class TextFace implements Face {
   public async scrollingDisplay(text: string, rate = 100) {
     console.log('scrolling display')
     const w = this.matrix.width()
+
     this.offset = w - 1
     this.animationIsOver = false
 
