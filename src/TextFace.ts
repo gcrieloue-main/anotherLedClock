@@ -24,10 +24,10 @@ export class TextFace implements Face {
     const w = this.matrix.width()
     const stringWidth = font4x6.stringWidth(text)
 
-    if (!this.animationIsOver) {
-      console.log('animation not over !')
-      await this.waitForAnimation()
-    }
+    // if (!this.animationIsOver) {
+    //   console.log('animation not over !')
+    //   await this.waitForAnimation()
+    // }
 
     this.matrix
       .fgColor(this.config.secondaryColor)
